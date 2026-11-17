@@ -56,7 +56,7 @@ pnpm build amp                    # or one
 ```
 
 What a theme can do is documented in Spotube's
-[`composeApp/themes/README.md`](https://github.com/team-spotube/spotube/blob/dev/composeApp/themes/README.md). The levers these themes lean on: per-component
+[`themes/README.md`](https://github.com/team-spotube/spotube/blob/dev/themes/README.md). The levers these themes lean on: per-component
 `variants`/`states`, gradient brushes, `bottomRimColor` + `innerGlowColor` for bevels, text-style `shadow` for glow, `tokens.app.background` for an
 app-wide backdrop, `tokens.type.styles` for per-role fonts, `tokens.interaction`/`tokens.surface` to flatten.
 

@@ -6,5 +6,5 @@ import { join } from 'node:path';
 import { ROOT } from './common.mjs';
 
 const spotube = process.argv[2] ?? join(ROOT, '..', 'spotube');
-copyFileSync(join(spotube, 'composeApp', 'themes', 'schema', 'theme.schema.json'), join(ROOT, 'schema', 'theme.schema.json'));
+copyFileSync(join(spotube, 'themes', 'schema', 'theme.schema.json'), join(ROOT, 'schema', 'theme.schema.json'));
 console.log('schema synced from', spotube);
