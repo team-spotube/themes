@@ -73,5 +73,5 @@ app-wide backdrop, `tokens.type.styles` for per-role fonts, `tokens.interaction`
 
 The repository, every `theme.json` and logo are licensed under the **GNU Affero General Public License v3.0 or later** ([LICENSE](LICENSE)), like
 Spotube. The bundled fonts keep their own licences (SIL Open Font License 1.1 for Archivo Black, Audiowide, Chakra Petch, Comfortaa, DM Serif Display,
-Red Hat Text, Silkscreen, Space Mono and VT323; the Liberation Sans licence for Liberation Sans, Apache 2.0 for Open Sans and Caladea); each theme's
+Liberation Sans, Red Hat Text, Silkscreen, Space Mono and VT323; Apache 2.0 for Open Sans and Caladea); each theme's
 `LICENSE` includes the texts of the fonts it ships.
