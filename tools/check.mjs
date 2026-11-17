@@ -6,13 +6,20 @@
 
 import { readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { THEMES, extOf, isAllowedFile, listFiles, readJson, themeIds } from './common.mjs';
+import Ajv2020 from 'ajv/dist/2020.js';
+import { ROOT, THEMES, extOf, isAllowedFile, listFiles, readJson, themeIds } from './common.mjs';
 
 const LIMITS = { entries: 128, total: 16 * 1024 * 1024, json: 512 * 1024, font: 8 * 1024 * 1024, png: 256 * 1024, image: 512 };
 const ID = /^[A-Za-z0-9._-]{1,48}$/;
 const VERSION = /^[0-9A-Za-z.+_-]{1,32}$/;
 const PARAM = /^[A-Za-z][A-Za-z0-9_]{0,31}$/;
 const HTTPS = /^https?:\/\/[^\s/]+/i;
+
+const schema = readJson(join(ROOT, 'schema', 'theme.schema.json'));
+const SCHEMA_VERSION = schema['x-schemaVersion'];
+const [SCHEMA_MAJOR, SCHEMA_MINOR] = SCHEMA_VERSION.split('.').map(Number);
+const ajv = new Ajv2020({ allErrors: true, strict: false });
+const validate = ajv.compile(schema);
 
 let errors = 0;
 let warnings = 0;
@@ -28,6 +35,17 @@ function checkTheme(id) {
   } catch (e) {
     problems.push(`theme.json is not valid JSON: ${e.message}`);
     return { problems, warns };
+  }
+
+  // schema: the theme must declare a semver `schema` this repository's schema can validate (same major, minor not newer),
+  // and match the JSON Schema exactly.
+  const declared = /^(\d+)\.(\d+)\.(\d+)$/.exec(String(meta.schema ?? ''));
+  if (!declared) problems.push(`"schema" must be a semantic version such as "${SCHEMA_VERSION}"`);
+  else if (Number(declared[1]) !== SCHEMA_MAJOR) problems.push(`schema ${meta.schema} is a different major than ${SCHEMA_VERSION}`);
+  else if (Number(declared[2]) > SCHEMA_MINOR) problems.push(`schema ${meta.schema} is newer than the ${SCHEMA_VERSION} this repository validates against (run pnpm schema:sync)`);
+  if (!validate(meta)) {
+    for (const e of validate.errors.slice(0, 12)) problems.push(`schema: ${e.instancePath || '/'} ${e.message}${e.params?.additionalProperty ? ` "${e.params.additionalProperty}"` : ''}`);
+    if (validate.errors.length > 12) problems.push(`schema: ...and ${validate.errors.length - 12} more`);
   }
 
   // metadata

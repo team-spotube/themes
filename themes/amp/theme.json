@@ -1,5 +1,6 @@
 {
-  "schema": 1,
+  "$schema": "https://docs.spotube.cc/schemas/theme/1.json",
+  "schema": "1.0.0",
   "id": "amp",
   "name": "Amp",
   "version": "1.0.0",

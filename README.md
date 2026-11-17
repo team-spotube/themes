@@ -21,6 +21,11 @@ Install from **Settings → Look & feel → Themes → Install theme**, then ope
 | **Neon Noir** (`neon-noir`) | Synthwave after dark. Sunset-gradient backdrop, neon tubes around outlines, glowing headings. | neon (pink, cyan, lime, amber), glow |
 | **Candy Pop** (`candy-pop`) | Sweets on a pastel gradient. Fat glossy pills with a thick under-edge, bouncy presses. | flavour (bubblegum, mint, grape, lemon, berry) |
 
+## Share your own
+
+Put a theme in a public GitHub repository and add the topic **`spotube-theme`**: Spotube's *Find themes on GitHub* button opens
+[github.com/topics/spotube-theme](https://github.com/topics/spotube-theme). Guides: [docs.spotube.cc/themes](https://docs.spotube.cc/themes).
+
 ## Install
 
 1. Build the zips (below) or take them from a release.
@@ -77,6 +82,14 @@ mix and match freely (a serif body with a bold-weight icon set, a pixel font wit
 | Candy Pop | Comfortaa | Phosphor Fill |
 
 Heroicons (no media icons in the set) and Hugeicons (stroke-only art, which cannot become a font without outlining) are not packaged.
+
+## Schema
+
+Every theme declares the theme format it was written for as a semver `schema` (currently `1.0.0`) and is validated against
+[`schema/theme.schema.json`](schema/theme.schema.json) in `pnpm check`, so a misspelt property is an error. The same file gives editors autocomplete via
+`"$schema": "https://docs.spotube.cc/schemas/theme/1.json"` (the builder adds it). The schema's source of truth is the Spotube repository: `pnpm schema:sync`
+copies it here. Compatibility rules (same major always loads, a newer minor loads with its newer parts ignored) are in
+[Schema and versioning](https://docs.spotube.cc/themes/schema-versioning).
 
 ## Adding a theme
 

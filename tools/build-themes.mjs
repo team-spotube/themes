@@ -16,6 +16,9 @@ import { PACKS } from './icons/packs.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUT = join(dirname(HERE), 'themes');
+// The theme schema version every theme here is written for (semver, see schema/theme.schema.json). Bump when a theme
+// starts using a newer minor's features.
+const SCHEMA = JSON.parse(readFileSync(join(dirname(HERE), 'schema', 'theme.schema.json'), 'utf8'))['x-schemaVersion'];
 const REPO = 'https://github.com/team-spotube/themes';
 
 const only = process.argv.slice(2);
@@ -32,7 +35,8 @@ for (const file of modules) {
   mkdirSync(join(folder, 'fonts'), { recursive: true });
 
   const doc = {
-    schema: 1,
+    $schema: 'https://docs.spotube.cc/schemas/theme/1.json',
+    schema: SCHEMA,
     id,
     name: body.name,
     version: body.version ?? '1.0.0',
