@@ -12,6 +12,7 @@ import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync,
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { makeLogo } from './make-logo.mjs';
+import { PACKS } from './icons/packs.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUT = join(dirname(HERE), 'themes');
@@ -24,7 +25,7 @@ for (const file of modules) {
   const id = file.replace(/\.mjs$/, '');
   if (only.length && !only.includes(id)) continue;
   const { default: t } = await import(pathToFileURL(join(HERE, 'themes', file)).href);
-  const { fonts = {}, logo, licenseNote = '', ...body } = t;
+  const { fonts = {}, logo, licenseNote = '', iconPack, ...body } = t;
 
   const folder = join(OUT, id);
   rmSync(folder, { recursive: true, force: true });
@@ -46,7 +47,7 @@ for (const file of modules) {
   doc.id = id;
 
   const notices = [];
-  if (Object.keys(fonts).length) {
+  if (Object.keys(fonts).length || iconPack) {
     doc.assets = { fonts: {} };
     for (const [family, spec] of Object.entries(fonts)) {
       doc.assets.fonts[family] = spec.files.map(([name, weight, style]) => {
@@ -56,9 +57,19 @@ for (const file of modules) {
       const lic = readdirSync(join(HERE, 'fonts', spec.dir)).find((f) => /^(OFL|LICENSE)/i.test(f));
       notices.push(`--- ${family} (fonts/) ---\n\n${readFileSync(join(HERE, 'fonts', spec.dir, lic), 'utf8').trim()}\n`);
     }
-  } else {
-    rmSync(join(folder, 'fonts'), { recursive: true, force: true });
   }
+  if (iconPack) {
+    const pack = PACKS[iconPack];
+    const meta = JSON.parse(readFileSync(join(HERE, 'iconfonts', `${iconPack}.json`), 'utf8'));
+    copyFileSync(join(HERE, 'iconfonts', `${iconPack}.ttf`), join(folder, 'fonts', `${iconPack}.ttf`));
+    doc.assets.fonts.Icons = [{ src: `fonts/${iconPack}.ttf`, weight: 400 }];
+    doc.assets.iconPack = { font: 'Icons', icons: meta.glyphs };
+    const pkgRoot = join(HERE, '..', 'node_modules', pack.pkg);
+    const licFile = pack.licenseFile === undefined ? 'LICENSE' : pack.licenseFile;
+    const text = licFile && existsSync(join(pkgRoot, licFile)) ? readFileSync(join(pkgRoot, licFile), 'utf8').trim() : `${pack.label} is licensed under ${pack.license}.`;
+    notices.push(`--- ${pack.label} icons (fonts/${iconPack}.ttf, a subset of the original artwork) ---\n\n${text}\n`);
+  }
+  if (!existsSync(join(folder, 'fonts', 'x')) && !readdirSync(join(folder, 'fonts')).length) rmSync(join(folder, 'fonts'), { recursive: true, force: true });
 
   writeFileSync(join(folder, 'theme.json'), `${JSON.stringify(doc, null, 2)}\n`);
   writeFileSync(

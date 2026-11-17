@@ -8,6 +8,7 @@ export default {
   name: 'Metro',
   version: '1.0.0',
   description: 'Flat saturated tiles, big light typography, square corners and no chrome. Presses tilt the tile back.',
+  iconPack: 'bootstrap',
   logo: ['#0078d7', '#005a9e'],
   fonts: { 'Open Sans': { dir: 'opensans', files: [['OpenSans-Light.ttf', 300], ['OpenSans-Regular.ttf', 400], ['OpenSans-Semibold.ttf', 600], ['OpenSans-Bold.ttf', 700]] } },
   parameters: {

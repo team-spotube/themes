@@ -55,6 +55,29 @@ What a theme can do is documented in Spotube's
 `variants`/`states`, gradient brushes, `bottomRimColor` + `innerGlowColor` for bevels, text-style `shadow` for glow, `tokens.app.background` for an
 app-wide backdrop, `tokens.type.styles` for per-role fonts, `tokens.interaction`/`tokens.surface` to flatten.
 
+## Icon packs and fonts
+
+Every theme restyles **all** of the app's icons with an icon pack, not just fonts. `pnpm icons` ([`tools/build-icons.mjs`](tools/build-icons.mjs)) builds a tiny
+font per pack from the official artwork (only the ~90 icons the app uses, found through the synonyms in
+[`tools/icons/aliases.mjs`](tools/icons/aliases.mjs)) into `tools/iconfonts/`: **Lucide**, **Phosphor** (thin, regular, bold, fill), **Bootstrap Icons**,
+**Font Awesome Free** (solid) and **Fluent System Icons** (regular, filled). A theme picks one with `iconPack: '<id>'` and any fonts it likes with `fonts`;
+mix and match freely (a serif body with a bold-weight icon set, a pixel font with a hairline pack...).
+
+| Theme | Fonts | Icons |
+|---|---|---|
+| Classic | Liberation Sans | Fluent (filled) |
+| Amp | Silkscreen + Liberation Sans | Lucide |
+| Phosphor | VT323 | Font Awesome |
+| You | Red Hat Text | Fluent |
+| Metro | Open Sans | Bootstrap |
+| Newsprint | DM Serif Display + Caladea | Phosphor Thin |
+| Brutal | Archivo Black + Space Mono | Phosphor Bold |
+| Pocket Synth | Space Mono | Phosphor Fill |
+| Neon Noir | Audiowide + Chakra Petch | Phosphor |
+| Candy Pop | Comfortaa | Phosphor Fill |
+
+Heroicons (no media icons in the set) and Hugeicons (stroke-only art, which cannot become a font without outlining) are not packaged.
+
 ## Adding a theme
 
 1. Create `tools/themes/<id>.mjs` (see an existing one; `id` is the filename). Give it light **and** dark values (`A(light, dark)`) and expose the
@@ -72,6 +95,6 @@ app-wide backdrop, `tokens.type.styles` for per-role fonts, `tokens.interaction`
 ## Licensing
 
 The repository, every `theme.json` and logo are licensed under the **GNU Affero General Public License v3.0 or later** ([LICENSE](LICENSE)), like
-Spotube. The bundled fonts keep their own licences (SIL Open Font License 1.1 for Archivo Black, Audiowide, Chakra Petch, Comfortaa, DM Serif Display,
+Spotube. The bundled fonts and icon fonts keep their own licences (SIL Open Font License 1.1 for Archivo Black, Audiowide, Chakra Petch, Comfortaa, DM Serif Display,
 Liberation Sans, Red Hat Text, Silkscreen, Space Mono and VT323; Apache 2.0 for Open Sans and Caladea); each theme's
 `LICENSE` includes the texts of the fonts it ships.

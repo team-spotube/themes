@@ -7,6 +7,7 @@ export default {
   name: 'Brutal',
   version: '1.0.0',
   description: 'Thick black outlines, loud flat colour and heavy type with no softness anywhere. Hover floods controls with the accent.',
+  iconPack: 'phosphor-bold',
   logo: ['#ffe14d', '#111111'],
   fonts: {
     'Archivo Black': { dir: 'archivoblack', files: [['ArchivoBlack-Regular.ttf', 400]] },

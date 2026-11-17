@@ -7,6 +7,7 @@ export default {
   name: 'You',
   version: '1.0.0',
   description: 'Tonal, softly rounded surfaces tinted by your accent: pill buttons, stadium selection and a roomy layout.',
+  iconPack: 'fluent',
   logo: ['#d0bcff', '#4f378b'],
   fonts: { 'Red Hat Text': { dir: 'redhat-text', files: [['RedHatText-Regular.otf', 400], ['RedHatText-Medium.otf', 500], ['RedHatText-Bold.otf', 700]] } },
   parameters: {

@@ -11,6 +11,7 @@ export default {
   name: 'Amp',
   version: '1.0.0',
   description: 'A hi-fi deck: brushed-metal panels, a glowing LCD, round knobs and pixel-font labels.',
+  iconPack: 'lucide',
   logo: ['#5dff7a', '#0b1a10'],
   fonts: {
     Silkscreen: { dir: 'silkscreen', files: [['Silkscreen-Regular.ttf', 400], ['Silkscreen-Bold.ttf', 700]] },

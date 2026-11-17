@@ -9,6 +9,7 @@ export default {
   name: 'Classic',
   version: '1.0.0',
   description: 'A 1990s desktop: square grey bevels, navy title bars and menu highlights, and no animation to speak of.',
+  iconPack: 'fluent-filled',
   logo: ['#4b6cd6', '#000080'],
   fonts: { 'Liberation Sans': { dir: 'liberation-sans', files: [['LiberationSans-Regular.ttf', 400], ['LiberationSans-Bold.ttf', 700]] } },
   parameters: {

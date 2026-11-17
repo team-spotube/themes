@@ -13,9 +13,21 @@
     "build": "node tools/build-themes.mjs",
     "check": "node tools/check.mjs",
     "zip": "node tools/zip.mjs",
-    "dist": "node tools/build-themes.mjs && node tools/check.mjs && node tools/zip.mjs"
+    "dist": "node tools/build-icons.mjs && node tools/build-themes.mjs && node tools/check.mjs && node tools/zip.mjs",
+    "icons": "node tools/build-icons.mjs"
   },
   "dependencies": {
     "fflate": "^0.8.2"
+  },
+  "devDependencies": {
+    "@fluentui/svg-icons": "^1.1.346",
+    "@fortawesome/fontawesome-free": "^7.3.1",
+    "@phosphor-icons/core": "^2.1.1",
+    "@phosphor-icons/web": "^2.1.2",
+    "bootstrap-icons": "^1.13.2",
+    "fantasticon": "^4.1.0",
+    "fonteditor-core": "^2.6.3",
+    "heroicons": "^2.2.0",
+    "lucide-static": "^1.73.0"
   }
 }

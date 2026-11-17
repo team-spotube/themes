@@ -9,6 +9,7 @@ export default {
   name: 'Candy Pop',
   version: '2.0.0',
   description: 'Sweets on a pastel gradient: fat glossy pills with a thick under-edge, bouncy presses and a round typeface. Dark is night-time candy.',
+  iconPack: 'phosphor-fill',
   logo: ['#ff9ad5', '#ff4fa3'],
   fonts: { Comfortaa: { dir: 'comfortaa', files: [['Comfortaa-Regular.otf', 400], ['Comfortaa-Bold.otf', 700]] } },
   parameters: {
