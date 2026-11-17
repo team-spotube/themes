@@ -1,0 +1,576 @@
+{
+  "schema": 1,
+  "id": "neon-noir",
+  "name": "Neon Noir",
+  "version": "1.1.0",
+  "author": "Spotube Team",
+  "description": "A glowing synthwave look: gradient buttons, pill shapes and neon accents, dark and light.",
+  "repository": "https://github.com/team-spotube/themes",
+  "bugs": "https://github.com/team-spotube/themes/issues",
+  "license": "AGPL-3.0",
+  "logo": "logo.png",
+  "parameters": {
+    "accent": {
+      "type": "enum",
+      "label": "Neon",
+      "default": "pink",
+      "options": [
+        {
+          "value": "pink",
+          "label": "Pink",
+          "color": "#ff3da6"
+        },
+        {
+          "value": "cyan",
+          "label": "Cyan",
+          "color": "#2ee6ff"
+        },
+        {
+          "value": "lime",
+          "label": "Lime",
+          "color": "#a3e635"
+        },
+        {
+          "value": "amber",
+          "label": "Amber",
+          "color": "#ffb020"
+        }
+      ]
+    },
+    "radius": {
+      "type": "number",
+      "label": "Corner radius",
+      "default": 14,
+      "min": 0,
+      "max": 28,
+      "step": 2
+    }
+  },
+  "vars": {
+    "none": {
+      "type": "color",
+      "default": "#00000000"
+    },
+    "accent": {
+      "type": "color",
+      "value": [
+        "match",
+        "{params.accent}",
+        {
+          "pink": "#ff3da6",
+          "cyan": "#2ee6ff",
+          "lime": "#a3e635",
+          "amber": "#ffb020"
+        }
+      ]
+    },
+    "accentHi": {
+      "type": "color",
+      "value": [
+        "match",
+        "{params.accent}",
+        {
+          "pink": "#ff7ac6",
+          "cyan": "#7ff3ff",
+          "lime": "#d9ff6a",
+          "amber": "#ffd36a"
+        }
+      ]
+    },
+    "accentLo": {
+      "type": "color",
+      "value": [
+        "match",
+        "{params.accent}",
+        {
+          "pink": "#7b2ff7",
+          "cyan": "#2563eb",
+          "lime": "#16a34a",
+          "amber": "#ef4444"
+        }
+      ]
+    },
+    "pair": {
+      "type": "color",
+      "value": [
+        "match",
+        "{params.accent}",
+        {
+          "pink": "#2ee6ff",
+          "cyan": "#ff3da6",
+          "lime": "#2ee6ff",
+          "amber": "#2ee6ff"
+        }
+      ]
+    },
+    "pairInk": {
+      "type": "color",
+      "value": {
+        "light": "#0a5a6a",
+        "dark": "{vars.pair}"
+      }
+    },
+    "ink": {
+      "type": "color",
+      "default": "#0b0614"
+    },
+    "glow": {
+      "type": "color",
+      "value": [
+        "alpha",
+        "{vars.accent}",
+        0.55
+      ]
+    },
+    "wash": {
+      "type": "color",
+      "value": [
+        "alpha",
+        "{vars.accent}",
+        0.16
+      ]
+    },
+    "trackLo": {
+      "type": "color",
+      "value": {
+        "light": "#e6d6fa",
+        "dark": "#0d0618"
+      }
+    },
+    "trackHi": {
+      "type": "color",
+      "value": {
+        "light": "#f6eeff",
+        "dark": "#1f1436"
+      }
+    },
+    "fieldA": {
+      "type": "color",
+      "value": {
+        "light": "#ffffff",
+        "dark": "#120a20"
+      }
+    },
+    "fieldB": {
+      "type": "color",
+      "value": {
+        "light": "#f7efff",
+        "dark": "#0e0719"
+      }
+    },
+    "cardA": {
+      "type": "color",
+      "value": {
+        "light": "#ffffff",
+        "dark": "#1f1436"
+      }
+    },
+    "cardB": {
+      "type": "color",
+      "value": {
+        "light": "#fbf6ff",
+        "dark": "#150d24"
+      }
+    },
+    "r": {
+      "type": "number",
+      "value": "{params.radius}"
+    }
+  },
+  "tokens": {
+    "color": {
+      "background": {
+        "light": "#f7f0ff",
+        "dark": "{vars.ink}"
+      },
+      "surface": {
+        "light": "#ffffff",
+        "dark": "#150d24"
+      },
+      "raised": {
+        "light": "#fbf6ff",
+        "dark": "#1f1436"
+      },
+      "inset": {
+        "light": "#efe4fb",
+        "dark": "#090411"
+      },
+      "text": {
+        "light": "#241036",
+        "dark": "#f6f0ff"
+      },
+      "muted": {
+        "light": "#6b5a86",
+        "dark": "#a99bc7"
+      },
+      "border": {
+        "light": "#d5c3ec",
+        "dark": "#3a2a5c"
+      },
+      "highlight": {
+        "light": "#ffffff",
+        "dark": "#7a5cc4"
+      },
+      "accent": "{vars.accent}",
+      "accentTop": "{vars.accentHi}",
+      "accentBottom": "{vars.accentLo}",
+      "onAccent": "#ffffff",
+      "success": "#4dffb0",
+      "danger": "#ff5470"
+    },
+    "shape": {
+      "small": 10,
+      "medium": "{vars.r}",
+      "large": 22
+    }
+  },
+  "defaults": {
+    "shape": "{vars.r}"
+  },
+  "components": {
+    "button": {
+      "base": {
+        "borderWidth": 0,
+        "textStyle": {
+          "fontWeight": 700
+        }
+      },
+      "variants": {
+        "primary": {
+          "base": {
+            "shape": "pill",
+            "background": [
+              "linear",
+              135,
+              "{vars.accentHi}",
+              "{vars.accent}",
+              "{vars.accentLo}"
+            ],
+            "foreground": "#ffffff",
+            "shadows": [
+              "{vars.glow}"
+            ],
+            "shadowElevation": 14,
+            "innerGlowColor": "#ffffff40",
+            "bottomRimColor": null,
+            "textStyle": {
+              "shadow": {
+                "color": "#00000066",
+                "offsetY": 1,
+                "blurRadius": 2
+              }
+            }
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "linear",
+                135,
+                "{vars.accentHi}",
+                "{vars.accentHi}",
+                "{vars.accent}"
+              ],
+              "shadowElevation": 20,
+              "motion": {
+                "hoverScale": 1.04
+              }
+            },
+            "pressed": {
+              "background": [
+                "linear",
+                135,
+                "{vars.accent}",
+                "{vars.accentLo}"
+              ],
+              "shadowElevation": 4,
+              "motion": {
+                "pressedScale": 0.95
+              }
+            },
+            "disabled": {
+              "shadowElevation": 0
+            }
+          }
+        },
+        "secondary": {
+          "base": {
+            "shape": "pill",
+            "borderWidth": 1.5,
+            "borderColor": "{vars.pair}",
+            "foreground": "{vars.pairInk}",
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "shadows": [
+              "#2ee6ff44"
+            ],
+            "shadowElevation": 10,
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "gradient",
+                "#2ee6ff22",
+                "#2ee6ff10"
+              ],
+              "shadowElevation": 16
+            }
+          }
+        },
+        "quiet": {
+          "base": {
+            "shape": "pill",
+            "foreground": "{tokens.color.muted}",
+            "innerGlowColor": "#00000000"
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "gradient",
+                "{vars.wash}",
+                "{vars.wash}"
+              ],
+              "foreground": "{tokens.color.text}",
+              "borderColor": "#00000000"
+            }
+          }
+        },
+        "danger": {
+          "base": {
+            "shape": "pill",
+            "background": [
+              "linear",
+              135,
+              "#ff7a8e",
+              "#ff5470",
+              "#b3123a"
+            ],
+            "foreground": "#ffffff",
+            "shadows": [
+              "#ff547066"
+            ],
+            "shadowElevation": 12,
+            "innerGlowColor": "#ffffff40"
+          }
+        }
+      }
+    },
+    "iconButton": {
+      "base": {
+        "borderWidth": 0,
+        "orb": false
+      },
+      "variants": {
+        "primary": {
+          "base": {
+            "background": [
+              "linear",
+              135,
+              "{vars.accentHi}",
+              "{vars.accentLo}"
+            ],
+            "foreground": "#ffffff",
+            "shadows": [
+              "{vars.glow}"
+            ],
+            "shadowElevation": 12,
+            "shape": "pill"
+          }
+        },
+        "secondary": {
+          "base": {
+            "background": [
+              "gradient",
+              "#ffffff10",
+              "#ffffff06"
+            ],
+            "borderWidth": 1,
+            "borderColor": "{tokens.color.border}",
+            "shape": "pill"
+          }
+        },
+        "quiet": {
+          "base": {
+            "shape": "pill"
+          }
+        },
+        "danger": {
+          "base": {
+            "background": [
+              "linear",
+              135,
+              "#ff7a8e",
+              "#b3123a"
+            ],
+            "foreground": "#ffffff",
+            "shape": "pill",
+            "shadows": [
+              "#ff547066"
+            ],
+            "shadowElevation": 10
+          }
+        }
+      }
+    },
+    "toggleSwitch": {
+      "base": {
+        "trackBackground": [
+          "linear",
+          90,
+          "{vars.trackLo}",
+          "{vars.trackHi}"
+        ],
+        "selectedTrackBackground": [
+          "linear",
+          90,
+          "{vars.accent}",
+          "{vars.accentLo}"
+        ],
+        "trackBorderColor": "{tokens.color.border}",
+        "trackGlowColor": "#00000000",
+        "thumbBackground": [
+          "radial",
+          0.35,
+          0.3,
+          0.8,
+          "#ffffff",
+          "#d9c6ff"
+        ],
+        "thumbBorderColor": "#00000000",
+        "thumbGlowColor": "#00000000",
+        "trackSize": [
+          48,
+          28
+        ]
+      },
+      "states": {
+        "selected": {
+          "trackBorderColor": "{vars.accent}",
+          "trackGlowColor": "{vars.glow}"
+        }
+      }
+    },
+    "slider": {
+      "base": {
+        "trackBackground": [
+          "linear",
+          90,
+          "{vars.trackLo}",
+          "{vars.trackHi}"
+        ],
+        "trackBorderColor": "{tokens.color.border}",
+        "trackInsetShadeColor": "#00000000",
+        "activeTrackBackground": [
+          "linear",
+          90,
+          "{vars.accentLo}",
+          "{vars.accent}"
+        ],
+        "thumbBackground": [
+          "radial",
+          0.35,
+          0.3,
+          0.8,
+          "#ffffff",
+          "#e7d6ff"
+        ],
+        "thumbBorderColor": "{vars.accent}",
+        "thumbBorderWidth": 2,
+        "thumbGlowColor": "{vars.glow}",
+        "thumbShape": "pill",
+        "trackShape": "pill",
+        "thumbBottomRimColor": null
+      }
+    },
+    "progress": {
+      "base": {
+        "trackBackground": [
+          "linear",
+          90,
+          "{vars.trackLo}",
+          "{vars.trackHi}"
+        ],
+        "borderColor": "{tokens.color.border}",
+        "shape": "pill",
+        "progressBackground": [
+          "linear",
+          90,
+          "{vars.accentLo}",
+          "{vars.accent}",
+          "{vars.accentHi}"
+        ],
+        "innerGlowColor": "#ffffff30"
+      }
+    },
+    "textField": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.fieldA}",
+          "{vars.fieldB}"
+        ],
+        "borderColor": "{tokens.color.border}",
+        "insetShadeColor": "#00000000",
+        "innerGlowColor": "#00000000",
+        "bottomRimColor": null,
+        "cursorColor": "{vars.accentHi}"
+      },
+      "states": {
+        "focused": {
+          "borderColor": "{vars.pair}",
+          "borderWidth": 2
+        }
+      }
+    },
+    "card": {
+      "base": {
+        "background": [
+          "linear",
+          160,
+          "{vars.cardA}",
+          "{vars.cardB}"
+        ],
+        "borderColor": "{tokens.color.border}",
+        "innerGlowColor": "#ffffff14",
+        "bottomRimColor": null,
+        "shadowElevation": 16,
+        "shadowColor": "#7b2ff733"
+      }
+    },
+    "listTile": {
+      "base": {
+        "selectedBackground": [
+          "linear",
+          90,
+          "{vars.wash}",
+          "#7b2ff714"
+        ],
+        "shape": 12
+      },
+      "rules": [
+        {
+          "when": {
+            "var": "ctx.item.current"
+          },
+          "set": {
+            "borderColor": "{vars.accent}",
+            "borderWidth": 1
+          }
+        }
+      ]
+    },
+    "topAppBar": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.cardB}",
+          "{vars.cardB}"
+        ]
+      }
+    }
+  }
+}
