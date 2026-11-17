@@ -1,0 +1,91 @@
+name: Release themes
+
+# Builds every theme and publishes all of them as one GitHub release under one tag.
+#   - push a tag like v1.2.0, or
+#   - run the workflow by hand and give it the tag (created on the selected branch if it doesn't exist yet).
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag, for example v1.2.0
+        required: true
+        type: string
+      prerelease:
+        description: Mark the release as a pre-release
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.event.inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.inputs.tag || github.ref_name }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check the tag
+        run: |
+          if ! [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::Tag '$TAG' must look like v1.2.3 (semver with a leading v)"
+            exit 1
+          fi
+
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4 # the version comes from "packageManager" in package.json
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Compile the tool
+        run: pnpm tool
+
+      - name: Type-check the themes
+        run: pnpm typecheck
+
+      - name: Build, check and zip every theme
+        run: pnpm dist
+
+      - name: Checksums
+        working-directory: dist
+        run: sha256sum *.zip > SHA256SUMS
+
+      - name: Publish the release
+        run: |
+          count=$(ls dist/*.zip | wc -l)
+          {
+            echo "$count themes. Install a \`.zip\` from **Settings → Look & feel → Themes → Install theme** in Spotube."
+            echo
+            echo '| Theme | Version | Package |'
+            echo '|---|---|---|'
+            node -e '
+              const idx = JSON.parse(require("fs").readFileSync("dist/index.json", "utf8"));
+              for (const t of idx) console.log(`| ${t.name} | ${t.version} | \`${t.file}\` (${t.sizeKb} KB) |`);
+            '
+            echo
+            echo 'Each theme declares the theme format version it was written for (`schema`); see https://docs.spotube.cc/themes/schema-versioning.'
+          } > notes.md
+
+          flags=()
+          if [[ "${{ github.event.inputs.prerelease }}" == "true" ]]; then flags+=(--prerelease); fi
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            # Re-running for the same tag replaces the assets.
+            gh release upload "$TAG" dist/*.zip dist/index.json dist/SHA256SUMS --clobber
+            gh release edit "$TAG" --notes-file notes.md
+          else
+            gh release create "$TAG" dist/*.zip dist/index.json dist/SHA256SUMS \
+              --title "Themes $TAG" --notes-file notes.md --target "${{ github.sha }}" "${flags[@]}"
+          fi
