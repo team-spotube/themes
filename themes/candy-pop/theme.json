@@ -2,14 +2,1082 @@
   "schema": 1,
   "id": "candy-pop",
   "name": "Candy Pop",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "author": "Spotube Team",
-  "description": "Soft pastel gloss with fully rounded shapes and the friendly Comfortaa typeface.",
+  "description": "Sweets on a pastel gradient: fat glossy pills with a thick under-edge, bouncy presses and a round typeface. Dark is night-time candy.",
   "repository": "https://github.com/team-spotube/themes",
   "bugs": "https://github.com/team-spotube/themes/issues",
-  "homepage": "https://github.com/alexeiva/comfortaa",
-  "license": "AGPL-3.0 (theme), OFL-1.1 (Comfortaa)",
+  "license": "AGPL-3.0-or-later",
   "logo": "logo.png",
+  "parameters": {
+    "flavor": {
+      "type": "enum",
+      "label": "Flavor",
+      "default": "bubblegum",
+      "options": [
+        {
+          "value": "bubblegum",
+          "label": "Bubblegum",
+          "color": "#ff4fa3"
+        },
+        {
+          "value": "mint",
+          "label": "Mint",
+          "color": "#19c9a0"
+        },
+        {
+          "value": "grape",
+          "label": "Grape",
+          "color": "#9b5cf6"
+        },
+        {
+          "value": "lemon",
+          "label": "Lemon",
+          "color": "#f5b800"
+        },
+        {
+          "value": "berry",
+          "label": "Berry",
+          "color": "#ff5a5f"
+        }
+      ]
+    }
+  },
+  "vars": {
+    "none": {
+      "type": "color",
+      "default": "#00000000"
+    },
+    "sweet": {
+      "type": "color",
+      "value": [
+        "match",
+        "{params.flavor}",
+        {
+          "bubblegum": "#ff4fa3",
+          "mint": "#19c9a0",
+          "grape": "#9b5cf6",
+          "lemon": "#f5b800",
+          "berry": "#ff5a5f"
+        }
+      ]
+    },
+    "sweetHi": {
+      "type": "color",
+      "value": [
+        "lighten",
+        "{vars.sweet}",
+        0.28
+      ]
+    },
+    "sweetLo": {
+      "type": "color",
+      "value": [
+        "darken",
+        "{vars.sweet}",
+        0.22
+      ]
+    },
+    "onSweet": {
+      "type": "color",
+      "value": [
+        "match",
+        "{params.flavor}",
+        {
+          "bubblegum": "#ffffff",
+          "mint": "#053b2f",
+          "grape": "#ffffff",
+          "lemon": "#4a3400",
+          "berry": "#ffffff"
+        }
+      ]
+    },
+    "cream": {
+      "type": "color",
+      "value": {
+        "light": "#ffffff",
+        "dark": "#3a2f5c"
+      }
+    },
+    "creamLo": {
+      "type": "color",
+      "value": {
+        "light": "#ffe3f1",
+        "dark": "#2c2347"
+      }
+    },
+    "creamEdge": {
+      "type": "color",
+      "value": {
+        "light": "#f0b6d3",
+        "dark": "#18112e"
+      }
+    },
+    "ink": {
+      "type": "color",
+      "value": {
+        "light": "#5a2347",
+        "dark": "#fff0f8"
+      }
+    },
+    "dim": {
+      "type": "color",
+      "value": {
+        "light": "#a45a86",
+        "dark": "#c4aee0"
+      }
+    },
+    "wash": {
+      "type": "color",
+      "value": [
+        "alpha",
+        "{vars.sweet}",
+        0.2
+      ]
+    },
+    "soft": {
+      "type": "color",
+      "value": [
+        "alpha",
+        "{vars.sweet}",
+        0.45
+      ]
+    }
+  },
+  "tokens": {
+    "color": {
+      "background": {
+        "light": "#fff0f8",
+        "dark": "#241a40"
+      },
+      "surface": "{vars.cream}",
+      "raised": "{vars.creamLo}",
+      "inset": "{vars.creamLo}",
+      "text": "{vars.ink}",
+      "muted": "{vars.dim}",
+      "border": "{vars.creamEdge}",
+      "highlight": "#ffffffc0",
+      "accent": "{vars.sweet}",
+      "accentTop": "{vars.sweetHi}",
+      "accentBottom": "{vars.sweetLo}",
+      "onAccent": "{vars.onSweet}",
+      "success": "#19c9a0",
+      "danger": "#ff5a5f",
+      "scrim": {
+        "light": "#5a234760",
+        "dark": "#0f0820b0"
+      }
+    },
+    "shape": {
+      "small": 14,
+      "medium": 20,
+      "large": 32
+    },
+    "type": {
+      "family": "Comfortaa"
+    },
+    "app": {
+      "background": [
+        "linear",
+        160,
+        {
+          "light": "#ffe3f4",
+          "dark": "#2a1d4d"
+        },
+        {
+          "light": "#efe3ff",
+          "dark": "#231a40"
+        },
+        {
+          "light": "#ddf1ff",
+          "dark": "#1a2a4a"
+        }
+      ]
+    }
+  },
+  "defaults": {
+    "shape": 20
+  },
+  "components": {
+    "button": {
+      "base": {
+        "shadows": [
+          "#5a234722"
+        ],
+        "shadowElevation": 8,
+        "innerGlowColor": "#ffffffff",
+        "bottomRimColor": "{vars.creamEdge}",
+        "interactionOverlay": "#00000000",
+        "interactionRim": "#00000000",
+        "motion": {
+          "hoverScale": 1.04,
+          "pressedScale": 0.93
+        },
+        "borderWidth": 0,
+        "background": [
+          "linear",
+          180,
+          "{vars.cream}",
+          "{vars.creamLo}"
+        ],
+        "foreground": "{vars.ink}",
+        "shape": "pill",
+        "padding": [
+          26,
+          13
+        ],
+        "textStyle": {
+          "fontWeight": 700,
+          "fontSize": 14
+        },
+        "labelShadow": false
+      },
+      "states": {
+        "pressed": {
+          "bottomRimColor": null,
+          "shadowElevation": 1
+        },
+        "disabled": {
+          "alpha": 0.5
+        }
+      },
+      "variants": {
+        "primary": {
+          "base": {
+            "background": [
+              "linear",
+              180,
+              "{vars.sweetHi}",
+              "{vars.sweet}"
+            ],
+            "foreground": "{vars.onSweet}",
+            "bottomRimColor": "{vars.sweetLo}",
+            "shadows": [
+              "{vars.soft}"
+            ],
+            "shadowElevation": 12
+          },
+          "states": {
+            "pressed": {
+              "bottomRimColor": null
+            }
+          }
+        },
+        "secondary": {},
+        "quiet": {
+          "base": {
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null,
+            "shadowElevation": 0,
+            "foreground": "{vars.dim}"
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "gradient",
+                "{vars.wash}",
+                "{vars.wash}"
+              ],
+              "foreground": "{vars.ink}"
+            }
+          }
+        },
+        "danger": {
+          "base": {
+            "background": [
+              "linear",
+              180,
+              "#ff9a9d",
+              "#ff5a5f"
+            ],
+            "foreground": "#ffffff",
+            "bottomRimColor": "#c93338"
+          }
+        }
+      }
+    },
+    "iconButton": {
+      "base": {
+        "orb": false,
+        "shadows": [
+          "#5a234722"
+        ],
+        "shadowElevation": 8,
+        "innerGlowColor": "#ffffffff",
+        "bottomRimColor": "{vars.creamEdge}",
+        "interactionOverlay": "#00000000",
+        "interactionRim": "#00000000",
+        "motion": {
+          "hoverScale": 1.08,
+          "pressedScale": 0.9
+        },
+        "borderWidth": 0,
+        "background": [
+          "linear",
+          180,
+          "{vars.cream}",
+          "{vars.creamLo}"
+        ],
+        "foreground": "{vars.ink}",
+        "shape": "pill",
+        "iconSize": 20
+      },
+      "states": {
+        "pressed": {
+          "bottomRimColor": null,
+          "shadowElevation": 1
+        }
+      },
+      "variants": {
+        "primary": {
+          "base": {
+            "background": [
+              "linear",
+              180,
+              "{vars.sweetHi}",
+              "{vars.sweet}"
+            ],
+            "foreground": "{vars.onSweet}",
+            "bottomRimColor": "{vars.sweetLo}",
+            "shadows": [
+              "{vars.soft}"
+            ],
+            "shadowElevation": 12
+          }
+        },
+        "secondary": {},
+        "quiet": {
+          "base": {
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null,
+            "shadowElevation": 0
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "gradient",
+                "{vars.wash}",
+                "{vars.wash}"
+              ]
+            }
+          }
+        },
+        "danger": {
+          "base": {
+            "background": [
+              "linear",
+              180,
+              "#ff9a9d",
+              "#ff5a5f"
+            ],
+            "foreground": "#ffffff",
+            "bottomRimColor": "#c93338"
+          }
+        }
+      }
+    },
+    "toggleSwitch": {
+      "base": {
+        "trackGlowColor": "#00000000",
+        "trackBottomRimColor": null,
+        "thumbGlowColor": "#ffffff",
+        "thumbBottomRimColor": "{vars.creamEdge}",
+        "thumbElevation": 3,
+        "trackInteractionOverlay": "#00000000",
+        "thumbInteractionOverlay": "#00000000",
+        "thumbHoverScaleX": 1,
+        "thumbHoverScaleY": 1,
+        "thumbPressedScaleX": 1,
+        "thumbPressedScaleY": 1,
+        "thumbBorderColor": "#00000000",
+        "trackBorderColor": "#00000000",
+        "trackSize": [
+          54,
+          30
+        ],
+        "trackShape": "pill",
+        "thumbShape": "pill",
+        "trackBackground": [
+          "gradient",
+          "{vars.creamEdge}",
+          "{vars.creamEdge}"
+        ],
+        "selectedTrackBackground": [
+          "linear",
+          180,
+          "{vars.sweetHi}",
+          "{vars.sweet}"
+        ],
+        "thumbBackground": [
+          "linear",
+          180,
+          "#ffffff",
+          "#ffeaf5"
+        ]
+      }
+    },
+    "checkbox": {
+      "base": {
+        "faceGlowColor": "#00000000",
+        "selectedFaceGlowColor": "#00000000",
+        "faceElevation": 0,
+        "faceBottomRimColor": null,
+        "faceInteractionOverlay": "#00000000",
+        "faceHoverScale": 1,
+        "facePressedScale": 1,
+        "faceShape": 9,
+        "faceSize": [
+          22,
+          22
+        ],
+        "faceBackground": [
+          "linear",
+          180,
+          "{vars.cream}",
+          "{vars.creamLo}"
+        ],
+        "faceBorderColor": "{vars.creamEdge}",
+        "faceBorderWidth": 2,
+        "selectedFaceBackground": [
+          "linear",
+          180,
+          "{vars.sweetHi}",
+          "{vars.sweet}"
+        ],
+        "selectedFaceBorderColor": "{vars.sweetLo}",
+        "selectedFaceForeground": "{vars.onSweet}"
+      }
+    },
+    "slider": {
+      "base": {
+        "trackInsetShadeColor": "#00000000",
+        "trackInnerGlowColor": "#00000000",
+        "trackBottomRimColor": null,
+        "activeTrackGlowColor": "#00000000",
+        "thumbGlowColor": "#00000000",
+        "thumbBottomRimColor": "{vars.creamEdge}",
+        "thumbElevation": 3,
+        "trackInteractionOverlay": "#00000000",
+        "thumbInteractionOverlay": "#00000000",
+        "trackBorderColor": "#00000000",
+        "trackBackground": [
+          "gradient",
+          "{vars.creamEdge}",
+          "{vars.creamEdge}"
+        ],
+        "trackShape": "pill",
+        "activeTrackBackground": [
+          "linear",
+          180,
+          "{vars.sweetHi}",
+          "{vars.sweet}"
+        ],
+        "activeTrackShape": "pill",
+        "thumbBackground": [
+          "linear",
+          180,
+          "#ffffff",
+          "#ffeaf5"
+        ],
+        "thumbBorderColor": "{vars.sweet}",
+        "thumbBorderWidth": 3,
+        "thumbShape": "pill"
+      }
+    },
+    "progress": {
+      "base": {
+        "borderColor": "#00000000",
+        "borderWidth": 0,
+        "progressInnerGlowColor": "#ffffff80",
+        "progressBottomRimColor": null,
+        "trackBottomRimColor": null,
+        "shape": "pill",
+        "height": 12,
+        "trackBackground": [
+          "gradient",
+          "{vars.creamEdge}",
+          "{vars.creamEdge}"
+        ],
+        "progressBackground": [
+          "linear",
+          180,
+          "{vars.sweetHi}",
+          "{vars.sweet}"
+        ],
+        "progressShape": "pill"
+      }
+    },
+    "textField": {
+      "base": {
+        "insetShadeColor": "#5a23470d",
+        "innerGlowColor": "#00000000",
+        "bottomRimColor": null,
+        "interactionOverlay": "#00000000",
+        "background": [
+          "gradient",
+          "{vars.cream}",
+          "{vars.cream}"
+        ],
+        "borderWidth": 2.5,
+        "borderColor": "{vars.creamEdge}",
+        "shape": "pill",
+        "minimumHeight": 50,
+        "cursorColor": "{vars.sweet}",
+        "placeholderColor": "{vars.dim}",
+        "labelColor": "{vars.dim}"
+      },
+      "states": {
+        "focused": {
+          "borderColor": "{vars.sweet}"
+        }
+      }
+    },
+    "card": {
+      "base": {
+        "shadowElevation": 14,
+        "innerGlowColor": "#ffffffff",
+        "bottomRimColor": "{vars.creamEdge}",
+        "insetShadeColor": "#00000000",
+        "interactionOverlay": "#00000000",
+        "background": [
+          "linear",
+          180,
+          "{vars.cream}",
+          "{vars.creamLo}"
+        ],
+        "shape": 32,
+        "shadowColor": "#5a23472a"
+      }
+    },
+    "listTile": {
+      "base": {
+        "shadowElevation": 0,
+        "innerGlowColor": "#00000000",
+        "bottomRimColor": null,
+        "interactionOverlay": "#00000000",
+        "borderWidth": 0,
+        "shape": 26,
+        "minimumHeight": 58,
+        "contentPadding": [
+          20,
+          10
+        ],
+        "background": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "selectedBackground": [
+          "linear",
+          180,
+          "{vars.sweetHi}",
+          "{vars.sweet}"
+        ],
+        "titleForeground": "{vars.ink}",
+        "subtitleForeground": "{vars.dim}",
+        "selectedTitleForeground": "{vars.onSweet}",
+        "selectedSubtitleForeground": "{vars.onSweet}"
+      },
+      "states": {
+        "hovered": {
+          "background": [
+            "gradient",
+            "{vars.wash}",
+            "{vars.wash}"
+          ]
+        }
+      }
+    },
+    "separator": {
+      "base": {
+        "highlightColor": "#00000000",
+        "color": "{vars.creamEdge}",
+        "thickness": 2
+      }
+    },
+    "dialog": {
+      "base": {
+        "panelGlowColor": "#ffffffff",
+        "panelBottomRimColor": "{vars.creamEdge}",
+        "panelShadowElevation": 36,
+        "titleBarBorderColor": "#00000000",
+        "titleBarDividerThickness": 0,
+        "footerBorderColor": "#00000000",
+        "footerDividerThickness": 0,
+        "closeCapBorderColor": "#00000000",
+        "closeCapBorderWidth": 0,
+        "closeCapGlowColor": "#ffffff",
+        "closeCapElevation": 3,
+        "closeCapRaisedElevation": 0,
+        "closeCapPressedElevation": 0,
+        "closeCapTint": "#00000000",
+        "closeScaleHover": 1.1,
+        "closeScalePressed": 0.9,
+        "shape": 36,
+        "panelBackground": [
+          "linear",
+          180,
+          "{vars.cream}",
+          "{vars.creamLo}"
+        ],
+        "panelShadowColor": "#5a234740",
+        "titleBarBackground": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "titleBarForeground": "{vars.ink}",
+        "titleStyle": {
+          "fontSize": 22,
+          "fontWeight": 700
+        },
+        "footerBackground": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "scrimColor": {
+          "light": "#5a234760",
+          "dark": "#0f0820b0"
+        },
+        "closeCapBackground": [
+          "linear",
+          180,
+          "{vars.cream}",
+          "{vars.creamLo}"
+        ],
+        "closeCapForeground": "{vars.dim}",
+        "closeCapShape": "pill"
+      },
+      "states": {
+        "hovered": {
+          "closeCapBackground": [
+            "linear",
+            180,
+            "{vars.sweetHi}",
+            "{vars.sweet}"
+          ],
+          "closeCapForeground": "{vars.onSweet}"
+        }
+      }
+    },
+    "dropdownMenu": {
+      "base": {
+        "panelGlowColor": "#ffffffff",
+        "panelBottomRimColor": "{vars.creamEdge}",
+        "panelShadowElevation": 24,
+        "itemActiveElevation": 0,
+        "itemHoverScale": 1.02,
+        "itemPressedScale": 1,
+        "itemBorderColor": "#00000000",
+        "itemBorderWidth": 0,
+        "itemGlowColor": "#00000000",
+        "itemActiveBorderColor": "#00000000",
+        "itemOrbColor": null,
+        "itemBottomRimColor": null,
+        "itemShadowColor": "#00000000",
+        "itemOverlayBrush": "#00000000",
+        "panelBackground": [
+          "linear",
+          180,
+          "{vars.cream}",
+          "{vars.creamLo}"
+        ],
+        "panelShape": 26,
+        "panelShadowColor": "#5a23472e",
+        "itemShape": "pill",
+        "itemForeground": "{vars.ink}",
+        "itemActiveBackground": [
+          "linear",
+          180,
+          "{vars.sweetHi}",
+          "{vars.sweet}"
+        ],
+        "itemSelectedBackground": [
+          "gradient",
+          "{vars.wash}",
+          "{vars.wash}"
+        ],
+        "itemActiveForeground": "{vars.onSweet}",
+        "itemIconTint": "{vars.dim}",
+        "itemMutedForeground": "{vars.dim}",
+        "separatorBrush": "{vars.creamEdge}"
+      },
+      "states": {
+        "hovered": {
+          "itemBackground": [
+            "linear",
+            180,
+            "{vars.sweetHi}",
+            "{vars.sweet}"
+          ],
+          "itemIconTint": "{vars.onSweet}"
+        },
+        "focused": {
+          "itemBackground": [
+            "gradient",
+            "{vars.wash}",
+            "{vars.wash}"
+          ]
+        },
+        "pressed": {
+          "itemBackground": [
+            "linear",
+            180,
+            "{vars.sweet}",
+            "{vars.sweetLo}"
+          ]
+        }
+      }
+    },
+    "tooltip": {
+      "base": {
+        "shadowElevation": 0,
+        "borderWidth": 0,
+        "background": [
+          "linear",
+          180,
+          "{vars.sweetHi}",
+          "{vars.sweet}"
+        ],
+        "foreground": "{vars.onSweet}",
+        "shape": 16
+      }
+    },
+    "segmentedButton": {
+      "base": {
+        "shadows": [
+          "#00000000"
+        ],
+        "shadowElevation": 0,
+        "innerGlowColor": "#ffffffff",
+        "bottomRimColor": "{vars.creamEdge}",
+        "interactionOverlay": "#00000000",
+        "interactionRim": "#00000000",
+        "motion": {
+          "hoverScale": 1,
+          "pressedScale": 1
+        },
+        "borderWidth": 0,
+        "background": [
+          "linear",
+          180,
+          "{vars.cream}",
+          "{vars.creamLo}"
+        ],
+        "foreground": "{vars.ink}"
+      },
+      "states": {
+        "selected": {
+          "background": [
+            "linear",
+            180,
+            "{vars.sweetHi}",
+            "{vars.sweet}"
+          ],
+          "foreground": "{vars.onSweet}",
+          "bottomRimColor": "{vars.sweetLo}"
+        }
+      }
+    },
+    "scrollbar": {
+      "base": {
+        "thumbInnerGlowColor": "#00000000",
+        "thumbBottomRimColor": null,
+        "trackInnerGlowColor": "#00000000",
+        "trackBottomRimColor": null,
+        "thumbInteractionOverlay": "#00000000",
+        "thumbBorderColor": "#00000000",
+        "trackBackground": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "thumbBackground": [
+          "gradient",
+          "{vars.creamEdge}",
+          "{vars.creamEdge}"
+        ]
+      },
+      "states": {
+        "hovered": {
+          "thumbBackground": [
+            "gradient",
+            "{vars.sweet}",
+            "{vars.sweet}"
+          ]
+        }
+      }
+    },
+    "snackbar": {
+      "base": {
+        "shadowElevation": 16,
+        "borderWidth": 0,
+        "background": [
+          "linear",
+          180,
+          "{vars.sweetHi}",
+          "{vars.sweet}"
+        ],
+        "foreground": "{vars.onSweet}",
+        "shape": 22,
+        "shadowColor": "{vars.soft}"
+      }
+    },
+    "bottomNavigationBar": {
+      "variants": {
+        "main": {
+          "base": {
+            "borderWidth": 0,
+            "shadowElevation": 20,
+            "innerGlowColor": "#ffffffff",
+            "bottomRimColor": "{vars.creamEdge}",
+            "orbColor": null,
+            "overlayBrush": "#00000000",
+            "background": [
+              "linear",
+              180,
+              "{vars.cream}",
+              "{vars.creamLo}"
+            ],
+            "shape": 36,
+            "margin": [
+              14,
+              10
+            ],
+            "insetsInsideSurface": false,
+            "shadowColor": "#5a23472e",
+            "minimumHeight": 64,
+            "itemSpacing": 6,
+            "contentPadding": [
+              8,
+              7
+            ]
+          }
+        },
+        "item": {
+          "base": {
+            "borderWidth": 0,
+            "borderColor": "#00000000",
+            "shadowElevation": 0,
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null,
+            "orbColor": null,
+            "overlayBrush": "#00000000",
+            "hoverScale": 1.05,
+            "pressedScale": 0.92,
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "foreground": "{vars.dim}",
+            "shape": "pill",
+            "iconSize": 22,
+            "labelStyle": {
+              "fontSize": 11,
+              "fontWeight": 700
+            }
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "gradient",
+                "{vars.wash}",
+                "{vars.wash}"
+              ],
+              "foreground": "{vars.ink}"
+            },
+            "selected": {
+              "background": [
+                "linear",
+                180,
+                "{vars.sweetHi}",
+                "{vars.sweet}"
+              ],
+              "foreground": "{vars.onSweet}",
+              "bottomRimColor": "{vars.sweetLo}",
+              "shadowElevation": 10,
+              "shadowColor": "{vars.soft}"
+            }
+          }
+        }
+      }
+    },
+    "sidebar": {
+      "variants": {
+        "root": {
+          "base": {
+            "borderWidth": 0,
+            "shadowElevation": 0,
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null,
+            "orbColor": null,
+            "overlayBrush": "#00000000",
+            "background": [
+              "gradient",
+              {
+                "light": "#ffffffa8",
+                "dark": "#2c2347c8"
+              },
+              {
+                "light": "#ffffffa8",
+                "dark": "#2c2347c8"
+              }
+            ],
+            "foreground": "{vars.ink}",
+            "shape": "rect"
+          }
+        },
+        "header": {
+          "base": {
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "dividerColor": "#00000000",
+            "dividerWidth": 0,
+            "dividerHighlightColor": "#00000000"
+          }
+        },
+        "footer": {
+          "base": {
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "dividerColor": "{vars.creamEdge}",
+            "dividerWidth": 2,
+            "dividerHighlightColor": "#00000000"
+          }
+        },
+        "group": {
+          "base": {
+            "labelBorderColor": "#00000000",
+            "labelBorderWidth": 0,
+            "labelInnerGlowColor": "#00000000",
+            "labelOverlayBrush": "#00000000",
+            "labelForeground": "{vars.dim}",
+            "labelShape": "pill",
+            "labelHoveredBackground": [
+              "gradient",
+              "{vars.wash}",
+              "{vars.wash}"
+            ],
+            "separatorBrush": "{vars.creamEdge}"
+          }
+        },
+        "item": {
+          "base": {
+            "borderWidth": 0,
+            "borderColor": "#00000000",
+            "shadowElevation": 0,
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null,
+            "orbColor": null,
+            "overlayBrush": "#00000000",
+            "hoverScale": 1.02,
+            "pressedScale": 0.95,
+            "selectedIndicatorColor": "#00000000",
+            "selectedIndicatorBrush": "#00000000",
+            "selectedIndicatorWidth": 0,
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "foreground": "{vars.ink}",
+            "iconTint": "{vars.dim}",
+            "iconSize": 20,
+            "shape": "pill",
+            "minimumHeight": 48,
+            "contentPadding": [
+              18,
+              10
+            ],
+            "labelStyle": {
+              "fontSize": 14,
+              "fontWeight": 700
+            },
+            "hoverBackground": [
+              "gradient",
+              "{vars.wash}",
+              "{vars.wash}"
+            ],
+            "focusBackground": [
+              "gradient",
+              "{vars.wash}",
+              "{vars.wash}"
+            ],
+            "pressedBackground": [
+              "gradient",
+              "{vars.soft}",
+              "{vars.soft}"
+            ],
+            "selectedBackground": [
+              "linear",
+              180,
+              "{vars.sweetHi}",
+              "{vars.sweet}"
+            ]
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "gradient",
+                "{vars.wash}",
+                "{vars.wash}"
+              ],
+              "iconTint": "{vars.sweet}"
+            },
+            "pressed": {
+              "background": [
+                "gradient",
+                "{vars.soft}",
+                "{vars.soft}"
+              ]
+            },
+            "selected": {
+              "background": [
+                "linear",
+                180,
+                "{vars.sweetHi}",
+                "{vars.sweet}"
+              ],
+              "foreground": "{vars.onSweet}",
+              "iconTint": "{vars.onSweet}",
+              "innerGlowColor": "#ffffffa0",
+              "bottomRimColor": "{vars.sweetLo}",
+              "shadowElevation": 8,
+              "shadowColor": "{vars.soft}"
+            }
+          }
+        }
+      }
+    },
+    "topAppBar": {
+      "base": {
+        "background": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "separatorColor": "#00000000"
+      }
+    }
+  },
   "assets": {
     "fonts": {
       "Comfortaa": [
@@ -22,615 +1090,6 @@
           "weight": 700
         }
       ]
-    }
-  },
-  "parameters": {
-    "accent": {
-      "type": "enum",
-      "label": "Flavor",
-      "default": "pink",
-      "options": [
-        {
-          "value": "pink",
-          "label": "Pink",
-          "color": "#ff5c9e"
-        },
-        {
-          "value": "peach",
-          "label": "Peach",
-          "color": "#ff8a5c"
-        },
-        {
-          "value": "mint",
-          "label": "Mint",
-          "color": "#10b981"
-        },
-        {
-          "value": "lavender",
-          "label": "Lavender",
-          "color": "#8b5cf6"
-        }
-      ]
-    },
-    "radius": {
-      "type": "number",
-      "label": "Corner radius",
-      "default": 20,
-      "min": 0,
-      "max": 32,
-      "step": 2
-    }
-  },
-  "vars": {
-    "soft": {
-      "type": "color",
-      "value": [
-        "match",
-        "{params.accent}",
-        {
-          "pink": "#ffb3d1",
-          "peach": "#ffcfb0",
-          "mint": "#b6f0d4",
-          "lavender": "#d9ccff"
-        }
-      ]
-    },
-    "main": {
-      "type": "color",
-      "value": [
-        "match",
-        "{params.accent}",
-        {
-          "pink": "#ff5c9e",
-          "peach": "#ff8a5c",
-          "mint": "#10b981",
-          "lavender": "#8b5cf6"
-        }
-      ]
-    },
-    "deep": {
-      "type": "color",
-      "value": [
-        "match",
-        "{params.accent}",
-        {
-          "pink": "#e63d82",
-          "peach": "#e5683a",
-          "mint": "#059669",
-          "lavender": "#6d3fd6"
-        }
-      ]
-    },
-    "bgc": {
-      "type": "color",
-      "value": [
-        "match",
-        "{params.accent}",
-        {
-          "pink": {
-            "light": "#fff4f8",
-            "dark": "#1e1118"
-          },
-          "peach": {
-            "light": "#fff6f0",
-            "dark": "#1f130e"
-          },
-          "mint": {
-            "light": "#f1fcf7",
-            "dark": "#0e1a15"
-          },
-          "lavender": {
-            "light": "#f7f3ff",
-            "dark": "#15101f"
-          }
-        }
-      ]
-    },
-    "insetc": {
-      "type": "color",
-      "value": [
-        "match",
-        "{params.accent}",
-        {
-          "pink": {
-            "light": "#ffe8f1",
-            "dark": "#170c12"
-          },
-          "peach": {
-            "light": "#ffeadd",
-            "dark": "#170d09"
-          },
-          "mint": {
-            "light": "#e1f8ee",
-            "dark": "#09130f"
-          },
-          "lavender": {
-            "light": "#ece5ff",
-            "dark": "#0f0a17"
-          }
-        }
-      ]
-    },
-    "line": {
-      "type": "color",
-      "value": [
-        "match",
-        "{params.accent}",
-        {
-          "pink": {
-            "light": "#f3c4d8",
-            "dark": "#5a3447"
-          },
-          "peach": {
-            "light": "#f5cdb6",
-            "dark": "#5a3b2a"
-          },
-          "mint": {
-            "light": "#bfe6d4",
-            "dark": "#27483b"
-          },
-          "lavender": {
-            "light": "#d8ccf3",
-            "dark": "#3d3159"
-          }
-        }
-      ]
-    },
-    "ink": {
-      "type": "color",
-      "value": [
-        "match",
-        "{params.accent}",
-        {
-          "pink": {
-            "light": "#4a2a3b",
-            "dark": "#ffeaf3"
-          },
-          "peach": {
-            "light": "#4a2e22",
-            "dark": "#ffeee3"
-          },
-          "mint": {
-            "light": "#1d3b30",
-            "dark": "#e2fff3"
-          },
-          "lavender": {
-            "light": "#33264f",
-            "dark": "#efe9ff"
-          }
-        }
-      ]
-    },
-    "inkMuted": {
-      "type": "color",
-      "value": [
-        "match",
-        "{params.accent}",
-        {
-          "pink": {
-            "light": "#9a6b83",
-            "dark": "#c79ab2"
-          },
-          "peach": {
-            "light": "#9a7258",
-            "dark": "#c9a48c"
-          },
-          "mint": {
-            "light": "#5d8f7b",
-            "dark": "#8fc7ad"
-          },
-          "lavender": {
-            "light": "#7d6aa8",
-            "dark": "#b6a2de"
-          }
-        }
-      ]
-    },
-    "wash": {
-      "type": "color",
-      "value": [
-        "alpha",
-        "{vars.main}",
-        0.14
-      ]
-    },
-    "glow": {
-      "type": "color",
-      "value": [
-        "alpha",
-        "{vars.main}",
-        0.35
-      ]
-    },
-    "surfaceC": {
-      "type": "color",
-      "value": {
-        "light": "#ffffff",
-        "dark": "#2a1822"
-      }
-    },
-    "r": {
-      "type": "number",
-      "value": "{params.radius}"
-    },
-    "rXl": {
-      "type": "number",
-      "value": [
-        "add",
-        "{params.radius}",
-        4
-      ]
-    },
-    "rField": {
-      "type": "number",
-      "value": [
-        "max",
-        0,
-        [
-          "sub",
-          "{params.radius}",
-          2
-        ]
-      ]
-    }
-  },
-  "tokens": {
-    "color": {
-      "background": "{vars.bgc}",
-      "surface": "{vars.surfaceC}",
-      "raised": {
-        "light": "#fffafc",
-        "dark": "#35202b"
-      },
-      "inset": "{vars.insetc}",
-      "text": "{vars.ink}",
-      "muted": "{vars.inkMuted}",
-      "border": "{vars.line}",
-      "highlight": "#ffffff",
-      "accent": "{vars.main}",
-      "accentTop": "{vars.soft}",
-      "accentBottom": "{vars.deep}",
-      "onAccent": "#ffffff",
-      "success": {
-        "light": "#2fb67f",
-        "dark": "#5be3a8"
-      },
-      "danger": {
-        "light": "#e8435f",
-        "dark": "#ff7d92"
-      }
-    },
-    "shape": {
-      "small": 12,
-      "medium": "{vars.r}",
-      "large": 28
-    },
-    "type": {
-      "family": "Comfortaa"
-    }
-  },
-  "defaults": {
-    "shape": "{vars.r}"
-  },
-  "components": {
-    "button": {
-      "base": {
-        "textStyle": {
-          "fontWeight": 700
-        },
-        "borderWidth": 1
-      },
-      "variants": {
-        "primary": {
-          "base": {
-            "shape": "pill",
-            "background": [
-              "linear",
-              180,
-              "{vars.soft}",
-              "{vars.main}"
-            ],
-            "borderColor": "{vars.deep}",
-            "foreground": "#ffffff",
-            "innerGlowColor": "#ffffffb0",
-            "shadows": [
-              "{vars.glow}"
-            ],
-            "shadowElevation": 8,
-            "textStyle": {
-              "shadow": {
-                "color": "#00000040",
-                "offsetY": 1,
-                "blurRadius": 1
-              }
-            }
-          },
-          "states": {
-            "hovered": {
-              "background": [
-                "linear",
-                180,
-                "{vars.soft}",
-                "{vars.soft}",
-                "{vars.main}"
-              ],
-              "shadowElevation": 12
-            },
-            "pressed": {
-              "background": [
-                "linear",
-                180,
-                "{vars.main}",
-                "{vars.soft}"
-              ],
-              "shadowElevation": 2,
-              "motion": {
-                "pressedScale": 0.94
-              }
-            }
-          }
-        },
-        "secondary": {
-          "base": {
-            "shape": "pill",
-            "borderColor": "{vars.soft}",
-            "foreground": "{vars.ink}",
-            "background": [
-              "linear",
-              180,
-              "{tokens.color.surface}",
-              "{tokens.color.inset}"
-            ],
-            "innerGlowColor": "#ffffffd0",
-            "shadows": [
-              "{vars.glow}"
-            ],
-            "shadowElevation": 4
-          },
-          "states": {
-            "hovered": {
-              "borderColor": "{vars.main}"
-            }
-          }
-        },
-        "quiet": {
-          "base": {
-            "shape": "pill",
-            "foreground": "{vars.deep}"
-          },
-          "states": {
-            "hovered": {
-              "background": [
-                "gradient",
-                "{vars.wash}",
-                "{vars.wash}"
-              ],
-              "borderColor": "{vars.soft}"
-            }
-          }
-        },
-        "danger": {
-          "base": {
-            "shape": "pill",
-            "background": [
-              "linear",
-              180,
-              "#ff9aa8",
-              "#e8435f"
-            ],
-            "borderColor": "#c92f4a",
-            "foreground": "#ffffff",
-            "innerGlowColor": "#ffffffa0",
-            "shadows": [
-              "#e8435f55"
-            ],
-            "shadowElevation": 8
-          }
-        }
-      }
-    },
-    "iconButton": {
-      "base": {
-        "shape": "pill",
-        "orb": false
-      },
-      "variants": {
-        "primary": {
-          "base": {
-            "background": [
-              "linear",
-              180,
-              "{vars.soft}",
-              "{vars.main}"
-            ],
-            "borderColor": "{vars.deep}",
-            "borderWidth": 1,
-            "foreground": "#ffffff",
-            "innerGlowColor": "#ffffffb0",
-            "shadows": [
-              "{vars.glow}"
-            ],
-            "shadowElevation": 6
-          }
-        },
-        "secondary": {
-          "base": {
-            "background": [
-              "linear",
-              180,
-              "{tokens.color.surface}",
-              "{tokens.color.inset}"
-            ],
-            "borderColor": "{vars.soft}",
-            "borderWidth": 1
-          }
-        },
-        "danger": {
-          "base": {
-            "background": [
-              "linear",
-              180,
-              "#ff9aa8",
-              "#e8435f"
-            ],
-            "borderColor": "#c92f4a",
-            "borderWidth": 1,
-            "foreground": "#ffffff"
-          }
-        }
-      }
-    },
-    "toggleSwitch": {
-      "base": {
-        "trackBackground": [
-          "linear",
-          180,
-          "{tokens.color.inset}",
-          "{tokens.color.surface}"
-        ],
-        "trackBorderColor": "{vars.soft}",
-        "trackShape": "pill",
-        "selectedTrackBackground": [
-          "linear",
-          180,
-          "{vars.soft}",
-          "{vars.main}"
-        ],
-        "thumbShape": "pill",
-        "thumbBackground": [
-          "linear",
-          180,
-          "#ffffff",
-          "#ffe3ee"
-        ],
-        "thumbBorderColor": "{vars.soft}",
-        "thumbBorderWidth": 1,
-        "trackSize": [
-          50,
-          30
-        ]
-      },
-      "states": {
-        "selected": {
-          "trackBorderColor": "{vars.deep}"
-        }
-      }
-    },
-    "checkbox": {
-      "base": {
-        "faceShape": 9,
-        "faceBackground": [
-          "linear",
-          180,
-          "{tokens.color.surface}",
-          "{tokens.color.inset}"
-        ],
-        "faceBorderColor": "{vars.soft}",
-        "faceBorderWidth": 1.5,
-        "selectedFaceBackground": [
-          "linear",
-          180,
-          "{vars.soft}",
-          "{vars.main}"
-        ],
-        "selectedFaceBorderColor": "{vars.deep}",
-        "selectedFaceForeground": "#ffffff",
-        "selectedFaceGlowColor": "{vars.glow}"
-      }
-    },
-    "slider": {
-      "base": {
-        "trackShape": "pill",
-        "trackBackground": [
-          "linear",
-          180,
-          "{tokens.color.inset}",
-          "{tokens.color.surface}"
-        ],
-        "trackBorderColor": "{vars.soft}",
-        "activeTrackBackground": [
-          "linear",
-          180,
-          "{vars.soft}",
-          "{vars.main}"
-        ],
-        "activeTrackShape": "pill",
-        "thumbShape": "pill",
-        "thumbBackground": [
-          "linear",
-          180,
-          "#ffffff",
-          "#ffe3ee"
-        ],
-        "thumbBorderColor": "{vars.main}",
-        "thumbBorderWidth": 2,
-        "thumbGlowColor": "{vars.glow}",
-        "thumbBottomRimColor": null
-      }
-    },
-    "progress": {
-      "base": {
-        "shape": "pill",
-        "trackBackground": [
-          "linear",
-          180,
-          "{tokens.color.inset}",
-          "{tokens.color.surface}"
-        ],
-        "borderColor": "{vars.soft}",
-        "progressBackground": [
-          "linear",
-          90,
-          "{vars.soft}",
-          "{vars.main}"
-        ],
-        "progressShape": "pill",
-        "innerGlowColor": "#ffffff90"
-      }
-    },
-    "textField": {
-      "base": {
-        "background": [
-          "gradient",
-          "{tokens.color.inset}",
-          "{tokens.color.surface}"
-        ],
-        "borderColor": "{vars.soft}",
-        "shape": "{vars.rField}",
-        "cursorColor": "{vars.main}"
-      },
-      "states": {
-        "focused": {
-          "borderColor": "{vars.main}",
-          "borderWidth": 2
-        }
-      }
-    },
-    "card": {
-      "base": {
-        "shape": "{vars.rXl}",
-        "background": [
-          "linear",
-          180,
-          "{tokens.color.surface}",
-          "{tokens.color.raised}"
-        ],
-        "borderColor": "{vars.soft}",
-        "shadowElevation": 10,
-        "shadowColor": "{vars.glow}",
-        "innerGlowColor": "#ffffffc0"
-      }
-    },
-    "listTile": {
-      "base": {
-        "shape": 16,
-        "selectedBackground": [
-          "linear",
-          90,
-          "{vars.wash}",
-          "#ffffff00"
-        ]
-      }
     }
   }
 }

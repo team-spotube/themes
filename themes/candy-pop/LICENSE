@@ -1,8 +1,10 @@
 Candy Pop theme for Spotube
 
-The theme definition (theme.json) is licensed under the GNU Affero General Public License v3.0 or later, like the rest of this repository (see ../../LICENSE).
+The theme definition (theme.json) and logo are licensed under the GNU Affero General Public License v3.0 or later, like the rest of this repository (see ../../LICENSE).
 
-The bundled Comfortaa fonts are licensed under the SIL Open Font License 1.1:
+The bundled fonts keep their own licences:
+
+--- Comfortaa (fonts/) ---
 
 Copyright 2011 The Comfortaa Project Authors 
 (https://github.com/alexeiva/comfortaa), with Reserved Font Name "Comfortaa".

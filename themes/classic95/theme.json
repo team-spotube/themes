@@ -1,0 +1,1085 @@
+{
+  "schema": 1,
+  "id": "classic95",
+  "name": "Classic",
+  "version": "1.0.0",
+  "author": "Spotube Team",
+  "description": "A 1990s desktop: square grey bevels, navy title bars and menu highlights, and no animation to speak of.",
+  "repository": "https://github.com/team-spotube/themes",
+  "bugs": "https://github.com/team-spotube/themes/issues",
+  "license": "AGPL-3.0-or-later",
+  "logo": "logo.png",
+  "parameters": {
+    "desktop": {
+      "type": "enum",
+      "label": "Highlight",
+      "default": "navy",
+      "options": [
+        {
+          "value": "navy",
+          "label": "Navy",
+          "color": "#000080"
+        },
+        {
+          "value": "teal",
+          "label": "Teal",
+          "color": "#008080"
+        },
+        {
+          "value": "maroon",
+          "label": "Maroon",
+          "color": "#800000"
+        },
+        {
+          "value": "olive",
+          "label": "Olive",
+          "color": "#808000"
+        }
+      ]
+    },
+    "density": {
+      "type": "enum",
+      "label": "Row size",
+      "default": "normal",
+      "options": [
+        {
+          "value": "compact",
+          "label": "Compact"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        }
+      ]
+    }
+  },
+  "vars": {
+    "none": {
+      "type": "color",
+      "default": "#00000000"
+    },
+    "face": {
+      "type": "color",
+      "value": {
+        "light": "#c0c0c0",
+        "dark": "#3c3c3c"
+      }
+    },
+    "faceDown": {
+      "type": "color",
+      "value": {
+        "light": "#b0b0b0",
+        "dark": "#303030"
+      }
+    },
+    "field": {
+      "type": "color",
+      "value": {
+        "light": "#ffffff",
+        "dark": "#1a1a1a"
+      }
+    },
+    "ink": {
+      "type": "color",
+      "value": {
+        "light": "#000000",
+        "dark": "#e8e8e8"
+      }
+    },
+    "inkOff": {
+      "type": "color",
+      "value": {
+        "light": "#808080",
+        "dark": "#808080"
+      }
+    },
+    "lit": {
+      "type": "color",
+      "value": {
+        "light": "#ffffff",
+        "dark": "#6a6a6a"
+      }
+    },
+    "shade": {
+      "type": "color",
+      "value": {
+        "light": "#808080",
+        "dark": "#141414"
+      }
+    },
+    "bad": {
+      "type": "color",
+      "value": {
+        "light": "#c00000",
+        "dark": "#ff6a6a"
+      }
+    },
+    "frame": {
+      "type": "color",
+      "value": {
+        "light": "#404040",
+        "dark": "#000000"
+      }
+    },
+    "hi": {
+      "type": "color",
+      "value": [
+        "match",
+        "{params.desktop}",
+        {
+          "navy": "#000080",
+          "teal": "#008080",
+          "maroon": "#800000",
+          "olive": "#6b6b00"
+        }
+      ]
+    },
+    "hiEdge": {
+      "type": "color",
+      "value": [
+        "match",
+        "{params.desktop}",
+        {
+          "navy": "#1084d0",
+          "teal": "#30c0c0",
+          "maroon": "#c04040",
+          "olive": "#b0b000"
+        }
+      ]
+    },
+    "rowH": {
+      "type": "number",
+      "value": [
+        "match",
+        "{params.density}",
+        {
+          "compact": 28,
+          "normal": 36
+        }
+      ]
+    }
+  },
+  "tokens": {
+    "color": {
+      "background": "{vars.face}",
+      "surface": "{vars.face}",
+      "raised": "{vars.face}",
+      "inset": "{vars.field}",
+      "text": "{vars.ink}",
+      "muted": "{vars.inkOff}",
+      "border": "{vars.frame}",
+      "highlight": "{vars.lit}",
+      "accent": "{vars.hi}",
+      "accentTop": "{vars.hiEdge}",
+      "accentBottom": "{vars.hi}",
+      "onAccent": "#ffffff",
+      "success": "#008000",
+      "danger": "{vars.bad}",
+      "scrim": "#00000040"
+    },
+    "shape": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+    },
+    "type": {
+      "family": "Liberation Sans"
+    },
+    "interaction": {
+      "lighting": false
+    },
+    "app": {
+      "background": [
+        "gradient",
+        "{vars.face}",
+        "{vars.face}"
+      ]
+    }
+  },
+  "defaults": {
+    "shape": "rect"
+  },
+  "components": {
+    "button": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.face}",
+          "{vars.face}"
+        ],
+        "borderWidth": 1,
+        "borderColor": "{vars.frame}",
+        "innerGlowColor": "{vars.lit}",
+        "bottomRimColor": "{vars.shade}",
+        "shadows": [
+          "#00000000"
+        ],
+        "shadowElevation": 0,
+        "interactionOverlay": "#00000000",
+        "interactionRim": "#00000000",
+        "motion": {
+          "hoverScale": 1,
+          "pressedScale": 1
+        },
+        "labelShadow": false,
+        "shape": "rect",
+        "foreground": "{vars.ink}",
+        "textStyle": {
+          "fontWeight": 400
+        },
+        "padding": [
+          14,
+          6
+        ]
+      },
+      "states": {
+        "pressed": {
+          "background": [
+            "gradient",
+            "{vars.faceDown}",
+            "{vars.faceDown}"
+          ],
+          "borderWidth": 1,
+          "borderColor": "{vars.frame}",
+          "innerGlowColor": "#00000000",
+          "bottomRimColor": null
+        },
+        "focused": {
+          "borderColor": "{vars.ink}",
+          "borderWidth": 2
+        },
+        "disabled": {
+          "foreground": "{vars.inkOff}"
+        }
+      },
+      "variants": {
+        "primary": {
+          "base": {
+            "borderColor": "{vars.ink}",
+            "borderWidth": 2,
+            "textStyle": {
+              "fontWeight": 700
+            }
+          }
+        },
+        "secondary": {},
+        "quiet": {
+          "base": {
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "borderColor": "#00000000",
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "gradient",
+                "{vars.face}",
+                "{vars.face}"
+              ],
+              "borderWidth": 1,
+              "borderColor": "{vars.frame}",
+              "innerGlowColor": "{vars.lit}",
+              "bottomRimColor": "{vars.shade}"
+            }
+          }
+        },
+        "danger": {
+          "base": {
+            "foreground": "{vars.bad}",
+            "textStyle": {
+              "fontWeight": 700
+            }
+          }
+        }
+      }
+    },
+    "iconButton": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.face}",
+          "{vars.face}"
+        ],
+        "borderWidth": 1,
+        "borderColor": "{vars.frame}",
+        "innerGlowColor": "{vars.lit}",
+        "bottomRimColor": "{vars.shade}",
+        "shadows": [
+          "#00000000"
+        ],
+        "shadowElevation": 0,
+        "interactionOverlay": "#00000000",
+        "interactionRim": "#00000000",
+        "motion": {
+          "hoverScale": 1,
+          "pressedScale": 1
+        },
+        "orb": false,
+        "shape": "rect",
+        "foreground": "{vars.ink}",
+        "iconSize": 16
+      },
+      "states": {
+        "pressed": {
+          "background": [
+            "gradient",
+            "{vars.faceDown}",
+            "{vars.faceDown}"
+          ],
+          "borderWidth": 1,
+          "borderColor": "{vars.frame}",
+          "innerGlowColor": "#00000000",
+          "bottomRimColor": null
+        }
+      },
+      "variants": {
+        "primary": {
+          "base": {
+            "borderColor": "{vars.ink}",
+            "borderWidth": 2
+          }
+        },
+        "secondary": {},
+        "quiet": {
+          "base": {
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "borderColor": "#00000000",
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "gradient",
+                "{vars.face}",
+                "{vars.face}"
+              ],
+              "borderWidth": 1,
+              "borderColor": "{vars.frame}",
+              "innerGlowColor": "{vars.lit}",
+              "bottomRimColor": "{vars.shade}"
+            }
+          }
+        },
+        "danger": {
+          "base": {
+            "foreground": "{vars.bad}"
+          }
+        }
+      }
+    },
+    "toggleSwitch": {
+      "base": {
+        "trackSize": [
+          40,
+          20
+        ],
+        "trackShape": "rect",
+        "thumbShape": "rect",
+        "trackBackground": [
+          "gradient",
+          "{vars.field}",
+          "{vars.field}"
+        ],
+        "selectedTrackBackground": [
+          "gradient",
+          "{vars.hi}",
+          "{vars.hi}"
+        ],
+        "trackBorderColor": "{vars.frame}",
+        "trackGlowColor": "#00000000",
+        "trackBottomRimColor": null,
+        "thumbBackground": [
+          "gradient",
+          "{vars.face}",
+          "{vars.face}"
+        ],
+        "thumbBorderColor": "{vars.frame}",
+        "thumbGlowColor": "{vars.lit}",
+        "thumbBottomRimColor": "{vars.shade}",
+        "thumbElevation": 0,
+        "trackInteractionOverlay": "#00000000",
+        "thumbInteractionOverlay": "#00000000",
+        "thumbHoverScaleX": 1,
+        "thumbHoverScaleY": 1,
+        "thumbPressedScaleX": 1,
+        "thumbPressedScaleY": 1
+      }
+    },
+    "checkbox": {
+      "base": {
+        "faceShape": "rect",
+        "faceSize": [
+          16,
+          16
+        ],
+        "faceBackground": [
+          "gradient",
+          "{vars.field}",
+          "{vars.field}"
+        ],
+        "faceBorderColor": "{vars.frame}",
+        "faceBorderWidth": 1,
+        "selectedFaceBackground": [
+          "gradient",
+          "{vars.field}",
+          "{vars.field}"
+        ],
+        "selectedFaceBorderColor": "{vars.frame}",
+        "selectedFaceForeground": "{vars.ink}",
+        "faceGlowColor": "#00000000",
+        "selectedFaceGlowColor": "#00000000",
+        "faceElevation": 0,
+        "faceBottomRimColor": "{vars.lit}",
+        "faceInteractionOverlay": "#00000000",
+        "faceHoverScale": 1,
+        "facePressedScale": 1
+      }
+    },
+    "slider": {
+      "base": {
+        "trackBackground": [
+          "gradient",
+          "{vars.field}",
+          "{vars.field}"
+        ],
+        "trackBorderColor": "{vars.frame}",
+        "trackInsetShadeColor": "{vars.shade}",
+        "trackShape": "rect",
+        "trackBottomRimColor": "{vars.lit}",
+        "activeTrackBackground": [
+          "gradient",
+          "{vars.hi}",
+          "{vars.hi}"
+        ],
+        "activeTrackShape": "rect",
+        "activeTrackGlowColor": "#00000000",
+        "thumbBackground": [
+          "gradient",
+          "{vars.face}",
+          "{vars.face}"
+        ],
+        "thumbBorderColor": "{vars.frame}",
+        "thumbBorderWidth": 1,
+        "thumbShape": "rect",
+        "thumbGlowColor": "{vars.lit}",
+        "thumbBottomRimColor": "{vars.shade}",
+        "thumbElevation": 0,
+        "trackInteractionOverlay": "#00000000",
+        "thumbInteractionOverlay": "#00000000"
+      }
+    },
+    "progress": {
+      "base": {
+        "shape": "rect",
+        "height": 18,
+        "trackBackground": [
+          "gradient",
+          "{vars.field}",
+          "{vars.field}"
+        ],
+        "borderColor": "{vars.frame}",
+        "borderWidth": 1,
+        "trackBottomRimColor": "{vars.lit}",
+        "progressBackground": [
+          "gradient",
+          "{vars.hi}",
+          "{vars.hi}"
+        ],
+        "progressShape": "rect",
+        "progressInnerGlowColor": "#00000000",
+        "progressBottomRimColor": null
+      }
+    },
+    "textField": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.field}",
+          "{vars.field}"
+        ],
+        "borderWidth": 1,
+        "borderColor": "{vars.frame}",
+        "innerGlowColor": "#00000000",
+        "bottomRimColor": null,
+        "insetShadeColor": "{vars.shade}",
+        "shape": "rect",
+        "cursorColor": "{vars.ink}",
+        "interactionOverlay": "#00000000",
+        "placeholderColor": "{vars.inkOff}",
+        "labelColor": "{vars.ink}"
+      },
+      "states": {
+        "focused": {
+          "borderColor": "{vars.ink}"
+        }
+      }
+    },
+    "card": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.face}",
+          "{vars.face}"
+        ],
+        "borderWidth": 1,
+        "borderColor": "{vars.frame}",
+        "innerGlowColor": "{vars.lit}",
+        "bottomRimColor": "{vars.shade}",
+        "shape": "rect",
+        "shadowElevation": 0,
+        "interactionOverlay": "#00000000",
+        "insetShadeColor": "#00000000"
+      }
+    },
+    "listTile": {
+      "base": {
+        "shape": "rect",
+        "minimumHeight": "{vars.rowH}",
+        "background": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "selectedBackground": [
+          "gradient",
+          "{vars.hi}",
+          "{vars.hi}"
+        ],
+        "borderWidth": 0,
+        "shadowElevation": 0,
+        "titleForeground": "{vars.ink}",
+        "subtitleForeground": "{vars.inkOff}",
+        "selectedTitleForeground": "#ffffff",
+        "selectedSubtitleForeground": "#ffffffc0",
+        "interactionOverlay": "#00000000"
+      },
+      "states": {
+        "hovered": {
+          "background": [
+            "gradient",
+            "{vars.hi}",
+            "{vars.hi}"
+          ],
+          "titleForeground": "#ffffff",
+          "subtitleForeground": "#ffffffc0"
+        }
+      }
+    },
+    "separator": {
+      "base": {
+        "color": "{vars.shade}",
+        "highlightColor": "{vars.lit}",
+        "thickness": 1
+      }
+    },
+    "dialog": {
+      "base": {
+        "shape": "rect",
+        "panelBackground": [
+          "gradient",
+          "{vars.face}",
+          "{vars.face}"
+        ],
+        "panelBorderColor": "{vars.frame}",
+        "panelBorderWidth": 2,
+        "panelGlowColor": "{vars.lit}",
+        "panelBottomRimColor": "{vars.shade}",
+        "panelShadowElevation": 0,
+        "enterScale": 1,
+        "exitScale": 1,
+        "titleBarBackground": [
+          "linear",
+          0,
+          "{vars.hi}",
+          "{vars.hiEdge}"
+        ],
+        "titleBarForeground": "#ffffff",
+        "titleStyle": {
+          "fontWeight": 700
+        },
+        "titleBarBorderColor": "#00000000",
+        "titleBarDividerThickness": 0,
+        "footerBackground": [
+          "gradient",
+          "{vars.face}",
+          "{vars.face}"
+        ],
+        "footerBorderColor": "#00000000",
+        "footerDividerThickness": 0,
+        "scrimColor": "#00000040",
+        "closeCapBackground": [
+          "gradient",
+          "{vars.face}",
+          "{vars.face}"
+        ],
+        "closeCapForeground": "{vars.ink}",
+        "closeCapBorderColor": "{vars.frame}",
+        "closeCapBorderWidth": 1,
+        "closeCapShape": "rect",
+        "closeCapGlowColor": "{vars.lit}",
+        "closeCapElevation": 0,
+        "closeCapRaisedElevation": 0,
+        "closeCapPressedElevation": 0,
+        "closeCapTint": "#00000000",
+        "closeScaleHover": 1,
+        "closeScalePressed": 1
+      },
+      "states": {
+        "pressed": {
+          "closeCapBackground": [
+            "gradient",
+            "{vars.faceDown}",
+            "{vars.faceDown}"
+          ],
+          "closeCapGlowColor": "#00000000"
+        }
+      }
+    },
+    "dropdownMenu": {
+      "base": {
+        "panelBackground": [
+          "gradient",
+          "{vars.face}",
+          "{vars.face}"
+        ],
+        "panelShape": "rect",
+        "panelBorderColor": "{vars.frame}",
+        "panelBorderWidth": 1,
+        "panelGlowColor": "{vars.lit}",
+        "panelBottomRimColor": "{vars.shade}",
+        "panelShadowElevation": 0,
+        "itemShape": "rect",
+        "itemForeground": "{vars.ink}",
+        "itemActiveBackground": [
+          "gradient",
+          "{vars.hi}",
+          "{vars.hi}"
+        ],
+        "itemSelectedBackground": [
+          "gradient",
+          "{vars.hi}",
+          "{vars.hi}"
+        ],
+        "itemActiveForeground": "#ffffff",
+        "itemActiveElevation": 0,
+        "itemHoverScale": 1,
+        "itemPressedScale": 1,
+        "itemMutedForeground": "{vars.inkOff}",
+        "itemIconTint": "{vars.ink}",
+        "itemBorderColor": "#00000000",
+        "itemBorderWidth": 0,
+        "itemGlowColor": "#00000000",
+        "itemActiveBorderColor": "#00000000",
+        "itemOrbColor": null,
+        "itemBottomRimColor": null,
+        "itemShadowColor": "#00000000",
+        "itemOverlayBrush": "#00000000",
+        "separatorBrush": "{vars.shade}",
+        "separatorThickness": 1,
+        "enterScale": 1,
+        "exitScale": 1,
+        "groupLabelForeground": "{vars.inkOff}"
+      },
+      "states": {
+        "hovered": {
+          "itemBackground": [
+            "gradient",
+            "{vars.hi}",
+            "{vars.hi}"
+          ],
+          "itemIconTint": "#ffffff"
+        },
+        "focused": {
+          "itemBackground": [
+            "gradient",
+            "{vars.hi}",
+            "{vars.hi}"
+          ],
+          "itemIconTint": "#ffffff"
+        },
+        "pressed": {
+          "itemBackground": [
+            "gradient",
+            "{vars.hi}",
+            "{vars.hi}"
+          ],
+          "itemIconTint": "#ffffff"
+        }
+      }
+    },
+    "tooltip": {
+      "base": {
+        "background": [
+          "gradient",
+          "#ffffe1",
+          "#ffffe1"
+        ],
+        "foreground": "#000000",
+        "shape": "rect",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "shadowElevation": 0
+      }
+    },
+    "segmentedButton": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.face}",
+          "{vars.face}"
+        ],
+        "borderWidth": 1,
+        "borderColor": "{vars.frame}",
+        "innerGlowColor": "{vars.lit}",
+        "bottomRimColor": "{vars.shade}",
+        "shadows": [
+          "#00000000"
+        ],
+        "shadowElevation": 0,
+        "interactionOverlay": "#00000000",
+        "interactionRim": "#00000000",
+        "motion": {
+          "hoverScale": 1,
+          "pressedScale": 1
+        },
+        "foreground": "{vars.ink}"
+      },
+      "states": {
+        "selected": {
+          "background": [
+            "gradient",
+            "{vars.faceDown}",
+            "{vars.faceDown}"
+          ],
+          "borderWidth": 1,
+          "borderColor": "{vars.frame}",
+          "innerGlowColor": "#00000000",
+          "bottomRimColor": null
+        },
+        "pressed": {
+          "background": [
+            "gradient",
+            "{vars.faceDown}",
+            "{vars.faceDown}"
+          ],
+          "borderWidth": 1,
+          "borderColor": "{vars.frame}",
+          "innerGlowColor": "#00000000",
+          "bottomRimColor": null
+        }
+      }
+    },
+    "scrollbar": {
+      "base": {
+        "trackBackground": [
+          "gradient",
+          "{vars.faceDown}",
+          "{vars.faceDown}"
+        ],
+        "thumbBackground": [
+          "gradient",
+          "{vars.face}",
+          "{vars.face}"
+        ],
+        "thumbBorderColor": "{vars.frame}",
+        "thumbInnerGlowColor": "{vars.lit}",
+        "thumbBottomRimColor": "{vars.shade}",
+        "thumbInteractionOverlay": "#00000000"
+      }
+    },
+    "snackbar": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.face}",
+          "{vars.face}"
+        ],
+        "foreground": "{vars.ink}",
+        "borderColor": "{vars.frame}",
+        "borderWidth": 2,
+        "shape": "rect",
+        "shadowElevation": 0
+      }
+    },
+    "topAppBar": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.face}",
+          "{vars.face}"
+        ],
+        "separatorColor": "{vars.shade}"
+      }
+    },
+    "bottomNavigationBar": {
+      "variants": {
+        "main": {
+          "base": {
+            "background": [
+              "gradient",
+              "{vars.face}",
+              "{vars.face}"
+            ],
+            "shape": "rect",
+            "borderWidth": 0,
+            "shadowElevation": 0,
+            "innerGlowColor": "{vars.lit}",
+            "bottomRimColor": null,
+            "overlayBrush": "#00000000",
+            "itemSpacing": 2,
+            "minimumHeight": 56
+          }
+        },
+        "item": {
+          "base": {
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "foreground": "{vars.ink}",
+            "shape": "rect",
+            "iconSize": 20,
+            "borderWidth": 1,
+            "borderColor": "#00000000",
+            "shadowElevation": 0,
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null,
+            "orbColor": null,
+            "overlayBrush": "#00000000",
+            "hoverScale": 1,
+            "pressedScale": 1,
+            "labelStyle": {
+              "fontSize": 11
+            }
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "gradient",
+                "{vars.face}",
+                "{vars.face}"
+              ],
+              "borderWidth": 1,
+              "borderColor": "{vars.frame}",
+              "innerGlowColor": "{vars.lit}",
+              "bottomRimColor": "{vars.shade}"
+            },
+            "pressed": {
+              "background": [
+                "gradient",
+                "{vars.faceDown}",
+                "{vars.faceDown}"
+              ],
+              "borderWidth": 1,
+              "borderColor": "{vars.frame}",
+              "innerGlowColor": "#00000000",
+              "bottomRimColor": null
+            },
+            "selected": {
+              "background": [
+                "gradient",
+                "{vars.faceDown}",
+                "{vars.faceDown}"
+              ],
+              "borderWidth": 1,
+              "borderColor": "{vars.frame}",
+              "innerGlowColor": "#00000000",
+              "bottomRimColor": null,
+              "labelStyle": {
+                "fontWeight": 700
+              }
+            }
+          }
+        }
+      }
+    },
+    "sidebar": {
+      "variants": {
+        "root": {
+          "base": {
+            "background": [
+              "gradient",
+              "{vars.face}",
+              "{vars.face}"
+            ],
+            "foreground": "{vars.ink}",
+            "shape": "rect",
+            "borderWidth": 0,
+            "shadowElevation": 0,
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null,
+            "overlayBrush": [
+              "linear",
+              90,
+              [
+                "#00000000",
+                0
+              ],
+              [
+                "#00000000",
+                0.99
+              ],
+              [
+                "{vars.frame}",
+                0.99
+              ],
+              [
+                "{vars.frame}",
+                1
+              ]
+            ]
+          }
+        },
+        "header": {
+          "base": {
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "dividerColor": "{vars.shade}",
+            "dividerHighlightColor": "{vars.lit}",
+            "dividerWidth": 1
+          }
+        },
+        "footer": {
+          "base": {
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "dividerColor": "{vars.shade}",
+            "dividerHighlightColor": "{vars.lit}",
+            "dividerWidth": 1
+          }
+        },
+        "group": {
+          "base": {
+            "labelForeground": "{vars.inkOff}",
+            "labelShape": "rect",
+            "labelHoveredBackground": [
+              "gradient",
+              "{vars.face}",
+              "{vars.face}"
+            ],
+            "labelBorderWidth": 0,
+            "labelInnerGlowColor": "#00000000",
+            "labelOverlayBrush": "#00000000",
+            "separatorBrush": "{vars.shade}"
+          }
+        },
+        "item": {
+          "base": {
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "foreground": "{vars.ink}",
+            "iconTint": "{vars.ink}",
+            "iconSize": 16,
+            "shape": "rect",
+            "borderWidth": 0,
+            "shadowElevation": 0,
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null,
+            "orbColor": null,
+            "overlayBrush": "#00000000",
+            "hoverScale": 1,
+            "pressedScale": 1,
+            "selectedIndicatorColor": "#00000000",
+            "selectedIndicatorBrush": "#00000000",
+            "selectedIndicatorWidth": 0,
+            "hoverBackground": [
+              "gradient",
+              "{vars.hi}",
+              "{vars.hi}"
+            ],
+            "focusBackground": [
+              "gradient",
+              "{vars.hi}",
+              "{vars.hi}"
+            ],
+            "pressedBackground": [
+              "gradient",
+              "{vars.hi}",
+              "{vars.hi}"
+            ],
+            "selectedBackground": [
+              "gradient",
+              "{vars.hi}",
+              "{vars.hi}"
+            ]
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "gradient",
+                "{vars.hi}",
+                "{vars.hi}"
+              ],
+              "foreground": "#ffffff",
+              "iconTint": "#ffffff"
+            },
+            "pressed": {
+              "background": [
+                "gradient",
+                "{vars.hi}",
+                "{vars.hi}"
+              ],
+              "foreground": "#ffffff",
+              "iconTint": "#ffffff"
+            },
+            "focused": {
+              "background": [
+                "gradient",
+                "{vars.hi}",
+                "{vars.hi}"
+              ],
+              "foreground": "#ffffff",
+              "iconTint": "#ffffff"
+            },
+            "selected": {
+              "background": [
+                "gradient",
+                "{vars.hi}",
+                "{vars.hi}"
+              ],
+              "foreground": "#ffffff",
+              "iconTint": "#ffffff",
+              "labelStyle": {
+                "fontWeight": 700
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "assets": {
+    "fonts": {
+      "Liberation Sans": [
+        {
+          "src": "fonts/LiberationSans-Regular.ttf",
+          "weight": 400
+        },
+        {
+          "src": "fonts/LiberationSans-Bold.ttf",
+          "weight": 700
+        }
+      ]
+    }
+  }
+}

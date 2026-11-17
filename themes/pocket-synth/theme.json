@@ -1,0 +1,1150 @@
+{
+  "schema": 1,
+  "id": "pocket-synth",
+  "name": "Pocket Synth",
+  "version": "1.0.0",
+  "author": "Spotube Team",
+  "description": "A palm-sized hardware sampler: chunky keys that sit on the panel, a pale LCD and one loud key colour.",
+  "repository": "https://github.com/team-spotube/themes",
+  "bugs": "https://github.com/team-spotube/themes/issues",
+  "license": "AGPL-3.0-or-later",
+  "logo": "logo.png",
+  "parameters": {
+    "keys": {
+      "type": "enum",
+      "label": "Key color",
+      "default": "orange",
+      "options": [
+        {
+          "value": "orange",
+          "label": "Orange",
+          "color": "#ff5a1f"
+        },
+        {
+          "value": "blue",
+          "label": "Blue",
+          "color": "#2f6bff"
+        },
+        {
+          "value": "green",
+          "label": "Green",
+          "color": "#18a058"
+        },
+        {
+          "value": "pink",
+          "label": "Pink",
+          "color": "#ff4f8b"
+        }
+      ]
+    }
+  },
+  "vars": {
+    "none": {
+      "type": "color",
+      "default": "#00000000"
+    },
+    "key": {
+      "type": "color",
+      "value": [
+        "match",
+        "{params.keys}",
+        {
+          "orange": "#ff5a1f",
+          "blue": "#2f6bff",
+          "green": "#18a058",
+          "pink": "#ff4f8b"
+        }
+      ]
+    },
+    "keyDown": {
+      "type": "color",
+      "value": [
+        "darken",
+        "{vars.key}",
+        0.22
+      ]
+    },
+    "keyHi": {
+      "type": "color",
+      "value": [
+        "lighten",
+        "{vars.key}",
+        0.2
+      ]
+    },
+    "panel": {
+      "type": "color",
+      "value": {
+        "light": "#dcd8c8",
+        "dark": "#2b2b2e"
+      }
+    },
+    "panelLo": {
+      "type": "color",
+      "value": {
+        "light": "#cdc8b6",
+        "dark": "#222225"
+      }
+    },
+    "capTop": {
+      "type": "color",
+      "value": {
+        "light": "#fbfaf4",
+        "dark": "#4a4a50"
+      }
+    },
+    "capBot": {
+      "type": "color",
+      "value": {
+        "light": "#e6e2d3",
+        "dark": "#38383d"
+      }
+    },
+    "capEdge": {
+      "type": "color",
+      "value": {
+        "light": "#a9a490",
+        "dark": "#101012"
+      }
+    },
+    "seat": {
+      "type": "color",
+      "value": {
+        "light": "#9c977f",
+        "dark": "#0a0a0b"
+      }
+    },
+    "lcd": {
+      "type": "color",
+      "value": {
+        "light": "#c8d1b3",
+        "dark": "#a9b88f"
+      }
+    },
+    "lcdInk": {
+      "type": "color",
+      "value": "#1f2a14"
+    },
+    "ink": {
+      "type": "color",
+      "value": {
+        "light": "#26241d",
+        "dark": "#ecebe4"
+      }
+    },
+    "dim": {
+      "type": "color",
+      "value": {
+        "light": "#6e6a58",
+        "dark": "#a3a396"
+      }
+    },
+    "wash": {
+      "type": "color",
+      "value": {
+        "light": "#00000012",
+        "dark": "#ffffff14"
+      }
+    }
+  },
+  "tokens": {
+    "color": {
+      "background": "{vars.panel}",
+      "surface": "{vars.panelLo}",
+      "raised": "{vars.capTop}",
+      "inset": "{vars.lcd}",
+      "text": "{vars.ink}",
+      "muted": "{vars.dim}",
+      "border": "{vars.capEdge}",
+      "highlight": "#ffffff80",
+      "accent": "{vars.key}",
+      "accentTop": "{vars.keyHi}",
+      "accentBottom": "{vars.keyDown}",
+      "onAccent": "#ffffff",
+      "success": "#18a058",
+      "danger": "#e0302c",
+      "scrim": "#00000070"
+    },
+    "shape": {
+      "small": 4,
+      "medium": 6,
+      "large": 10
+    },
+    "type": {
+      "family": "Space Mono",
+      "scale": 0.92
+    },
+    "interaction": {
+      "lighting": false
+    },
+    "surface": {
+      "shadows": false,
+      "glow": false
+    },
+    "app": {
+      "background": [
+        "linear",
+        180,
+        {
+          "light": "#e3dfd0",
+          "dark": "#323236"
+        },
+        {
+          "light": "#cfcab8",
+          "dark": "#242427"
+        }
+      ]
+    }
+  },
+  "defaults": {
+    "shape": 6
+  },
+  "components": {
+    "button": {
+      "base": {
+        "shadows": [
+          "#00000000"
+        ],
+        "shadowElevation": 0,
+        "innerGlowColor": "#ffffffa0",
+        "bottomRimColor": "{vars.seat}",
+        "interactionOverlay": "#00000000",
+        "interactionRim": "#00000000",
+        "motion": {
+          "hoverScale": 1,
+          "pressedScale": 0.985
+        },
+        "borderWidth": 1,
+        "background": [
+          "linear",
+          180,
+          "{vars.capTop}",
+          "{vars.capBot}"
+        ],
+        "foreground": "{vars.ink}",
+        "borderColor": "{vars.capEdge}",
+        "shape": 6,
+        "padding": [
+          18,
+          11
+        ],
+        "textStyle": {
+          "fontFamily": "Space Mono",
+          "fontWeight": 700,
+          "fontSize": 13
+        }
+      },
+      "states": {
+        "hovered": {
+          "background": [
+            "linear",
+            180,
+            "#ffffff",
+            "{vars.capBot}"
+          ]
+        },
+        "pressed": {
+          "background": [
+            "linear",
+            180,
+            "{vars.capBot}",
+            "{vars.capBot}"
+          ],
+          "innerGlowColor": "#00000000",
+          "bottomRimColor": null,
+          "borderColor": "{vars.seat}"
+        },
+        "disabled": {
+          "alpha": 0.5
+        }
+      },
+      "variants": {
+        "primary": {
+          "base": {
+            "background": [
+              "linear",
+              180,
+              "{vars.keyHi}",
+              "{vars.key}"
+            ],
+            "foreground": "#ffffff",
+            "borderColor": "{vars.keyDown}",
+            "bottomRimColor": "{vars.keyDown}",
+            "innerGlowColor": "#ffffff60"
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "linear",
+                180,
+                "{vars.keyHi}",
+                "{vars.keyHi}"
+              ]
+            },
+            "pressed": {
+              "background": [
+                "linear",
+                180,
+                "{vars.key}",
+                "{vars.key}"
+              ],
+              "bottomRimColor": null,
+              "innerGlowColor": "#00000000"
+            }
+          }
+        },
+        "secondary": {},
+        "quiet": {
+          "base": {
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "borderColor": "#00000000",
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "gradient",
+                "{vars.wash}",
+                "{vars.wash}"
+              ]
+            }
+          }
+        },
+        "danger": {
+          "base": {
+            "background": [
+              "linear",
+              180,
+              "#f0605a",
+              "#e0302c"
+            ],
+            "foreground": "#ffffff",
+            "borderColor": "#a01c18",
+            "bottomRimColor": "#a01c18"
+          }
+        }
+      }
+    },
+    "iconButton": {
+      "base": {
+        "orb": false,
+        "shadows": [
+          "#00000000"
+        ],
+        "shadowElevation": 0,
+        "innerGlowColor": "#ffffffa0",
+        "bottomRimColor": "{vars.seat}",
+        "interactionOverlay": "#00000000",
+        "interactionRim": "#00000000",
+        "motion": {
+          "hoverScale": 1,
+          "pressedScale": 0.97
+        },
+        "borderWidth": 1,
+        "background": [
+          "linear",
+          180,
+          "{vars.capTop}",
+          "{vars.capBot}"
+        ],
+        "foreground": "{vars.ink}",
+        "borderColor": "{vars.capEdge}",
+        "shape": 6,
+        "iconSize": 18
+      },
+      "states": {
+        "pressed": {
+          "background": [
+            "linear",
+            180,
+            "{vars.capBot}",
+            "{vars.capBot}"
+          ],
+          "innerGlowColor": "#00000000",
+          "bottomRimColor": null
+        }
+      },
+      "variants": {
+        "primary": {
+          "base": {
+            "background": [
+              "linear",
+              180,
+              "{vars.keyHi}",
+              "{vars.key}"
+            ],
+            "foreground": "#ffffff",
+            "borderColor": "{vars.keyDown}",
+            "bottomRimColor": "{vars.keyDown}"
+          }
+        },
+        "secondary": {},
+        "quiet": {
+          "base": {
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "borderColor": "#00000000",
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "gradient",
+                "{vars.wash}",
+                "{vars.wash}"
+              ]
+            }
+          }
+        },
+        "danger": {
+          "base": {
+            "background": [
+              "linear",
+              180,
+              "#f0605a",
+              "#e0302c"
+            ],
+            "foreground": "#ffffff",
+            "borderColor": "#a01c18",
+            "bottomRimColor": "#a01c18"
+          }
+        }
+      }
+    },
+    "toggleSwitch": {
+      "base": {
+        "trackGlowColor": "#00000000",
+        "trackBottomRimColor": null,
+        "thumbGlowColor": "#ffffffa0",
+        "thumbBottomRimColor": "{vars.seat}",
+        "thumbElevation": 0,
+        "trackInteractionOverlay": "#00000000",
+        "thumbInteractionOverlay": "#00000000",
+        "thumbHoverScaleX": 1,
+        "thumbHoverScaleY": 1,
+        "thumbPressedScaleX": 1,
+        "thumbPressedScaleY": 1,
+        "thumbBorderColor": "{vars.capEdge}",
+        "trackBorderColor": "{vars.capEdge}",
+        "trackSize": [
+          44,
+          22
+        ],
+        "trackShape": 4,
+        "thumbShape": 3,
+        "trackBackground": [
+          "gradient",
+          "{vars.seat}",
+          "{vars.seat}"
+        ],
+        "selectedTrackBackground": [
+          "gradient",
+          "{vars.key}",
+          "{vars.key}"
+        ],
+        "thumbBackground": [
+          "linear",
+          180,
+          "{vars.capTop}",
+          "{vars.capBot}"
+        ]
+      }
+    },
+    "checkbox": {
+      "base": {
+        "faceGlowColor": "#00000000",
+        "selectedFaceGlowColor": "#00000000",
+        "faceElevation": 0,
+        "faceBottomRimColor": null,
+        "faceInteractionOverlay": "#00000000",
+        "faceHoverScale": 1,
+        "facePressedScale": 1,
+        "faceShape": 3,
+        "faceSize": [
+          18,
+          18
+        ],
+        "faceBackground": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "faceBorderColor": "{vars.capEdge}",
+        "faceBorderWidth": 1,
+        "selectedFaceBackground": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "selectedFaceBorderColor": "{vars.capEdge}",
+        "selectedFaceForeground": "{vars.lcdInk}"
+      }
+    },
+    "slider": {
+      "base": {
+        "trackInsetShadeColor": "#00000000",
+        "trackInnerGlowColor": "#00000000",
+        "trackBottomRimColor": null,
+        "activeTrackGlowColor": "#00000000",
+        "thumbGlowColor": "#ffffffa0",
+        "thumbBottomRimColor": "{vars.seat}",
+        "thumbElevation": 0,
+        "trackInteractionOverlay": "#00000000",
+        "thumbInteractionOverlay": "#00000000",
+        "trackBorderColor": "#00000000",
+        "trackBackground": [
+          "gradient",
+          "{vars.seat}",
+          "{vars.seat}"
+        ],
+        "trackShape": 2,
+        "activeTrackBackground": [
+          "gradient",
+          "{vars.key}",
+          "{vars.key}"
+        ],
+        "activeTrackShape": 2,
+        "thumbBackground": [
+          "linear",
+          180,
+          "{vars.capTop}",
+          "{vars.capBot}"
+        ],
+        "thumbBorderColor": "{vars.capEdge}",
+        "thumbBorderWidth": 1,
+        "thumbShape": 4
+      }
+    },
+    "progress": {
+      "base": {
+        "borderColor": "#00000000",
+        "borderWidth": 0,
+        "progressInnerGlowColor": "#00000000",
+        "progressBottomRimColor": null,
+        "trackBottomRimColor": null,
+        "shape": 3,
+        "height": 10,
+        "trackBackground": [
+          "gradient",
+          "{vars.seat}",
+          "{vars.seat}"
+        ],
+        "progressBackground": [
+          "gradient",
+          "{vars.key}",
+          "{vars.key}"
+        ],
+        "progressShape": 3
+      }
+    },
+    "textField": {
+      "base": {
+        "insetShadeColor": "#00000030",
+        "innerGlowColor": "#00000000",
+        "bottomRimColor": null,
+        "interactionOverlay": "#00000000",
+        "background": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "borderWidth": 1,
+        "borderColor": "{vars.capEdge}",
+        "shape": 4,
+        "cursorColor": "{vars.lcdInk}",
+        "placeholderColor": "#5e6b49",
+        "labelColor": "{vars.ink}",
+        "textStyle": {
+          "color": "{vars.lcdInk}"
+        }
+      },
+      "states": {
+        "focused": {
+          "borderColor": "{vars.key}",
+          "borderWidth": 2
+        }
+      }
+    },
+    "card": {
+      "base": {
+        "shadowElevation": 0,
+        "innerGlowColor": "#ffffff60",
+        "bottomRimColor": "{vars.seat}",
+        "insetShadeColor": "#00000000",
+        "interactionOverlay": "#00000000",
+        "background": [
+          "gradient",
+          "{vars.panelLo}",
+          "{vars.panelLo}"
+        ],
+        "borderWidth": 1,
+        "borderColor": "{vars.capEdge}",
+        "shape": 10
+      }
+    },
+    "listTile": {
+      "base": {
+        "shadowElevation": 0,
+        "innerGlowColor": "#00000000",
+        "bottomRimColor": null,
+        "interactionOverlay": "#00000000",
+        "borderWidth": 1,
+        "shape": 4,
+        "background": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "selectedBackground": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "titleForeground": "{vars.ink}",
+        "subtitleForeground": "{vars.dim}",
+        "selectedTitleForeground": "{vars.lcdInk}",
+        "selectedSubtitleForeground": "#44522e",
+        "borderColor": "#00000000",
+        "minimumHeight": 52
+      },
+      "states": {
+        "hovered": {
+          "background": [
+            "gradient",
+            "{vars.wash}",
+            "{vars.wash}"
+          ]
+        }
+      }
+    },
+    "separator": {
+      "base": {
+        "highlightColor": "#ffffff60",
+        "color": "{vars.capEdge}",
+        "thickness": 1
+      }
+    },
+    "dialog": {
+      "base": {
+        "panelGlowColor": "#ffffff60",
+        "panelBottomRimColor": "{vars.seat}",
+        "panelShadowElevation": 24,
+        "titleBarBorderColor": "{vars.capEdge}",
+        "titleBarDividerThickness": 1,
+        "footerBorderColor": "#00000000",
+        "footerDividerThickness": 0,
+        "closeCapBorderColor": "{vars.capEdge}",
+        "closeCapBorderWidth": 1,
+        "closeCapGlowColor": "#00000000",
+        "closeCapElevation": 0,
+        "closeCapRaisedElevation": 0,
+        "closeCapPressedElevation": 0,
+        "closeCapTint": "#00000000",
+        "closeScaleHover": 1,
+        "closeScalePressed": 1,
+        "shape": 10,
+        "panelBackground": [
+          "gradient",
+          "{vars.panel}",
+          "{vars.panel}"
+        ],
+        "panelBorderColor": "{vars.capEdge}",
+        "panelBorderWidth": 1,
+        "panelShadowColor": "#00000070",
+        "titleBarBackground": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "titleBarForeground": "{vars.lcdInk}",
+        "titleStyle": {
+          "fontFamily": "Space Mono",
+          "fontWeight": 700,
+          "fontSize": 15
+        },
+        "footerBackground": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "scrimColor": "#00000070",
+        "closeCapBackground": [
+          "linear",
+          180,
+          "{vars.capTop}",
+          "{vars.capBot}"
+        ],
+        "closeCapForeground": "{vars.ink}",
+        "closeCapShape": 4
+      },
+      "states": {
+        "hovered": {
+          "closeCapBackground": [
+            "linear",
+            180,
+            "{vars.keyHi}",
+            "{vars.key}"
+          ],
+          "closeCapForeground": "#ffffff"
+        }
+      }
+    },
+    "dropdownMenu": {
+      "base": {
+        "panelGlowColor": "#00000000",
+        "panelBottomRimColor": "{vars.seat}",
+        "panelShadowElevation": 14,
+        "itemActiveElevation": 0,
+        "itemHoverScale": 1,
+        "itemPressedScale": 1,
+        "itemBorderColor": "#00000000",
+        "itemBorderWidth": 0,
+        "itemGlowColor": "#00000000",
+        "itemActiveBorderColor": "#00000000",
+        "itemOrbColor": null,
+        "itemBottomRimColor": null,
+        "itemShadowColor": "#00000000",
+        "itemOverlayBrush": "#00000000",
+        "panelBackground": [
+          "gradient",
+          "{vars.panel}",
+          "{vars.panel}"
+        ],
+        "panelShape": 8,
+        "panelBorderColor": "{vars.capEdge}",
+        "panelBorderWidth": 1,
+        "panelShadowColor": "#00000060",
+        "itemShape": 4,
+        "itemForeground": "{vars.ink}",
+        "itemActiveBackground": [
+          "gradient",
+          "{vars.key}",
+          "{vars.key}"
+        ],
+        "itemSelectedBackground": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "itemActiveForeground": "#ffffff",
+        "itemIconTint": "{vars.dim}",
+        "itemMutedForeground": "{vars.dim}",
+        "separatorBrush": "{vars.capEdge}",
+        "itemTextStyle": {
+          "fontSize": 13
+        }
+      },
+      "states": {
+        "hovered": {
+          "itemBackground": [
+            "gradient",
+            "{vars.key}",
+            "{vars.key}"
+          ],
+          "itemIconTint": "#ffffff"
+        },
+        "focused": {
+          "itemBackground": [
+            "gradient",
+            "{vars.key}",
+            "{vars.key}"
+          ]
+        },
+        "pressed": {
+          "itemBackground": [
+            "gradient",
+            "{vars.keyDown}",
+            "{vars.keyDown}"
+          ],
+          "itemIconTint": "#ffffff"
+        }
+      }
+    },
+    "tooltip": {
+      "base": {
+        "shadowElevation": 0,
+        "borderWidth": 1,
+        "background": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "foreground": "{vars.lcdInk}",
+        "borderColor": "{vars.capEdge}",
+        "shape": 4
+      }
+    },
+    "segmentedButton": {
+      "base": {
+        "shadows": [
+          "#00000000"
+        ],
+        "shadowElevation": 0,
+        "innerGlowColor": "#ffffffa0",
+        "bottomRimColor": "{vars.seat}",
+        "interactionOverlay": "#00000000",
+        "interactionRim": "#00000000",
+        "motion": {
+          "hoverScale": 1,
+          "pressedScale": 1
+        },
+        "borderWidth": 1,
+        "background": [
+          "linear",
+          180,
+          "{vars.capTop}",
+          "{vars.capBot}"
+        ],
+        "foreground": "{vars.ink}",
+        "borderColor": "{vars.capEdge}"
+      },
+      "states": {
+        "selected": {
+          "background": [
+            "linear",
+            180,
+            "{vars.keyHi}",
+            "{vars.key}"
+          ],
+          "foreground": "#ffffff",
+          "innerGlowColor": "#00000000",
+          "bottomRimColor": null
+        },
+        "pressed": {
+          "background": [
+            "linear",
+            180,
+            "{vars.capBot}",
+            "{vars.capBot}"
+          ]
+        }
+      }
+    },
+    "scrollbar": {
+      "base": {
+        "thumbInnerGlowColor": "#00000000",
+        "thumbBottomRimColor": null,
+        "trackInnerGlowColor": "#00000000",
+        "trackBottomRimColor": null,
+        "thumbInteractionOverlay": "#00000000",
+        "thumbBorderColor": "#00000000",
+        "trackBackground": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "thumbBackground": [
+          "gradient",
+          "{vars.seat}",
+          "{vars.seat}"
+        ]
+      }
+    },
+    "snackbar": {
+      "base": {
+        "shadowElevation": 10,
+        "borderWidth": 1,
+        "background": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "foreground": "{vars.lcdInk}",
+        "borderColor": "{vars.capEdge}",
+        "shape": 6,
+        "shadowColor": "#00000050"
+      }
+    },
+    "bottomNavigationBar": {
+      "variants": {
+        "main": {
+          "base": {
+            "borderWidth": 0,
+            "shadowElevation": 0,
+            "innerGlowColor": "#ffffff60",
+            "bottomRimColor": null,
+            "orbColor": null,
+            "overlayBrush": "#00000000",
+            "background": [
+              "gradient",
+              "{vars.panelLo}",
+              "{vars.panelLo}"
+            ],
+            "shape": "rect",
+            "minimumHeight": 70,
+            "itemSpacing": 8,
+            "contentPadding": [
+              12,
+              8
+            ]
+          }
+        },
+        "item": {
+          "base": {
+            "borderWidth": 1,
+            "borderColor": "{vars.capEdge}",
+            "shadowElevation": 0,
+            "innerGlowColor": "#ffffffa0",
+            "bottomRimColor": "{vars.seat}",
+            "orbColor": null,
+            "overlayBrush": "#00000000",
+            "hoverScale": 1,
+            "pressedScale": 0.97,
+            "background": [
+              "linear",
+              180,
+              "{vars.capTop}",
+              "{vars.capBot}"
+            ],
+            "foreground": "{vars.ink}",
+            "shape": 6,
+            "iconSize": 20,
+            "labelStyle": {
+              "fontFamily": "Space Mono",
+              "fontSize": 10,
+              "fontWeight": 700
+            }
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "linear",
+                180,
+                "#ffffff",
+                "{vars.capBot}"
+              ]
+            },
+            "pressed": {
+              "background": [
+                "linear",
+                180,
+                "{vars.capBot}",
+                "{vars.capBot}"
+              ],
+              "innerGlowColor": "#00000000",
+              "bottomRimColor": null
+            },
+            "selected": {
+              "background": [
+                "linear",
+                180,
+                "{vars.keyHi}",
+                "{vars.key}"
+              ],
+              "foreground": "#ffffff",
+              "borderColor": "{vars.keyDown}",
+              "bottomRimColor": "{vars.keyDown}",
+              "labelStyle": {
+                "fontFamily": "Space Mono",
+                "fontSize": 10,
+                "fontWeight": 700
+              }
+            }
+          }
+        }
+      }
+    },
+    "sidebar": {
+      "variants": {
+        "root": {
+          "base": {
+            "borderWidth": 0,
+            "shadowElevation": 0,
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null,
+            "orbColor": null,
+            "overlayBrush": [
+              "linear",
+              90,
+              [
+                "#00000000",
+                0
+              ],
+              [
+                "#00000000",
+                0.994
+              ],
+              [
+                "{vars.capEdge}",
+                0.994
+              ],
+              [
+                "{vars.capEdge}",
+                1
+              ]
+            ],
+            "background": [
+              "gradient",
+              "{vars.panelLo}",
+              "{vars.panelLo}"
+            ],
+            "foreground": "{vars.ink}",
+            "shape": "rect"
+          }
+        },
+        "header": {
+          "base": {
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "dividerColor": "{vars.capEdge}",
+            "dividerWidth": 1,
+            "dividerHighlightColor": "#ffffff60"
+          }
+        },
+        "footer": {
+          "base": {
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "dividerColor": "{vars.capEdge}",
+            "dividerWidth": 1,
+            "dividerHighlightColor": "#ffffff60"
+          }
+        },
+        "group": {
+          "base": {
+            "labelBorderColor": "#00000000",
+            "labelBorderWidth": 0,
+            "labelInnerGlowColor": "#00000000",
+            "labelOverlayBrush": "#00000000",
+            "labelForeground": "{vars.dim}",
+            "labelShape": 4,
+            "labelHoveredBackground": [
+              "gradient",
+              "{vars.wash}",
+              "{vars.wash}"
+            ],
+            "separatorBrush": "{vars.capEdge}",
+            "labelStyle": {
+              "fontFamily": "Space Mono",
+              "fontSize": 11,
+              "fontWeight": 700
+            }
+          }
+        },
+        "item": {
+          "base": {
+            "borderWidth": 0,
+            "borderColor": "#00000000",
+            "shadowElevation": 0,
+            "innerGlowColor": "#00000000",
+            "bottomRimColor": null,
+            "orbColor": null,
+            "overlayBrush": "#00000000",
+            "hoverScale": 1,
+            "pressedScale": 1,
+            "selectedIndicatorColor": "#00000000",
+            "selectedIndicatorBrush": "#00000000",
+            "selectedIndicatorWidth": 0,
+            "background": [
+              "gradient",
+              "#00000000",
+              "#00000000"
+            ],
+            "foreground": "{vars.ink}",
+            "iconTint": "{vars.dim}",
+            "iconSize": 17,
+            "shape": 6,
+            "minimumHeight": 42,
+            "labelStyle": {
+              "fontFamily": "Space Mono",
+              "fontSize": 13,
+              "fontWeight": 700
+            },
+            "hoverBackground": [
+              "gradient",
+              "{vars.wash}",
+              "{vars.wash}"
+            ],
+            "focusBackground": [
+              "gradient",
+              "{vars.wash}",
+              "{vars.wash}"
+            ],
+            "pressedBackground": [
+              "gradient",
+              "{vars.keyDown}",
+              "{vars.keyDown}"
+            ],
+            "selectedBackground": [
+              "gradient",
+              "{vars.key}",
+              "{vars.key}"
+            ]
+          },
+          "states": {
+            "hovered": {
+              "background": [
+                "gradient",
+                "{vars.wash}",
+                "{vars.wash}"
+              ],
+              "iconTint": "{vars.ink}"
+            },
+            "pressed": {
+              "background": [
+                "gradient",
+                "{vars.keyDown}",
+                "{vars.keyDown}"
+              ],
+              "foreground": "#ffffff",
+              "iconTint": "#ffffff"
+            },
+            "selected": {
+              "background": [
+                "linear",
+                180,
+                "{vars.keyHi}",
+                "{vars.key}"
+              ],
+              "foreground": "#ffffff",
+              "iconTint": "#ffffff",
+              "borderWidth": 1,
+              "borderColor": "{vars.keyDown}",
+              "bottomRimColor": "{vars.keyDown}",
+              "innerGlowColor": "#ffffff50"
+            }
+          }
+        }
+      }
+    },
+    "topAppBar": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.panel}",
+          "{vars.panel}"
+        ],
+        "separatorColor": "{vars.capEdge}"
+      }
+    }
+  },
+  "assets": {
+    "fonts": {
+      "Space Mono": [
+        {
+          "src": "fonts/SpaceMono-Regular.ttf",
+          "weight": 400
+        },
+        {
+          "src": "fonts/SpaceMono-Bold.ttf",
+          "weight": 700
+        }
+      ]
+    }
+  }
+}
