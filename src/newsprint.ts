@@ -13,7 +13,7 @@ export default defineTheme({
   version: '1.0.0',
   description: 'The Sunday paper: ink on cream (or a night edition), serif headlines, hairline rules and square corners.',
   iconPack: 'phosphor-thin',
-  logo: ['#f4efe3', '#2a2622'],
+  logo: 'logos/newsprint.svg',
   fonts: {
     'DM Serif Display': { dir: 'dmserifdisplay', files: [['DMSerifDisplay-Regular.ttf', 400]] },
     Caladea: { dir: 'caladea', files: [['Caladea-Regular.ttf', 400], ['Caladea-Bold.ttf', 700], ['Caladea-Italic.ttf', 400, 'italic']] },

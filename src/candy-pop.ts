@@ -14,7 +14,7 @@ export default defineTheme({
   version: '2.0.0',
   description: 'Sweets on a pastel gradient: fat glossy pills with a thick under-edge, bouncy presses and a round typeface. Dark is night-time candy.',
   iconPack: 'phosphor-fill',
-  logo: ['#ff9ad5', '#ff4fa3'],
+  logo: 'logos/candy-pop.svg',
   fonts: { Comfortaa: { dir: 'comfortaa', files: [['Comfortaa-Regular.otf', 400], ['Comfortaa-Bold.otf', 700]] } },
   parameters: {
     flavor: choice('Flavor', 'bubblegum', [['bubblegum', 'Bubblegum', '#ff4fa3'], ['mint', 'Mint', '#19c9a0'], ['grape', 'Grape', '#9b5cf6'], ['lemon', 'Lemon', '#f5b800'], ['berry', 'Berry', '#ff5a5f']]),

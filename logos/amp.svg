@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef0f4"/><stop offset="1" stop-color="#a3a9b5"/></linearGradient>
+    <linearGradient id="lcd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#06100a"/><stop offset="1" stop-color="#0e2216"/></linearGradient>
+    <radialGradient id="knob" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#8c929e"/></radialGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="56" fill="url(#metal)"/>
+  <rect x="3" y="3" width="506" height="506" rx="54" fill="none" stroke="#6f7683" stroke-width="6"/>
+  <!-- LCD with an equaliser -->
+  <rect x="56" y="64" width="400" height="212" rx="22" fill="url(#lcd)" stroke="#4a505c" stroke-width="8"/>
+  <g fill="#5dff7a" filter="url(#glow)" opacity=".8">
+    <rect x="92" y="170" width="36" height="76"/><rect x="144" y="122" width="36" height="124"/><rect x="196" y="146" width="36" height="100"/>
+    <rect x="248" y="98" width="36" height="148"/><rect x="300" y="134" width="36" height="112"/><rect x="352" y="170" width="36" height="76"/><rect x="404" y="194" width="30" height="52"/>
+  </g>
+  <g fill="#5dff7a">
+    <rect x="92" y="170" width="36" height="76"/><rect x="144" y="122" width="36" height="124"/><rect x="196" y="146" width="36" height="100"/>
+    <rect x="248" y="98" width="36" height="148"/><rect x="300" y="134" width="36" height="112"/><rect x="352" y="170" width="36" height="76"/><rect x="404" y="194" width="30" height="52"/>
+  </g>
+  <g fill="#06100a">
+    <rect x="84" y="156" width="360" height="6"/><rect x="84" y="196" width="360" height="6"/><rect x="84" y="226" width="360" height="6"/>
+  </g>
+  <!-- knobs -->
+  <g>
+    <circle cx="148" cy="372" r="64" fill="#7c828f"/><circle cx="148" cy="368" r="58" fill="url(#knob)"/><rect x="143" y="320" width="10" height="34" rx="5" fill="#1b1e24"/>
+    <circle cx="364" cy="372" r="64" fill="#7c828f"/><circle cx="364" cy="368" r="58" fill="url(#knob)"/><rect x="359" y="320" width="10" height="34" rx="5" fill="#1b1e24" transform="rotate(50 364 368)"/>
+    <circle cx="256" cy="396" r="14" fill="#5dff7a"/><circle cx="256" cy="396" r="30" fill="#5dff7a" opacity=".25"/>
+  </g>
+</svg>

@@ -14,7 +14,7 @@ export default defineTheme({
   version: '1.0.0',
   description: 'A terminal: monospace type, one-pixel outlines, no corners and inverse video for hover and selection. Dark is a CRT, light is paper.',
   iconPack: 'fontawesome',
-  logo: ['#33ff66', '#001a08'],
+  logo: 'logos/phosphor.svg',
   fonts: { VT323: { dir: 'vt323', files: [['VT323-Regular.ttf', 400]] } },
   parameters: {
     ink: choice('Phosphor', 'green', [['green', 'Green', '#39ff6e'], ['amber', 'Amber', '#ffb000'], ['ice', 'Ice', '#7fe3ff'], ['white', 'White', '#e8f0e8']]),

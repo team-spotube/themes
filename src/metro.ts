@@ -13,7 +13,7 @@ export default defineTheme({
   version: '1.0.0',
   description: 'Flat saturated tiles, big light typography, square corners and no chrome. Presses tilt the tile back.',
   iconPack: 'bootstrap',
-  logo: ['#0078d7', '#005a9e'],
+  logo: 'logos/metro.svg',
   fonts: { 'Open Sans': { dir: 'opensans', files: [['OpenSans-Light.ttf', 300], ['OpenSans-Regular.ttf', 400], ['OpenSans-Semibold.ttf', 600], ['OpenSans-Bold.ttf', 700]] } },
   parameters: {
     accent: choice('Accent', 'cobalt', [['cobalt', 'Cobalt', '#0078d7'], ['magenta', 'Magenta', '#d80073'], ['lime', 'Lime', '#60a917'], ['orange', 'Orange', '#fa6800'], ['teal', 'Teal', '#00aba9'], ['crimson', 'Crimson', '#a20025']]),

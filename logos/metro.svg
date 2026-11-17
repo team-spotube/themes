@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#000"/>
+  <rect x="24" y="24" width="300" height="300" fill="#0078d7"/>
+  <rect x="340" y="24" width="148" height="144" fill="#d80073"/>
+  <rect x="340" y="180" width="148" height="144" fill="#60a917"/>
+  <rect x="24" y="340" width="144" height="148" fill="#fa6800"/>
+  <rect x="180" y="340" width="308" height="148" fill="#00aba9"/>
+  <!-- play glyph on the big tile, thin Metro-style strokes elsewhere -->
+  <path d="M130 100v148l124-74z" fill="#fff"/>
+  <g stroke="#fff" stroke-width="10" fill="none"><circle cx="414" cy="96" r="34"/><path d="M386 252h56M414 224v56"/><path d="M60 392h72M60 424h52"/><path d="M220 414h180"/></g>
+</svg>

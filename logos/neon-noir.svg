@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0518"/><stop offset=".6" stop-color="#2a0f5a"/><stop offset="1" stop-color="#5a0f6e"/></linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd36a"/><stop offset=".5" stop-color="#ff3da6"/><stop offset="1" stop-color="#7b2ff7"/></linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="10"/></filter>
+    <clipPath id="clip"><rect width="512" height="512" rx="56"/></clipPath>
+    <clipPath id="sunclip"><circle cx="256" cy="236" r="132"/></clipPath>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="512" height="512" fill="url(#sky)"/>
+    <circle cx="256" cy="236" r="140" fill="#ff3da6" filter="url(#glow)" opacity=".6"/>
+    <g clip-path="url(#sunclip)">
+      <rect x="100" y="90" width="320" height="300" fill="url(#sun)"/>
+      <g fill="#2a0f5a"><rect x="100" y="250" width="320" height="8"/><rect x="100" y="282" width="320" height="12"/><rect x="100" y="316" width="320" height="16"/><rect x="100" y="352" width="320" height="22"/></g>
+    </g>
+    <!-- grid horizon -->
+    <rect y="372" width="512" height="140" fill="#12062a"/>
+    <g stroke="#2ee6ff" stroke-width="5" fill="none" filter="url(#glow)" opacity=".8"><path d="M0 372H512M0 412H512M0 462H512"/><path d="M256 372V512M180 372L60 512M332 372L452 512M110 372L-60 512M402 372L572 512"/></g>
+    <g stroke="#2ee6ff" stroke-width="3" fill="none"><path d="M0 372H512M0 412H512M0 462H512"/><path d="M256 372V512M180 372L60 512M332 372L452 512M110 372L-60 512M402 372L572 512"/></g>
+  </g>
+  <rect x="4" y="4" width="504" height="504" rx="52" fill="none" stroke="#ff3da6" stroke-width="6" opacity=".9"/>
+</svg>

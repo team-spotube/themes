@@ -2,7 +2,7 @@
 import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { PKG } from '../common.js';
-import { ALIASES } from './aliases.js';
+import { ALIASES } from '../aliases.js';
 
 const pkgDir = (name: string): string => join(PKG, 'node_modules', name);
 const dirOf = (d: string): string[] => (existsSync(d) ? readdirSync(d) : []);

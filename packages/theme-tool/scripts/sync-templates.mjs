@@ -8,6 +8,12 @@ const here = dirname(fileURLToPath(import.meta.url));
 const from = join(here, '..', '..', '..', 'src');
 const to = join(here, '..', 'templates');
 mkdirSync(to, { recursive: true });
+const logosFrom = join(from, '..', 'logos');
+mkdirSync(join(to, 'logos'), { recursive: true });
+for (const f of readdirSync(logosFrom).filter((f) => f.endsWith('.svg'))) {
+  copyFileSync(join(logosFrom, f), join(to, 'logos', f));
+  console.log(`template logo: ${f}`);
+}
 for (const f of readdirSync(from).filter((f) => f.endsWith('.ts'))) {
   copyFileSync(join(from, f), join(to, f));
   console.log(`template: ${f}`);

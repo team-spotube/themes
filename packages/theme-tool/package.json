@@ -54,6 +54,7 @@
     "prepack": "pnpm build && pnpm templates"
   },
   "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "ajv": "^8.17.1",
     "fflate": "^0.8.2",
     "jiti": "^2.4.2"

@@ -32,8 +32,33 @@ export interface Parameter {
   options?: (string | { value: string; label?: string; color?: string })[];
   presets?: string[];
 }
-/** A font family: `dir` is a folder in your project's `fonts/` or a bundled one; files are `[file, weight, 'italic'?]`. */
-export interface FontSpec { dir: string; files: ([string, number] | [string, number, 'normal' | 'italic'])[] }
+type FontFileEntry = [file: string, weight: number] | [file: string, weight: number, style: 'normal' | 'italic'];
+/**
+ * A font family from anywhere:
+ *   `{ dir: 'my-font', files }`            a folder in your project's `fonts/`, or one bundled with the tool;
+ *   `{ from: '@fontsource/inter', files }` any npm font package (Fontsource, @expo-google-fonts/*...) or a `./path`;
+ * `files` are paths inside that folder: `.ttf`, `.otf`, `.woff` or `.woff2` (the last two are converted).
+ */
+export type FontSpec =
+  | { dir: string; files: FontFileEntry[] }
+  | { from: string; files: FontFileEntry[] };
+/** Options shared by generic icon packs. Missing roles keep Spotube's stock icon. */
+interface GenericIconPack {
+  label?: string;
+  /** Licence text (or name) to put in the theme's LICENSE. */
+  license?: string;
+  /** Override the icon name used for a role: `{ 'skip-forward': 'player-skip-forward' }`. */
+  names?: Record<string, string>;
+  prefix?: string;
+  /** Pick a style variant: `'-fill'`, `'-bold'`, `'-solid'`... */
+  suffix?: string;
+  /** PNG size in px (default 96). */
+  size?: number;
+  /** Recolour with the icon colour (default true; set false for multicolour art). */
+  tint?: boolean;
+}
+/** An icon pack: a bundled font pack id, an Iconify set from npm, or any folder of SVG files. */
+export type IconPackSpec = IconPackId | (GenericIconPack & { iconify: string }) | (GenericIconPack & { svgDir: string });
 export type IconPackId = 'lucide' | 'phosphor' | 'phosphor-thin' | 'phosphor-bold' | 'phosphor-fill' | 'bootstrap' | 'fontawesome' | 'fluent' | 'fluent-filled' | (string & {});
 
 /** What a `src/<id>.ts` module default-exports. The file name is the theme id. */
@@ -47,9 +72,9 @@ export interface ThemeModule {
   homepage?: string;
   contact?: string;
   license?: string;
-  /** `[top, bottom]` colours (#RRGGBB) of the generated `logo.png`. */
-  logo: [string, string];
-  iconPack?: IconPackId;
+  /** Your logo: path to a `.png` (max 512x512) or `.svg` (rendered to PNG), relative to the project. */
+  logo: string;
+  iconPack?: IconPackSpec;
   fonts?: Record<string, FontSpec>;
   licenseNote?: string;
   parameters?: Record<string, Parameter>;

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#fffdf2"/>
+  <!-- hard offset shadow, thick outline, loud colour -->
+  <rect x="72" y="72" width="400" height="400" fill="#111"/>
+  <rect x="40" y="40" width="400" height="400" fill="#ffe14d" stroke="#111" stroke-width="20"/>
+  <rect x="96" y="96" width="288" height="56" fill="#111"/>
+  <path d="M168 224v176l160-88z" fill="#111"/>
+  <rect x="352" y="224" width="32" height="176" fill="#ff6bd6" stroke="#111" stroke-width="14"/>
+  <rect x="96" y="352" width="40" height="48" fill="#6aa9ff" stroke="#111" stroke-width="14"/>
+</svg>

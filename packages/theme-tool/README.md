@@ -13,7 +13,7 @@ cd my-themes && pnpm install && pnpm dist
 - **CLI** `spotube-theme`: `build`, `check`, `zip`, `dist`, `add`, `init`, `list`.
 - **Typed helpers** for theme modules: `defineTheme`, `A(light, dark)`, `solid`, `choice`, `merge`, `flatComponents`, ...
 - **The theme JSON Schema** (`@team-spotube/theme-tool/schema`), used by `check` (a misspelt property is an error).
-- **Bundled fonts** (12 families with their licences) and **icon packs**: Lucide, Phosphor (thin, regular, bold, fill), Bootstrap Icons,
+- **Any font and any icon library** (npm font packages, Iconify sets, your own SVG folders), plus **bundled fonts** (12 families with their licences) and **icon packs**: Lucide, Phosphor (thin, regular, bold, fill), Bootstrap Icons,
   Font Awesome Free and Fluent, each as a tiny font with just the icons Spotube uses.
 - **Templates**: a `starter` and the ten official themes, to copy with `spotube-theme add <id> --template <name>`.
 
@@ -30,20 +30,38 @@ export default defineTheme({
   author: 'You',
   license: 'MIT',
   repository: 'https://github.com/you/my-themes',
-  logo: ['#ff7a18', '#7a1eff'],
-  iconPack: 'phosphor',
-  fonts: { 'Red Hat Text': { dir: 'redhat-text', files: [['RedHatText-Regular.otf', 400], ['RedHatText-Bold.otf', 700]] } },
+  logo: 'logos/sunset.svg',                        // your own artwork: .svg or .png (max 512 px)
+  iconPack: { iconify: '@iconify-json/tabler' },  // any icon library, or a bundled one: 'phosphor'
+  fonts: { Inter: { from: '@fontsource/inter', files: [['files/inter-latin-400-normal.woff2', 400], ['files/inter-latin-700-normal.woff2', 700]] } },
   parameters: { accent: choice('Accent', 'orange', [['orange', 'Orange', '#ff7a18'], ['violet', 'Violet', '#7a1eff']]) },
   vars: { key: { type: 'color', value: ['match', '{params.accent}', { orange: '#ff7a18', violet: '#7a1eff' }] } },
-  tokens: { color: { accent: '{vars.key}' }, type: { family: 'Red Hat Text' } },
+  tokens: { color: { accent: '{vars.key}' }, type: { family: 'Inter' } },
   components: merge(flatComponents(), {
     button: { variants: { primary: { base: { background: solid('{vars.key}'), foreground: '#ffffff', shape: 'pill' } } } },
   }),
 });
 ```
 
-`fonts[...].dir` is a folder in your project's `fonts/` (put the font and its licence there) or one of the bundled fonts
-(`spotube-theme list`).
+## Any font, any icon library
+
+**Fonts** come from anywhere: `{ dir: 'my-font' }` is a folder in your `fonts/` (or a bundled one, see `spotube-theme list`), and
+`{ from: '@fontsource/inter' }` (or `'@expo-google-fonts/lato'`, or a `./path`) reads any npm font package. Files may be `.ttf`, `.otf`,
+`.woff` or `.woff2`; Spotube needs TrueType/OpenType, so the last two are converted. The font's licence is copied into the theme's `LICENSE`.
+
+**Icons** restyle every icon in the app. `iconPack` is one of:
+
+| | |
+|---|---|
+| `'phosphor'` | a bundled pack (Lucide, Phosphor thin/regular/bold/fill, Bootstrap, Font Awesome, Fluent), shipped as a tiny icon font |
+| `{ iconify: '@iconify-json/hugeicons' }` | any [Iconify](https://icon-sets.iconify.design) set from npm: 200+ libraries (Hugeicons, Tabler, Material Symbols, Heroicons, Remix, Carbon, Lucide, Phosphor, Bootstrap, Font Awesome, Fluent...) |
+| `{ svgDir: 'node_modules/feather-icons/dist/icons' }` | any folder of SVG files, including your own |
+
+Generic packs are rendered to PNGs (so stroke-based libraries work too) and tinted by Spotube like its own icons; they need theme format 1.1
+(the tool declares the lowest version a theme needs). Options: `suffix` (a style variant such as `'-fill'`), `prefix`, `names` (map a role to
+an icon name), `size`, `tint`, `license`. Roles are Lucide names; the tool matches them to the library's names through synonyms and reports
+what it could not find, which then keeps Spotube's stock icon.
+
+**Logos** are yours: `logo` is the path of a `.png` or `.svg` (rendered to 512 px) in your project. The tool never generates one.
 
 ## Commands
 

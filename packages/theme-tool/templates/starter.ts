@@ -8,7 +8,7 @@ export default defineTheme({
   author: '{{author}}',
   license: '{{license}}',
   repository: '{{repository}}', // where people find the source and report problems
-  logo: ['#7c5cff', '#2b1a6b'],
+  logo: 'logos/{{id}}.svg', // your own artwork: a .png (max 512 px) or .svg
   iconPack: 'lucide',
 
   // Settings users can change under "Customize" in the app. Use them as {params.name}.

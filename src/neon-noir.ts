@@ -14,7 +14,7 @@ export default defineTheme({
   version: '2.0.0',
   description: 'Synthwave after dark: a sunset-gradient backdrop, neon tubes around outlines, glowing headings and an Audiowide wordmark feel. Light is a pastel daylight take.',
   iconPack: 'phosphor',
-  logo: ['#ff3da6', '#1a0b3a'],
+  logo: 'logos/neon-noir.svg',
   fonts: {
     Audiowide: { dir: 'audiowide', files: [['Audiowide-Regular.ttf', 400]] },
     'Chakra Petch': { dir: 'chakrapetch', files: [['ChakraPetch-Regular.ttf', 400], ['ChakraPetch-Bold.ttf', 700]] },

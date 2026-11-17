@@ -3,3 +3,5 @@ dist/
 packages/*/dist/
 packages/theme-tool/templates/*.ts
 !packages/theme-tool/templates/starter.ts
+packages/theme-tool/templates/logos/*.svg
+!packages/theme-tool/templates/logos/starter.svg

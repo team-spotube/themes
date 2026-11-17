@@ -12,7 +12,7 @@ export default defineTheme({
   version: '1.0.0',
   description: 'Thick black outlines, loud flat colour and heavy type with no softness anywhere. Hover floods controls with the accent.',
   iconPack: 'phosphor-bold',
-  logo: ['#ffe14d', '#111111'],
+  logo: 'logos/brutalist.svg',
   fonts: {
     'Archivo Black': { dir: 'archivoblack', files: [['ArchivoBlack-Regular.ttf', 400]] },
     'Space Mono': { dir: 'spacemono', files: [['SpaceMono-Regular.ttf', 400], ['SpaceMono-Bold.ttf', 700]] },

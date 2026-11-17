@@ -1,5 +1,5 @@
 // Creating projects and theme modules: shared by `spotube-theme init`, `spotube-theme add` and `create-spotube-theme`.
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { basename, join } from 'node:path';
 import { PKG, moduleIds, type Project } from './common.js';
 
@@ -30,6 +30,15 @@ export function addTheme(p: Project, o: ThemeOptions): string {
     text = text.replace(/(\n  name: )'[^']*'/, `$1'${o.name.replaceAll("'", "\\'")}'`);
     text = text.replace(/\n  (author|license|repository|bugs): '[^']*',/g, '');
     text = text.replace(/(\n  name: '[^']*',)/, `$1\n  author: '${o.author.replaceAll("'", "\\'")}',\n  license: '${o.license}',\n  repository: '${repo}',`);
+  }
+  // The theme's logo: a copy of the template's artwork marked as a placeholder, so the build reminds you to replace it.
+  const logoSource = join(TEMPLATES_DIR, 'logos', `${o.template}.svg`);
+  text = text.replaceAll(`logos/${o.template}.svg`, `logos/${o.id}.svg`).replaceAll('logos/{{id}}.svg', `logos/${o.id}.svg`);
+  if (existsSync(logoSource)) {
+    mkdirSync(join(p.root, 'logos'), { recursive: true });
+    let svg = readFileSync(logoSource, 'utf8');
+    if (!svg.includes('spotube-theme-placeholder')) svg = svg.replace(/(<svg[^>]*>)/, '$1\n  <!-- spotube-theme-placeholder: replace this file with your own logo (a .svg or a .png up to 512x512) -->');
+    writeFileSync(join(p.root, 'logos', `${o.id}.svg`), svg);
   }
   mkdirSync(p.src, { recursive: true });
   writeFileSync(file, text);

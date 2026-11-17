@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="40" fill="#008080"/>
+  <!-- window: grey face with a 2px bevel -->
+  <rect x="64" y="84" width="384" height="344" fill="#c0c0c0"/>
+  <path d="M64 428V84h384" fill="none" stroke="#fff" stroke-width="8"/>
+  <path d="M448 84v344H64" fill="none" stroke="#404040" stroke-width="8"/>
+  <path d="M76 416V96h360" fill="none" stroke="#dfdfdf" stroke-width="4"/>
+  <path d="M436 96v320H76" fill="none" stroke="#808080" stroke-width="4"/>
+  <!-- navy title bar -->
+  <rect x="88" y="112" width="336" height="52" fill="#000080"/>
+  <rect x="96" y="122" width="150" height="14" fill="#fff"/>
+  <g>
+    <rect x="368" y="120" width="40" height="36" fill="#c0c0c0"/>
+    <path d="M368 156V120h40" fill="none" stroke="#fff" stroke-width="4"/>
+    <path d="M408 120v36h-40" fill="none" stroke="#404040" stroke-width="4"/>
+    <path d="M378 132l20 14m0-14l-20 14" stroke="#000" stroke-width="6"/>
+  </g>
+  <!-- client area with a sunken edge and a "play" button -->
+  <rect x="88" y="188" width="336" height="216" fill="#fff"/>
+  <path d="M88 404V188h336" fill="none" stroke="#808080" stroke-width="6"/>
+  <path d="M424 188v216H88" fill="none" stroke="#dfdfdf" stroke-width="6"/>
+  <rect x="196" y="236" width="120" height="120" fill="#c0c0c0"/>
+  <path d="M196 356V236h120" fill="none" stroke="#fff" stroke-width="6"/>
+  <path d="M316 236v120H196" fill="none" stroke="#404040" stroke-width="6"/>
+  <path d="M240 262v68l44-34z" fill="#000080"/>
+</svg>

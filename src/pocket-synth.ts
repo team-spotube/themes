@@ -14,7 +14,7 @@ export default defineTheme({
   version: '1.0.0',
   description: 'A palm-sized hardware sampler: chunky keys that sit on the panel, a pale LCD and one loud key colour.',
   iconPack: 'phosphor-fill',
-  logo: ['#ff6a2b', '#d9d4c3'],
+  logo: 'logos/pocket-synth.svg',
   fonts: { 'Space Mono': { dir: 'spacemono', files: [['SpaceMono-Regular.ttf', 400], ['SpaceMono-Bold.ttf', 700]] } },
   parameters: {
     keys: choice('Key color', 'orange', [['orange', 'Orange', '#ff5a1f'], ['blue', 'Blue', '#2f6bff'], ['green', 'Green', '#18a058'], ['pink', 'Pink', '#ff4f8b']]),

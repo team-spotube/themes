@@ -16,7 +16,7 @@ export default defineTheme({
   version: '1.0.0',
   description: 'A hi-fi deck: brushed-metal panels, a glowing LCD, round knobs and pixel-font labels.',
   iconPack: 'lucide',
-  logo: ['#5dff7a', '#0b1a10'],
+  logo: 'logos/amp.svg',
   fonts: {
     Silkscreen: { dir: 'silkscreen', files: [['Silkscreen-Regular.ttf', 400], ['Silkscreen-Bold.ttf', 700]] },
     'Liberation Sans': { dir: 'liberation-sans', files: [['LiberationSans-Regular.ttf', 400], ['LiberationSans-Bold.ttf', 700]] },
