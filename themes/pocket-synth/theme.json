@@ -2,14 +2,14 @@
   "$schema": "https://docs.spotube.cc/schemas/theme/1.json",
   "schema": "1.0.0",
   "id": "pocket-synth",
-  "name": "Pocket Synth",
   "version": "1.0.0",
   "author": "Spotube Team",
-  "description": "A palm-sized hardware sampler: chunky keys that sit on the panel, a pale LCD and one loud key colour.",
   "repository": "https://github.com/team-spotube/themes",
   "bugs": "https://github.com/team-spotube/themes/issues",
-  "license": "AGPL-3.0-or-later",
   "logo": "logo.png",
+  "name": "Pocket Synth",
+  "license": "AGPL-3.0-or-later",
+  "description": "A palm-sized hardware sampler: chunky keys that sit on the panel, a pale LCD and one loud key colour.",
   "parameters": {
     "keys": {
       "type": "enum",

@@ -1,0 +1,16 @@
+{
+  "name": "create-spotube-theme",
+  "version": "1.0.0",
+  "description": "Bootstrap a Spotube theme project: pnpm create spotube-theme",
+  "license": "AGPL-3.0-or-later",
+  "keywords": ["spotube", "spotube-theme", "create"],
+  "repository": { "type": "git", "url": "git+https://github.com/team-spotube/themes.git", "directory": "packages/create-spotube-theme" },
+  "homepage": "https://docs.spotube.cc/themes",
+  "type": "module",
+  "bin": { "create-spotube-theme": "bin/create-spotube-theme.js" },
+  "files": ["bin", "dist", "README.md"],
+  "engines": { "node": ">=20" },
+  "scripts": { "build": "tsc -p .", "typecheck": "tsc -p . --noEmit", "prepack": "pnpm build" },
+  "dependencies": { "@team-spotube/theme-tool": "workspace:^" },
+  "devDependencies": { "@types/node": "^22.10.0", "typescript": "^5.7.0" }
+}

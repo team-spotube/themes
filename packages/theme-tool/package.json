@@ -1,0 +1,73 @@
+{
+  "name": "@team-spotube/theme-tool",
+  "version": "1.0.0",
+  "description": "Build, validate and package Spotube themes: typed helpers, a CLI, bundled fonts and icon packs, and the theme JSON Schema.",
+  "license": "AGPL-3.0-or-later",
+  "keywords": [
+    "spotube",
+    "spotube-theme",
+    "theme",
+    "cli"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team-spotube/themes.git",
+    "directory": "packages/theme-tool"
+  },
+  "bugs": "https://github.com/team-spotube/themes/issues",
+  "homepage": "https://docs.spotube.cc/themes",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./schema": "./schema/theme.schema.json",
+    "./package.json": "./package.json",
+    "./scaffold": {
+      "types": "./dist/scaffold.d.ts",
+      "default": "./dist/scaffold.js"
+    }
+  },
+  "bin": {
+    "spotube-theme": "bin/spotube-theme.js"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "assets",
+    "schema",
+    "templates",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "typecheck": "tsc -p . --noEmit",
+    "icons": "tsc -p . && node dist/maintainer/build-icons.js",
+    "templates": "node scripts/sync-templates.mjs",
+    "prepack": "pnpm build && pnpm templates"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "fflate": "^0.8.2",
+    "jiti": "^2.4.2"
+  },
+  "devDependencies": {
+    "@fluentui/svg-icons": "^1.1.346",
+    "@fortawesome/fontawesome-free": "^7.3.1",
+    "@phosphor-icons/core": "^2.1.1",
+    "@phosphor-icons/web": "^2.1.2",
+    "@types/node": "^22.10.0",
+    "bootstrap-icons": "^1.13.2",
+    "fantasticon": "^4.1.0",
+    "fonteditor-core": "^2.6.3",
+    "lucide-static": "^1.73.0",
+    "typescript": "^5.7.0"
+  }
+}

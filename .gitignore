@@ -1,2 +1,5 @@
 node_modules/
 dist/
+packages/*/dist/
+packages/theme-tool/templates/*.ts
+!packages/theme-tool/templates/starter.ts

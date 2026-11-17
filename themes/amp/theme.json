@@ -2,14 +2,14 @@
   "$schema": "https://docs.spotube.cc/schemas/theme/1.json",
   "schema": "1.0.0",
   "id": "amp",
-  "name": "Amp",
   "version": "1.0.0",
   "author": "Spotube Team",
-  "description": "A hi-fi deck: brushed-metal panels, a glowing LCD, round knobs and pixel-font labels.",
   "repository": "https://github.com/team-spotube/themes",
   "bugs": "https://github.com/team-spotube/themes/issues",
-  "license": "AGPL-3.0-or-later",
   "logo": "logo.png",
+  "name": "Amp",
+  "license": "AGPL-3.0-or-later",
+  "description": "A hi-fi deck: brushed-metal panels, a glowing LCD, round knobs and pixel-font labels.",
   "parameters": {
     "led": {
       "type": "enum",

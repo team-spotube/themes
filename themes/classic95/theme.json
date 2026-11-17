@@ -2,14 +2,14 @@
   "$schema": "https://docs.spotube.cc/schemas/theme/1.json",
   "schema": "1.0.0",
   "id": "classic95",
-  "name": "Classic",
   "version": "1.0.0",
   "author": "Spotube Team",
-  "description": "A 1990s desktop: square grey bevels, navy title bars and menu highlights, and no animation to speak of.",
   "repository": "https://github.com/team-spotube/themes",
   "bugs": "https://github.com/team-spotube/themes/issues",
-  "license": "AGPL-3.0-or-later",
   "logo": "logo.png",
+  "name": "Classic",
+  "license": "AGPL-3.0-or-later",
+  "description": "A 1990s desktop: square grey bevels, navy title bars and menu highlights, and no animation to speak of.",
   "parameters": {
     "desktop": {
       "type": "enum",

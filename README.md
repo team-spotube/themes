@@ -1,113 +1,79 @@
 # Spotube themes
 
-Installable themes for [Spotube](https://github.com/team-spotube/spotube). Each one is a complete **application design language**, not a recolour:
-its own typeface, shape language, surface treatment, hover and press behaviour, and (where it fits) an app-wide backdrop. Every theme has a light
-and a dark look and exposes a few **parameters** you can change in the app (accent, corner style, glow...).
+The official [Spotube](https://github.com/team-spotube/spotube) themes, and **`@team-spotube/theme-tool`**, the tool for making your own.
 
-Install from **Settings → Look & feel → Themes → Install theme**, then open the theme's details and use **Customize**.
+Each theme is a complete **application design language**, not a recolour: its own typeface, icon set, shape language, surface treatment,
+hover and press behaviour, and (where it fits) an app-wide backdrop. Every theme has a light and a dark look and exposes a few
+**parameters** you can change in the app (accent, corner style, glow...).
 
 ## Themes
 
-| Theme | Idea | Parameters |
-|---|---|---|
-| **Classic** (`classic95`) | A 1990s desktop. Grey bevels, navy title bars and menu highlights, square everything. | highlight (navy, teal, maroon, olive), row size |
-| **Amp** (`amp`) | A hi-fi deck. Brushed-metal panels, round knobs, a glowing LCD for the selection and inputs, pixel-font labels. | LED colour (green, amber, cyan, red) |
-| **Phosphor** (`phosphor`) | A terminal. VT323 type, one-pixel outlines, inverse video for hover and selection. Dark is a CRT, light is paper. | phosphor (green, amber, ice, white) |
-| **You** (`material-you`) | Tonal surfaces tinted by the accent, big pills, stadium-shaped selection, roomy layout. | colour (violet, blue, green, rose, amber), corners |
-| **Metro** (`metro`) | Flat saturated tiles, big light type, no chrome; presses tilt the tile back. | accent (cobalt, magenta, lime, orange, teal, crimson) |
-| **Newsprint** (`newsprint`) | The Sunday paper. Ink on cream (or a night edition), serif headlines, hairline rules. | ink (black, red, blue, green) |
-| **Brutal** (`brutalist`) | Thick black outlines, loud flat colour, heavy type; hover floods a control with the colour. | colour (yellow, pink, blue, lime, red), outline thickness |
-| **Pocket Synth** (`pocket-synth`) | A palm-sized sampler. Chunky keys sitting on the panel, a pale LCD, one loud key colour. | key colour (orange, blue, green, pink) |
-| **Neon Noir** (`neon-noir`) | Synthwave after dark. Sunset-gradient backdrop, neon tubes around outlines, glowing headings. | neon (pink, cyan, lime, amber), glow |
-| **Candy Pop** (`candy-pop`) | Sweets on a pastel gradient. Fat glossy pills with a thick under-edge, bouncy presses. | flavour (bubblegum, mint, grape, lemon, berry) |
+| Theme | Idea | Fonts | Icons | Parameters |
+|---|---|---|---|---|
+| **Classic** (`classic95`) | A 1990s desktop. Grey bevels, navy title bars and menu highlights, square everything. | Liberation Sans | Fluent filled | highlight, row size |
+| **Amp** (`amp`) | A hi-fi deck. Brushed-metal panels, round knobs, a glowing LCD for selection and inputs. | Silkscreen, Liberation Sans | Lucide | LED colour |
+| **Phosphor** (`phosphor`) | A terminal. Inverse video for hover and selection. Dark is a CRT, light is paper. | VT323 | Font Awesome | phosphor colour |
+| **You** (`material-you`) | Tonal surfaces tinted by the accent, big pills, stadium-shaped selection. | Red Hat Text | Fluent | colour, corners |
+| **Metro** (`metro`) | Flat saturated tiles, big light type, no chrome; presses tilt the tile back. | Open Sans | Bootstrap | accent |
+| **Newsprint** (`newsprint`) | The Sunday paper. Ink on cream (or a night edition), serif headlines, hairline rules. | DM Serif Display, Caladea | Phosphor Thin | ink |
+| **Brutal** (`brutalist`) | Thick black outlines, loud flat colour; hover floods a control with the colour. | Archivo Black, Space Mono | Phosphor Bold | colour, outline thickness |
+| **Pocket Synth** (`pocket-synth`) | A palm-sized sampler. Chunky keys on the panel, a pale LCD, one loud key colour. | Space Mono | Phosphor Fill | key colour |
+| **Neon Noir** (`neon-noir`) | Synthwave after dark. Sunset-gradient backdrop, neon tubes around outlines. | Audiowide, Chakra Petch | Phosphor | neon, glow |
+| **Candy Pop** (`candy-pop`) | Sweets on a pastel gradient. Fat glossy pills with a thick under-edge, bouncy presses. | Comfortaa | Phosphor Fill | flavour |
 
-## Share your own
+## Make your own
 
-Put a theme in a public GitHub repository and add the topic **`spotube-theme`**: Spotube's *Find themes on GitHub* button opens
+```bash
+pnpm create spotube-theme my-themes     # bootstraps a project with @team-spotube/theme-tool as a devDependency
+cd my-themes && pnpm install && pnpm dist
+```
+
+Put it on GitHub with the topic **`spotube-theme`**: Spotube's *Find themes on GitHub* button opens
 [github.com/topics/spotube-theme](https://github.com/topics/spotube-theme). Guides: [docs.spotube.cc/themes](https://docs.spotube.cc/themes).
+The tool's own documentation is in [`packages/theme-tool`](packages/theme-tool).
 
-## Install
+## Install a theme
 
-1. Build the zips (below) or take them from a release.
+1. Build the zips (`pnpm install && pnpm dist` puts them in `dist/`), or take them from a release.
 2. In Spotube open **Settings → Look & feel → Themes → Install theme** and pick a zip. You see the author, links, licence and contents before confirming.
 3. Select it.
 
-You need Node 22.2+ and [pnpm](https://pnpm.io):
+## This repository
 
-```
+A pnpm workspace:
+
+| Path | What |
+|---|---|
+| `src/*.ts` | the ten official themes, one TypeScript file each (they are also the tool's templates) |
+| `packages/theme-tool` | **`@team-spotube/theme-tool`**: CLI, typed helpers, JSON Schema, bundled fonts and icon packs |
+| `packages/create-spotube-theme` | `pnpm create spotube-theme` |
+| `themes/`, `dist/` | generated theme folders and zips |
+
+```bash
 pnpm install
-pnpm dist                         # build + check + zip into dist/ (with an index.json)
-pnpm zip neon-noir amp            # or just some
+pnpm tool        # compile the two packages
+pnpm dist        # build + check + zip the official themes, with the tool
+pnpm typecheck
 ```
 
-## How the themes are made
-
-Each theme is one module in [`tools/themes/`](tools/themes): a plain object holding the `theme.json` content, plus the fonts it uses and its logo
-colours. `pnpm build` ([`tools/build-themes.mjs`](tools/build-themes.mjs)) turns every module into `themes/<id>/` (theme.json, logo.png, the exact fonts
-it uses, and a LICENSE that carries every font's licence). **Edit the modules, not the generated `themes/` folders.**
-
-[`tools/lib.mjs`](tools/lib.mjs) has the helpers: `A(light, dark)`, `choice(...)` for swatch parameters, `solid(color)` and `flatComponents()`, which
-switches off all of Millennium's built-in gloss (shadows, rims, glows, scaling) so a theme only has the effects it asks for. Fonts live in
-[`tools/fonts/`](tools/fonts) with their licences.
+To validate a theme with the real engine (zero warnings, every parameter choice in light and dark, PNG renders), run Spotube's own test from a
+Spotube checkout; this is the check that matters for what the app will do:
 
 ```
-pnpm build                        # regenerate all
-pnpm build amp                    # or one
+THEMES_DIR=/path/to/themes/themes ./gradlew :composeApp:jvmTest --tests '*ThemeFolderValidationTest*'
 ```
 
-What a theme can do is documented in Spotube's
-[`themes/README.md`](https://github.com/team-spotube/spotube/blob/dev/themes/README.md). The levers these themes lean on: per-component
-`variants`/`states`, gradient brushes, `bottomRimColor` + `innerGlowColor` for bevels, text-style `shadow` for glow, `tokens.app.background` for an
-app-wide backdrop, `tokens.type.styles` for per-role fonts, `tokens.interaction`/`tokens.surface` to flatten.
+Renders land in `composeApp/build/theme-gallery/external`; look at them, light *and* dark. `ThemeInteractionGalleryTest` renders hovered rows.
 
 ## Icon packs and fonts
 
-Every theme restyles **all** of the app's icons with an icon pack, not just fonts. `pnpm icons` ([`tools/build-icons.mjs`](tools/build-icons.mjs)) builds a tiny
-font per pack from the official artwork (only the ~90 icons the app uses, found through the synonyms in
-[`tools/icons/aliases.mjs`](tools/icons/aliases.mjs)) into `tools/iconfonts/`: **Lucide**, **Phosphor** (thin, regular, bold, fill), **Bootstrap Icons**,
-**Font Awesome Free** (solid) and **Fluent System Icons** (regular, filled). A theme picks one with `iconPack: '<id>'` and any fonts it likes with `fonts`;
-mix and match freely (a serif body with a bold-weight icon set, a pixel font with a hairline pack...).
-
-| Theme | Fonts | Icons |
-|---|---|---|
-| Classic | Liberation Sans | Fluent (filled) |
-| Amp | Silkscreen + Liberation Sans | Lucide |
-| Phosphor | VT323 | Font Awesome |
-| You | Red Hat Text | Fluent |
-| Metro | Open Sans | Bootstrap |
-| Newsprint | DM Serif Display + Caladea | Phosphor Thin |
-| Brutal | Archivo Black + Space Mono | Phosphor Bold |
-| Pocket Synth | Space Mono | Phosphor Fill |
-| Neon Noir | Audiowide + Chakra Petch | Phosphor |
-| Candy Pop | Comfortaa | Phosphor Fill |
-
-Heroicons (no media icons in the set) and Hugeicons (stroke-only art, which cannot become a font without outlining) are not packaged.
-
-## Schema
-
-Every theme declares the theme format it was written for as a semver `schema` (currently `1.0.0`) and is validated against
-[`schema/theme.schema.json`](schema/theme.schema.json) in `pnpm check`, so a misspelt property is an error. The same file gives editors autocomplete via
-`"$schema": "https://docs.spotube.cc/schemas/theme/1.json"` (the builder adds it). The schema's source of truth is the Spotube repository: `pnpm schema:sync`
-copies it here. Compatibility rules (same major always loads, a newer minor loads with its newer parts ignored) are in
-[Schema and versioning](https://docs.spotube.cc/themes/schema-versioning).
-
-## Adding a theme
-
-1. Create `tools/themes/<id>.mjs` (see an existing one; `id` is the filename). Give it light **and** dark values (`A(light, dark)`) and expose the
-   basics as `parameters`.
-2. `pnpm build <id>`, then `pnpm check` (structure, metadata, file types, size limits).
-3. Validate with Spotube's own checks and **look at the renders**, light and dark:
-
-   ```
-   THEMES_DIR=/path/to/themes/themes ./gradlew :composeApp:jvmTest --tests '*ThemeFolderValidationTest*'
-   ```
-
-   Zero warnings are required, every parameter choice must compile in light and dark, and PNGs land in `composeApp/build/theme-gallery/external`.
-   `ThemeInteractionGalleryTest` renders hovered rows if you want to judge hover states.
+Themes restyle **all** of the app's icons with an icon pack, not just the fonts. The tool bundles a tiny font per pack, built from the official
+artwork with only the roughly 90 icons Spotube uses: **Lucide**, **Phosphor** (thin, regular, bold, fill), **Bootstrap Icons**, **Font Awesome Free**
+(solid) and **Fluent System Icons** (regular, filled). Fonts come bundled too (12 families), or put your own in `fonts/`. Mix freely: a serif body
+with a bold icon set, a pixel font with a hairline one. Heroicons (no media icons) and Hugeicons (stroke-only art) are not packaged.
 
 ## Licensing
 
-The repository, every `theme.json` and logo are licensed under the **GNU Affero General Public License v3.0 or later** ([LICENSE](LICENSE)), like
-Spotube. The bundled fonts and icon fonts keep their own licences (SIL Open Font License 1.1 for Archivo Black, Audiowide, Chakra Petch, Comfortaa, DM Serif Display,
-Liberation Sans, Red Hat Text, Silkscreen, Space Mono and VT323; Apache 2.0 for Open Sans and Caladea); each theme's
-`LICENSE` includes the texts of the fonts it ships.
+The repository, every theme definition and logo, and the tool are licensed under the **GNU Affero General Public License v3.0 or later**
+([LICENSE](LICENSE)), like Spotube. Bundled fonts and icon fonts keep their own licences (SIL Open Font License 1.1 for most fonts, Apache 2.0 for
+Open Sans and Caladea; MIT/ISC for most icon sets, CC BY 4.0 for Font Awesome); every theme's `LICENSE` includes the texts of what it ships.

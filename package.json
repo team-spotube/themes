@@ -2,40 +2,25 @@
   "name": "spotube-themes",
   "version": "1.0.0",
   "private": true,
-  "description": "Installable application-style themes for Spotube.",
+  "description": "The official Spotube themes, built with @team-spotube/theme-tool.",
   "license": "AGPL-3.0-or-later",
+  "keywords": ["spotube-theme"],
   "type": "module",
   "packageManager": "pnpm@11.25.0",
-  "engines": {
-    "node": ">=22.2"
-  },
+  "engines": { "node": ">=20" },
   "scripts": {
-    "build": "node tools/build-themes.mjs",
-    "check": "node tools/check.mjs",
-    "zip": "node tools/zip.mjs",
-    "dist": "node tools/build-icons.mjs && node tools/build-themes.mjs && node tools/check.mjs && node tools/zip.mjs",
-    "icons": "node tools/build-icons.mjs",
-    "schema:sync": "node tools/sync-schema.mjs"
-  },
-  "dependencies": {
-    "fflate": "^0.8.2"
+    "tool": "pnpm --filter @team-spotube/theme-tool build && pnpm --filter create-spotube-theme build",
+    "build": "spotube-theme build",
+    "check": "spotube-theme check",
+    "zip": "spotube-theme zip",
+    "dist": "spotube-theme dist",
+    "typecheck": "tsc --noEmit",
+    "icons": "pnpm --filter @team-spotube/theme-tool icons",
+    "templates": "pnpm --filter @team-spotube/theme-tool templates"
   },
   "devDependencies": {
-    "@fluentui/svg-icons": "^1.1.346",
-    "@fortawesome/fontawesome-free": "^7.3.1",
-    "@phosphor-icons/core": "^2.1.1",
-    "@phosphor-icons/web": "^2.1.2",
-    "ajv": "^8.20.0",
-    "ajv-formats": "^3.0.1",
-    "bootstrap-icons": "^1.13.2",
-    "fantasticon": "^4.1.0",
-    "fonteditor-core": "^2.6.3",
-    "heroicons": "^2.2.0",
-    "lucide-static": "^1.73.0"
-  },
-  "keywords": [
-    "spotube",
-    "spotube-theme",
-    "theme"
-  ]
+    "@team-spotube/theme-tool": "workspace:*",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  }
 }

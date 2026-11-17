@@ -2,14 +2,14 @@
   "$schema": "https://docs.spotube.cc/schemas/theme/1.json",
   "schema": "1.0.0",
   "id": "phosphor",
-  "name": "Phosphor",
   "version": "1.0.0",
   "author": "Spotube Team",
-  "description": "A terminal: monospace type, one-pixel outlines, no corners and inverse video for hover and selection. Dark is a CRT, light is paper.",
   "repository": "https://github.com/team-spotube/themes",
   "bugs": "https://github.com/team-spotube/themes/issues",
-  "license": "AGPL-3.0-or-later",
   "logo": "logo.png",
+  "name": "Phosphor",
+  "license": "AGPL-3.0-or-later",
+  "description": "A terminal: monospace type, one-pixel outlines, no corners and inverse video for hover and selection. Dark is a CRT, light is paper.",
   "parameters": {
     "ink": {
       "type": "enum",
