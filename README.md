@@ -31,23 +31,26 @@ Every theme ships a **light and a dark** variant and works with the app's Light 
    confirming.
 3. Select it. Open its details to **Customize**.
 
-Build every package into `dist/` (plus an `index.json` listing them):
+Build every package into `dist/` (plus an `index.json` listing them). You need Node 22.2+ and [pnpm](https://pnpm.io):
 
 ```
-python3 tools/pack.py            # all themes
-python3 tools/pack.py dracula nord
+pnpm install
+pnpm zip                         # all themes (reproducible zips)
+pnpm zip dracula nord            # or just some
+pnpm dist                        # build + check + zip in one go
 ```
 
 ## How the themes are made
 
 The nine palette themes (`dracula`, `nord`, `catppuccin`, `gruvbox`, `solarized`, `tokyo-night`, `rose-pine`, `one`, `github`) are **generated**
-from palette data in [`tools/build_themes.py`](tools/build_themes.py) and the structure in [`tools/template.json`](tools/template.json), which is
-Spotube's flat *Modern* theme. The generator picks readable text for every accent by contrast (white on saturated colors, dark ink on pastels). To
-change a palette, edit `tools/build_themes.py` and run it; don't hand-edit the generated `theme.json` files:
+from the palette data in [`tools/palettes.mjs`](tools/palettes.mjs) and the structure in [`tools/template.json`](tools/template.json), which is
+Spotube's flat *Modern* theme. The generator ([`tools/build-themes.mjs`](tools/build-themes.mjs)) picks readable text for every accent by contrast (white
+on saturated colors, dark ink on pastels). To change a palette, edit `tools/palettes.mjs` and run the build; don't hand-edit the generated `theme.json`
+files:
 
 ```
-python3 tools/build_themes.py            # regenerate all
-python3 tools/build_themes.py nord       # or one
+pnpm build                       # regenerate all
+pnpm build nord                  # or one
 ```
 
 `neon-noir` and `candy-pop` are hand-written; edit their `theme.json` directly.
@@ -60,14 +63,16 @@ The theme format (tokens, component styling, parameters, brushes, fonts) is docu
 1. Create `themes/<id>/` containing `theme.json` (with `id` equal to the folder name, plus `name`, `version`, `author`; `repository`, `bugs`,
    `license` and `logo` are expected), a `logo.png` (max 512 x 512) and a `LICENSE`. Fonts (`.ttf`/`.otf`) and icon PNGs are allowed; nothing else is.
 2. Give it a light **and** a dark look (`{"light": ..., "dark": ...}` values) and expose the basics as `parameters` (accent, radius, density).
-3. Validate it with Spotube's checks. From a Spotube checkout:
+3. Run `pnpm check` (structure, metadata, file types and size limits, parameter sanity), then validate it with Spotube's own checks. From a Spotube
+   checkout:
 
    ```
    THEMES_DIR=/path/to/themes/themes ./gradlew :composeApp:jvmTest --tests '*ThemeFolderValidationTest*'
    ```
 
    Every theme must load with **zero warnings**, and every accent / radius / density choice must compile warning-free in light and dark. The test
-   also renders each theme to `composeApp/build/theme-gallery/external/*.png`: look at them (text readable on every fill, light *and* dark).
+   also renders each theme to `composeApp/build/theme-gallery/external` (PNG files; look at them: text readable on every fill, light *and* dark), and,
+   after `pnpm zip`, runs every built zip in `dist/` through the app's strict package reader.
 
 ## Licensing
 

@@ -1,0 +1,21 @@
+{
+  "name": "spotube-themes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Installable themes for Spotube: popular palettes plus Neon Noir and Candy Pop.",
+  "license": "AGPL-3.0-or-later",
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=22.2"
+  },
+  "scripts": {
+    "build": "node tools/build-themes.mjs",
+    "check": "node tools/check.mjs",
+    "zip": "node tools/zip.mjs",
+    "dist": "node tools/build-themes.mjs && node tools/check.mjs && node tools/zip.mjs"
+  },
+  "dependencies": {
+    "fflate": "^0.8.2"
+  }
+}
