@@ -64,7 +64,7 @@ what it could not find, which then keeps Spotube's stock icon.
 
 **Updates.** `updates: true` lets Spotube find new versions of your installed theme: it reads the GitHub releases of `repository`, looks for the
 newest published release whose tag is a semantic version (`v1.2.0` or `1.2.0`) that has an archive named `<id>.zip` (what `spotube-theme zip` produces)
-and offers an update when it is newer than the installed `version`. Use `updates: { github: 'https://github.com/you/repo', asset: 'my-theme.zip' }`
+and offers an update when it is newer than the installed `version`. Spotube checks the selected theme automatically at app start; the Appearance page's refresh button checks all installed themes. Use `updates: { github: 'https://github.com/you/repo', asset: 'my-theme.zip' }`
 for another repository or archive name. Themes without an explicit `version` share the `version` of the project's `package.json`, so a release tag
 matches every theme in the project. This needs theme format 1.2, which the tool declares for you.
 

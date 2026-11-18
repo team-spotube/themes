@@ -28,14 +28,30 @@ pnpm create spotube-theme my-themes     # bootstraps a project with @team-spotub
 cd my-themes && pnpm install && pnpm dist
 ```
 
-Put it on GitHub with the topics **`spotube`** and **`spotube-theme`** (a non-fork repository): Spotube's *Discover themes* list shows
-every such repository, most starred first, and installs a `.zip` from any of its releases. Guides: [docs.spotube.cc/themes](https://docs.spotube.cc/themes).
-Tag releases with semantic versions (`v1.2.0` or `1.2.0`) and attach `<id>.zip`: that is also how installed themes are updated.
-The tool's own documentation is in [`packages/theme-tool`](packages/theme-tool).
+## How themes are discovered and updated
+
+**Discovery.** Spotube's *Settings → Appearance → Discover on GitHub* lists every public, non-fork repository that has **both** GitHub topics
+`spotube` and `spotube-theme`, most starred first. Opening one lists its releases and every `.zip` attached to them; picking a file downloads it
+(from github.com only) and shows the usual install dialog. To be listed:
+
+1. Push your theme project to a public GitHub repository (not a fork).
+2. Add the topics **`spotube`** and **`spotube-theme`** (*About → Topics*).
+3. Create a release and attach `dist/<id>.zip` (the `.zip` files `pnpm dist` builds).
+
+**Updates.** Set `updates: true` in a theme (with `repository` pointing at the GitHub repo) to let Spotube find new versions of it:
+
+- Release tags must be semantic versions, with or without a `v` (`v1.2.0`, `1.2.0`); other tags are ignored, as are drafts and pre-releases.
+- The release must carry an archive named `<id>.zip` (what `spotube-theme zip` produces). Use `updates: { github: 'https://github.com/you/repo', asset: 'my-theme.zip' }` for another repository or archive name.
+- Spotube checks the **selected theme automatically** when the app starts and whenever the selection changes (when "check for updates" is on in
+  settings) and offers *Update to X* in a dialog with the release notes; *Ignore* silences that version. The refresh button on the Appearance page
+  checks **every** installed theme and shows *Update to X* on the rows that have one.
+- An update installs over the installed theme when the archive has the **same id** and a **newer** version; the archive is validated like any import.
+- Keep the theme's `version` equal to the release tag. Themes without an explicit `version` share the `version` of your `package.json`, so one tag
+  matches every theme in a multi-theme repository (this repository's release workflow checks that the tag is `v<package.json version>`).
 
 ## Install a theme
 
-1. In Spotube open **Settings → Appearance → Discover themes**, pick a repository and a release asset, or build the zips yourself (`pnpm install && pnpm dist` puts them in `dist/`).
+1. In Spotube open **Settings → Appearance → Discover on GitHub**, pick a repository and a release asset, or build the zips yourself (`pnpm install && pnpm dist` puts them in `dist/`).
 2. Or use **Install theme** and pick a zip. You see the author, links, licence and contents before confirming.
 3. Select it.
 
