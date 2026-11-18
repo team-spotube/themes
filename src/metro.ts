@@ -10,7 +10,7 @@ export default defineTheme({
   license: 'AGPL-3.0-or-later',
   repository: 'https://github.com/team-spotube/themes',
   bugs: 'https://github.com/team-spotube/themes/issues',
-  version: '1.0.0',
+  updates: true,
   description: 'Flat saturated tiles, big light typography, square corners and no chrome. Presses tilt the tile back.',
   iconPack: 'bootstrap',
   logo: 'logos/metro.svg',

@@ -11,7 +11,7 @@ export default defineTheme({
   license: 'AGPL-3.0-or-later',
   repository: 'https://github.com/team-spotube/themes',
   bugs: 'https://github.com/team-spotube/themes/issues',
-  version: '1.0.0',
+  updates: true,
   description: 'A 1990s desktop: square grey bevels, navy title bars and menu highlights, and no animation to speak of.',
   iconPack: 'fluent-filled',
   logo: 'logos/classic95.svg',

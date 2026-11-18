@@ -13,7 +13,7 @@ export default defineTheme({
   license: 'AGPL-3.0-or-later',
   repository: 'https://github.com/team-spotube/themes',
   bugs: 'https://github.com/team-spotube/themes/issues',
-  version: '1.0.0',
+  updates: true,
   description: 'A hi-fi deck: brushed-metal panels, a glowing LCD, round knobs and pixel-font labels.',
   iconPack: 'lucide',
   logo: 'logos/amp.svg',

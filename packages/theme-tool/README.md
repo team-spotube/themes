@@ -30,6 +30,7 @@ export default defineTheme({
   author: 'You',
   license: 'MIT',
   repository: 'https://github.com/you/my-themes',
+  updates: true,                                   // update checks from this repository's GitHub releases (see below)
   logo: 'logos/sunset.svg',                        // your own artwork: .svg or .png (max 512 px)
   iconPack: { iconify: '@iconify-json/tabler' },  // any icon library, or a bundled one: 'phosphor'
   fonts: { Inter: { from: '@fontsource/inter', files: [['files/inter-latin-400-normal.woff2', 400], ['files/inter-latin-700-normal.woff2', 700]] } },
@@ -60,6 +61,12 @@ Generic packs are rendered to PNGs (so stroke-based libraries work too) and tint
 (the tool declares the lowest version a theme needs). Options: `suffix` (a style variant such as `'-fill'`), `prefix`, `names` (map a role to
 an icon name), `size`, `tint`, `license`. Roles are Lucide names; the tool matches them to the library's names through synonyms and reports
 what it could not find, which then keeps Spotube's stock icon.
+
+**Updates.** `updates: true` lets Spotube find new versions of your installed theme: it reads the GitHub releases of `repository`, looks for the
+newest published release whose tag is a semantic version (`v1.2.0` or `1.2.0`) that has an archive named `<id>.zip` (what `spotube-theme zip` produces)
+and offers an update when it is newer than the installed `version`. Use `updates: { github: 'https://github.com/you/repo', asset: 'my-theme.zip' }`
+for another repository or archive name. Themes without an explicit `version` share the `version` of the project's `package.json`, so a release tag
+matches every theme in the project. This needs theme format 1.2, which the tool declares for you.
 
 **Logos** are yours: `logo` is the path of a `.png` or `.svg` (rendered to 512 px) in your project. The tool never generates one.
 

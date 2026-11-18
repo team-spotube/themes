@@ -9,9 +9,19 @@ import { renderPack } from './icons.js';
 import type { ThemeModule } from './lib.js';
 import { writeLogo } from './logo.js';
 
+/** The project's own version (package.json): themes without an explicit `version` share it, so one release tag matches every theme. */
+function projectVersion(p: Project): string | undefined {
+  try {
+    return readJson(join(p.root, 'package.json')).version;
+  } catch {
+    return undefined;
+  }
+}
+
 /** Schema versions: the lowest version that contains every feature the theme uses (see docs: schema versioning). */
 const BASE_SCHEMA = '1.0.0';
 const ICON_IMAGES_SCHEMA = '1.1.0';
+const UPDATES_SCHEMA = '1.2.0';
 
 export async function build(p: Project, only: string[] = []): Promise<string[]> {
   const ids = moduleIds(p).filter((id) => !only.length || only.includes(id));
@@ -23,7 +33,7 @@ export async function build(p: Project, only: string[] = []): Promise<string[]> 
   for (const id of ids) {
     const t = (await jiti.import(moduleFile(p, id), { default: true })) as ThemeModule | undefined;
     if (!t || typeof t !== 'object') throw new Error(`src/${id} must default-export a theme (use defineTheme)`);
-    const { fonts = {}, logo, licenseNote = '', iconPack, author, repository, bugs, ...body } = t;
+    const { fonts = {}, logo, licenseNote = '', iconPack, author, repository, bugs, updates, ...body } = t;
     if (!logo || typeof logo !== 'string') throw new Error(`src/${id}: "logo" is required: the path of your .png or .svg logo`);
 
     const folder = join(p.themes, id);
@@ -35,7 +45,7 @@ export async function build(p: Project, only: string[] = []): Promise<string[]> 
       $schema: `https://docs.spotube.cc/schemas/theme/${latest.split('.')[0]}.json`,
       schema,
       id,
-      version: '1.0.0',
+      version: projectVersion(p) ?? '1.0.0',
       author: author ?? 'Unknown',
       ...(repository ? { repository } : {}),
       ...(bugs ? { bugs } : repository ? { bugs: `${repository.replace(/\/$/, '')}/issues` } : {}),
@@ -77,6 +87,14 @@ export async function build(p: Project, only: string[] = []): Promise<string[]> 
       schema = ICON_IMAGES_SCHEMA;
       notices.push(rendered.notice);
       if (rendered.missing.length) warnings.push(`iconPack: no icon for ${rendered.missing.length} role(s), they keep the stock icon: ${rendered.missing.join(', ')} (map them with "names")`);
+    }
+    if (updates) {
+      const github = (updates === true ? undefined : updates.github) ?? repository;
+      if (!github || !/^https:\/\/github\.com\/[^/]+\/[^/]+\/?$/.test(github)) {
+        throw new Error(`src/${id}: "updates" needs a GitHub repository (set "repository" to https://github.com/owner/repo, or updates.github)`);
+      }
+      doc.updates = { github: github.replace(/\/$/, ''), asset: (updates === true ? undefined : updates.asset) ?? `${id}.zip` };
+      schema = UPDATES_SCHEMA;
     }
     doc.schema = schema;
     if (!Object.keys(doc.assets?.fonts ?? {}).length && doc.assets) delete doc.assets.fonts;

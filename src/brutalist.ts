@@ -9,7 +9,7 @@ export default defineTheme({
   license: 'AGPL-3.0-or-later',
   repository: 'https://github.com/team-spotube/themes',
   bugs: 'https://github.com/team-spotube/themes/issues',
-  version: '1.0.0',
+  updates: true,
   description: 'Thick black outlines, loud flat colour and heavy type with no softness anywhere. Hover floods controls with the accent.',
   iconPack: 'phosphor-bold',
   logo: 'logos/brutalist.svg',

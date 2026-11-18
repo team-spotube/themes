@@ -10,7 +10,7 @@ export default defineTheme({
   license: 'AGPL-3.0-or-later',
   repository: 'https://github.com/team-spotube/themes',
   bugs: 'https://github.com/team-spotube/themes/issues',
-  version: '1.0.0',
+  updates: true,
   description: 'The Sunday paper: ink on cream (or a night edition), serif headlines, hairline rules and square corners.',
   iconPack: 'phosphor-thin',
   logo: 'logos/newsprint.svg',

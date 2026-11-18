@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.spotube.cc/schemas/theme/1.json",
-  "schema": "1.0.0",
+  "schema": "1.2.0",
   "id": "amp",
   "version": "1.0.0",
   "author": "Spotube Team",
@@ -1339,5 +1339,9 @@
         "x": "U+E1B2"
       }
     }
+  },
+  "updates": {
+    "github": "https://github.com/team-spotube/themes",
+    "asset": "amp.zip"
   }
 }

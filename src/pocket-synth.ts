@@ -11,7 +11,7 @@ export default defineTheme({
   license: 'AGPL-3.0-or-later',
   repository: 'https://github.com/team-spotube/themes',
   bugs: 'https://github.com/team-spotube/themes/issues',
-  version: '1.0.0',
+  updates: true,
   description: 'A palm-sized hardware sampler: chunky keys that sit on the panel, a pale LCD and one loud key colour.',
   iconPack: 'phosphor-fill',
   logo: 'logos/pocket-synth.svg',

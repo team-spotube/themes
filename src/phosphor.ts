@@ -11,7 +11,7 @@ export default defineTheme({
   license: 'AGPL-3.0-or-later',
   repository: 'https://github.com/team-spotube/themes',
   bugs: 'https://github.com/team-spotube/themes/issues',
-  version: '1.0.0',
+  updates: true,
   description: 'A terminal: monospace type, one-pixel outlines, no corners and inverse video for hover and selection. Dark is a CRT, light is paper.',
   iconPack: 'fontawesome',
   logo: 'logos/phosphor.svg',

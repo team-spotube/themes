@@ -9,7 +9,7 @@ export default defineTheme({
   license: 'AGPL-3.0-or-later',
   repository: 'https://github.com/team-spotube/themes',
   bugs: 'https://github.com/team-spotube/themes/issues',
-  version: '1.0.0',
+  updates: true,
   description: 'Tonal, softly rounded surfaces tinted by your accent: pill buttons, stadium selection and a roomy layout.',
   iconPack: 'fluent',
   logo: 'logos/material-you.svg',

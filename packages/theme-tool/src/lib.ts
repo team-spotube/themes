@@ -74,6 +74,11 @@ export interface ThemeModule {
   license?: string;
   /** Your logo: path to a `.png` (max 512x512) or `.svg` (rendered to PNG), relative to the project. */
   logo: string;
+  /**
+   * Update checks from GitHub releases (theme format 1.2): `true` uses your `repository` and an archive named `<id>.zip`
+   * (what \`spotube-theme zip\` produces); or `{ github, asset }`. Release tags must be semver, with or without a `v`.
+   */
+  updates?: true | { github?: string; asset?: string };
   iconPack?: IconPackSpec;
   fonts?: Record<string, FontSpec>;
   licenseNote?: string;

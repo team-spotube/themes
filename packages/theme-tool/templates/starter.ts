@@ -8,6 +8,7 @@ export default defineTheme({
   author: '{{author}}',
   license: '{{license}}',
   repository: '{{repository}}', // where people find the source and report problems
+  updates: true, // let Spotube check this repository's GitHub releases (tags like v1.2.0) for a newer {{id}}.zip
   logo: 'logos/{{id}}.svg', // your own artwork: a .png (max 512 px) or .svg
   iconPack: 'lucide',
 

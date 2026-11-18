@@ -11,7 +11,7 @@ export default defineTheme({
   license: 'AGPL-3.0-or-later',
   repository: 'https://github.com/team-spotube/themes',
   bugs: 'https://github.com/team-spotube/themes/issues',
-  version: '2.0.0',
+  updates: true,
   description: 'Sweets on a pastel gradient: fat glossy pills with a thick under-edge, bouncy presses and a round typeface. Dark is night-time candy.',
   iconPack: 'phosphor-fill',
   logo: 'logos/candy-pop.svg',

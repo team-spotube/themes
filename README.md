@@ -28,14 +28,15 @@ pnpm create spotube-theme my-themes     # bootstraps a project with @team-spotub
 cd my-themes && pnpm install && pnpm dist
 ```
 
-Put it on GitHub with the topic **`spotube-theme`**: Spotube's *Find themes on GitHub* button opens
-[github.com/topics/spotube-theme](https://github.com/topics/spotube-theme). Guides: [docs.spotube.cc/themes](https://docs.spotube.cc/themes).
+Put it on GitHub with the topics **`spotube`** and **`spotube-theme`** (a non-fork repository): Spotube's *Discover themes* list shows
+every such repository, most starred first, and installs a `.zip` from any of its releases. Guides: [docs.spotube.cc/themes](https://docs.spotube.cc/themes).
+Tag releases with semantic versions (`v1.2.0` or `1.2.0`) and attach `<id>.zip`: that is also how installed themes are updated.
 The tool's own documentation is in [`packages/theme-tool`](packages/theme-tool).
 
 ## Install a theme
 
-1. Build the zips (`pnpm install && pnpm dist` puts them in `dist/`), or take them from a release.
-2. In Spotube open **Settings → Look & feel → Themes → Install theme** and pick a zip. You see the author, links, licence and contents before confirming.
+1. In Spotube open **Settings → Appearance → Discover themes**, pick a repository and a release asset, or build the zips yourself (`pnpm install && pnpm dist` puts them in `dist/`).
+2. Or use **Install theme** and pick a zip. You see the author, links, licence and contents before confirming.
 3. Select it.
 
 ## This repository
@@ -48,6 +49,9 @@ A pnpm workspace:
 | `packages/theme-tool` | **`@team-spotube/theme-tool`**: CLI, typed helpers, JSON Schema, bundled fonts and icon packs |
 | `packages/create-spotube-theme` | `pnpm create spotube-theme` |
 | `themes/`, `dist/` | generated theme folders and zips |
+
+All themes share the version in the root `package.json`, and a release is tagged `v<that version>` (the workflow checks it), so Spotube's update check
+(release tag vs installed theme version) works for the whole collection.
 
 ```bash
 pnpm install

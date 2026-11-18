@@ -1,8 +1,8 @@
 {
   "$schema": "https://docs.spotube.cc/schemas/theme/1.json",
-  "schema": "1.0.0",
+  "schema": "1.2.0",
   "id": "neon-noir",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "author": "Spotube Team",
   "repository": "https://github.com/team-spotube/themes",
   "bugs": "https://github.com/team-spotube/themes/issues",
@@ -1384,5 +1384,9 @@
         "x": "U+E057"
       }
     }
+  },
+  "updates": {
+    "github": "https://github.com/team-spotube/themes",
+    "asset": "neon-noir.zip"
   }
 }

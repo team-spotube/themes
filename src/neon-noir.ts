@@ -11,7 +11,7 @@ export default defineTheme({
   license: 'AGPL-3.0-or-later',
   repository: 'https://github.com/team-spotube/themes',
   bugs: 'https://github.com/team-spotube/themes/issues',
-  version: '2.0.0',
+  updates: true,
   description: 'Synthwave after dark: a sunset-gradient backdrop, neon tubes around outlines, glowing headings and an Audiowide wordmark feel. Light is a pastel daylight take.',
   iconPack: 'phosphor',
   logo: 'logos/neon-noir.svg',

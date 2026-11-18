@@ -24,12 +24,12 @@ export function addTheme(p: Project, o: ThemeOptions): string {
   const repo = o.repository ?? 'https://github.com/your-name/my-spotube-themes';
   let text = readFileSync(source, 'utf8');
   if (o.template === 'starter') {
-    text = text.replaceAll('{{name}}', o.name.replaceAll("'", "\\'")).replaceAll('{{author}}', o.author.replaceAll("'", "\\'")).replaceAll('{{license}}', o.license).replaceAll('{{repository}}', repo);
+    text = text.replaceAll('{{name}}', o.name.replaceAll("'", "\\'")).replaceAll('{{author}}', o.author.replaceAll("'", "\\'")).replaceAll('{{license}}', o.license).replaceAll('{{repository}}', repo).replaceAll('{{id}}', o.id);
   } else {
     // Make a bundled theme your own: new name, your author and licence.
     text = text.replace(/(\n  name: )'[^']*'/, `$1'${o.name.replaceAll("'", "\\'")}'`);
-    text = text.replace(/\n  (author|license|repository|bugs): '[^']*',/g, '');
-    text = text.replace(/(\n  name: '[^']*',)/, `$1\n  author: '${o.author.replaceAll("'", "\\'")}',\n  license: '${o.license}',\n  repository: '${repo}',`);
+    text = text.replace(/\n  (author|license|repository|bugs): '[^']*',/g, '').replace(/\n  updates: true,/, '');
+    text = text.replace(/(\n  name: '[^']*',)/, `$1\n  author: '${o.author.replaceAll("'", "\\'")}',\n  license: '${o.license}',\n  repository: '${repo}',\n  updates: true,`);
   }
   // The theme's logo: a copy of the template's artwork marked as a placeholder, so the build reminds you to replace it.
   const logoSource = join(TEMPLATES_DIR, 'logos', `${o.template}.svg`);
