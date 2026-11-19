@@ -4,6 +4,135 @@ import { A, choice, defineTheme, flatComponents, merge, NONE, solid } from '@tea
 const paper = (c: unknown) => solid(c);
 const rule = { borderWidth: 1, borderColor: '{vars.ink}' };
 
+
+// The app's own components: ruled boxes, serif headlines, italic datelines, no shadows, no corners.
+const serif = { fontFamily: 'DM Serif Display' };
+const spotLine = { color: '{vars.spot}' };
+// Millennium components the stock look would otherwise leave glossy.
+const gaps = {
+  autocomplete: {
+    base: {
+      panelBackground: paper('{vars.paper}'), panelShape: 'rect', panelBorderColor: '{vars.ink}', panelBorderWidth: 1, panelShadowElevation: 0, panelBottomRimColor: null, itemShape: 'rect', itemForeground: '{vars.ink}',
+      highlightedItemBackground: paper('{vars.ink}'), highlightedItemForeground: '{vars.paper}', dividerColor: '{vars.ink}', itemInteractionOverlay: paper(NONE), itemTextStyle: { fontSize: 15 },
+    },
+    states: { hovered: { itemBackground: paper('{vars.ink}') }, pressed: { itemBackground: paper('{vars.spot}') } },
+  },
+  bottomSheet: { base: { background: paper('{vars.paper}'), shape: 'rect', borderColor: '{vars.ink}', borderWidth: 2, shadowElevation: 0, foreground: '{vars.ink}', handleColor: '{vars.ink}', handleShape: 'rect', bottomRimColor: null, orbColor: null } },
+  modalBottomSheet: { base: { background: paper('{vars.paper}'), shape: 'rect', borderColor: '{vars.ink}', borderWidth: 2, shadowElevation: 0, foreground: '{vars.ink}', handleColor: '{vars.ink}', handleShape: 'rect', scrimColor: A('#1b1a1780', '#000000b0'), bottomRimColor: null, orbColor: null } },
+  drawer: { base: { background: paper('{vars.paper}'), shape: 'rect', borderColor: '{vars.ink}', borderWidth: 2, shadowElevation: 0, foreground: '{vars.ink}', scrimColor: A('#1b1a1780', '#000000b0'), bottomRimColor: null, orbColor: null } },
+  tabGroup: {
+    base: {
+      listBackground: paper(NONE), listBorderColor: '{vars.ink}', listBorderWidth: 1, listShape: 'rect', listBottomRimColor: null, tabShape: 'rect', tabTextStyle: { fontWeight: 700 }, unselectedTabForeground: '{vars.dim}',
+      selectedTabBackground: paper('{vars.ink}'), selectedTabForeground: '{vars.paper}', selectedTabBorderColor: '{vars.ink}', selectedTabBottomRimColor: null, selectedTabOrbColor: null, tabHoverBackground: paper('{vars.paper2}'), tabElevation: 0,
+    },
+  },
+  loading: {
+    base: {
+      color: '{vars.ink}', fillBrush: paper('{vars.ink}'), trackBackground: paper('{vars.paper3}'), trackBorderColor: NONE, linearShape: 'rect', linearHeight: 6, trackBottomRimColor: null,
+      skeletonBackground: paper('{vars.paper3}'), skeletonShimmerColor: '{vars.paper2}',
+    },
+  },
+  avatar: { base: { shape: 'rect', background: paper('{vars.paper3}'), foreground: '{vars.ink}', borderColor: '{vars.ink}', borderWidth: 1, shadowElevation: 0, bottomRimColor: null, initialsBackground: paper('{vars.ink}'), textStyle: { fontFamily: 'DM Serif Display' } } },
+  radioGroup: {
+    base: { indicatorBackground: paper(NONE), indicatorBorderColor: '{vars.ink}', indicatorBorderWidth: 1, indicatorShape: 'rect', indicatorBottomRimColor: null, indicatorInteractionOverlay: paper(NONE), selectedIndicatorBackground: paper(NONE), dotBrush: paper('{vars.spot}'), dotShape: 'rect' },
+  },
+  triStateCheckbox: {
+    base: { faceShape: 'rect', faceSize: [18, 18], faceBackground: paper(NONE), faceBorderColor: '{vars.ink}', faceBorderWidth: 1, selectedFaceBackground: paper(NONE), indeterminateFaceBackground: paper(NONE), selectedFaceBorderColor: '{vars.ink}', selectedFaceForeground: '{vars.spot}', dashBrush: paper('{vars.spot}'), dashShape: 'rect' },
+  },
+  disclosure: {
+    base: { background: paper(NONE), borderColor: '{vars.ink}', borderWidth: 1, shape: 'rect', foreground: '{vars.ink}', chevronForeground: '{vars.ink}', headerBackground: paper(NONE), bottomRimColor: null, titleStyle: { fontFamily: 'DM Serif Display' } },
+    states: { hovered: { headerBackground: paper('{vars.paper2}') } },
+  },
+  pullToRefresh: { base: { indicatorBackground: paper('{vars.paper}'), indicatorBorderColor: '{vars.ink}', indicatorBorderWidth: 1, indicatorShape: 'rect', indicatorShadowElevation: 0, indicatorBottomRimColor: null, indicatorProgressBackground: paper('{vars.ink}'), indicatorTrackBackground: paper('{vars.paper3}') } },
+};
+const appComponents = {
+  mediaCard: {
+    variants: {
+      root: {
+        base: { shape: 'rect', background: paper('{vars.paper}'), borderColor: '{vars.ink}', borderWidth: 1, shadowElevation: 0, innerGlowColor: NONE },
+        states: {
+          hovered: { highlightBackground: paper('{vars.tint}'), borderWidth: 1 },
+          focused: { highlightBackground: paper('{vars.tint}'), borderColor: '{vars.spot}', borderWidth: 2 },
+          pressed: { highlightBackground: paper('{vars.paper3}'), scale: 1 },
+          error: { background: paper(['alpha', '{tokens.color.danger}', 0.1]), borderColor: '{tokens.color.danger}' },
+        },
+      },
+      artwork: { base: { shape: 'rect' } },
+      info: { base: { titleStyle: { ...serif, fontSize: 15 }, subtitleStyle: { fontStyle: 'italic' } } },
+    },
+  },
+  mediaListTile: {
+    base: { shape: 'rect', borderColor: NONE, borderWidth: 1, titleStyle: { fontWeight: 700 }, subtitleStyle: { fontStyle: 'italic' } },
+    states: {
+      selected: { background: paper('{vars.tint}'), borderColor: '{vars.ink}', titleForeground: '{vars.spot}' },
+      error: { borderColor: '{tokens.color.danger}' },
+    },
+  },
+  mediaArtwork: { base: { shape: 'rect', borderColor: '{vars.ink}', borderWidth: 1, background: paper('{vars.paper3}') } },
+  floatingPlayer: {
+    variants: {
+      root: { base: { background: paper('{vars.paper2}'), shape: 'rect', borderColor: '{vars.ink}', borderWidth: 1, progressHeight: 3 } },
+      artwork: { base: { shape: 'rect', background: '{vars.paper3}' } },
+      info: { base: { titleStyle: { ...serif } , subtitleStyle: { fontStyle: 'italic' } } },
+    },
+  },
+  largePlayer: {
+    variants: {
+      root: { base: { tint: ['alpha', '{vars.paper}', 0.92], blurRadius: 0 } },
+      artwork: { base: { shape: 'rect' } },
+      info: { base: { titleStyle: { ...serif, fontSize: 16 }, artistStyle: { fontStyle: 'italic' } } },
+      transport: { base: { activeTint: '{vars.spot}' } },
+    },
+  },
+  expandedPlayer: {
+    variants: {
+      root: { base: { headerStyle: { ...serif } } },
+      artwork: { base: { shape: 'rect' } },
+      info: { base: { titleStyle: { ...serif }, artistStyle: { fontStyle: 'italic' } } },
+      transport: { base: { activeTint: '{vars.spot}' } },
+      lyrics: { base: { titleStyle: { ...serif }, shadowElevation: 0 } },
+      optionTile: { base: { iconTint: '{vars.ink}' } },
+    },
+  },
+  playerQueue: {
+    variants: {
+      root: { base: { titleStyle: { ...serif } } },
+      row: {
+        base: { thumbShape: 'rect', thumbBackground: '{vars.paper3}', subtitleStyle: { fontStyle: 'italic' } },
+        states: { selected: { titleStyle: { ...spotLine, fontWeight: 700 } } },
+      },
+    },
+  },
+  trackList: {
+    variants: {
+      row: {
+        base: { selectedBackground: paper('{vars.tint}'), artworkShape: 'rect', artistStyle: { fontStyle: 'italic' } },
+        states: {
+          selected: { titleStyle: { ...spotLine, fontWeight: 700 } },
+          error: { titleStyle: { color: '{tokens.color.danger}' } },
+        },
+      },
+    },
+  },
+  trackOptions: { base: { headerArtworkShape: 'rect', headerTitleStyle: { ...serif }, headerArtistStyle: { fontStyle: 'italic' } } },
+  collectionHeader: {
+    base: { artworkShape: 'rect', titleStyle: { ...serif }, compactTitleStyle: { ...serif }, collapsedTitleStyle: { ...serif }, collapsedArtworkShape: 'rect', descriptionStyle: { fontStyle: 'italic' } },
+  },
+  featuredCarousel: { base: { cardShape: 'rect', titleStyle: { ...serif }, subtitleStyle: { fontStyle: 'italic' } } },
+  emptyState: { base: { iconBoxShape: 'rect', iconBoxBackground: paper(NONE), iconBoxBorderColor: '{vars.ink}', titleStyle: { ...serif } } },
+  errorDisplay: { base: { iconTint: '{tokens.color.danger}', titleStyle: { ...serif } } },
+  loginRequired: { base: { badgeShape: 'rect', badgeBackground: '{vars.paper3}', titleStyle: { ...serif } } },
+  section: { variants: { header: { base: { titleStyle: { ...serif }, subtitleStyle: { fontStyle: 'italic' } } } } },
+  connectBanner: { variants: { row: { base: { background: '{vars.paper3}', shape: 'rect' } }, dot: { base: { color: '{vars.spot}' } } } },
+  settingsRow: { variants: { root: { base: { titleStyle: { fontWeight: 700 }, subtitleStyle: { fontStyle: 'italic' } } } } },
+  lyricsLine: {
+    variants: {
+      root: { states: { selected: { textStyle: { ...serif, color: '{vars.spot}' } } } },
+      immersive: { base: { shape: 'rect' }, states: { selected: { textStyle: { ...serif, color: '{vars.spot}' } } } },
+    },
+  },
+};
+
 export default defineTheme({
   name: 'Newsprint',
   author: 'Spotube Team',
@@ -50,7 +179,7 @@ export default defineTheme({
     app: { background: solid('{vars.paper}') },
   },
   defaults: { shape: 'rect' },
-  components: merge(flatComponents(), {
+  components: merge(merge(merge(flatComponents(), {
     button: {
       base: { background: paper(NONE), foreground: '{vars.ink}', ...rule, shape: 'rect', padding: [20, 9], textStyle: { fontSize: 15, fontWeight: 700 } },
       states: { hovered: { background: paper('{vars.ink}'), foreground: '{vars.paper}' }, pressed: { background: paper('{vars.spot}'), foreground: '{vars.onSpot}' }, focused: { borderWidth: 2 }, disabled: { alpha: 0.45 } },
@@ -140,5 +269,5 @@ export default defineTheme({
         },
       },
     },
-  }),
+  }), appComponents), gaps),
 });

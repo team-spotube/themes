@@ -97,3 +97,11 @@ with a bold icon set, a pixel font with a hairline one. Heroicons (no media icon
 The repository, every theme definition and logo, and the tool are licensed under the **GNU Affero General Public License v3.0 or later**
 ([LICENSE](LICENSE)), like Spotube. Bundled fonts and icon fonts keep their own licences (SIL Open Font License 1.1 for most fonts, Apache 2.0 for
 Open Sans and Caladea; MIT/ISC for most icon sets, CC BY 4.0 for Font Awesome); every theme's `LICENSE` includes the texts of what it ships.
+
+## Publishing the tooling to npm
+`@team-spotube/theme-tool` and `create-spotube-theme` are published by `.github/workflows/publish-npm.yml`:
+1. Bump `version` in `packages/theme-tool/package.json` (and `packages/create-spotube-theme/package.json` if it changed), commit and push.
+2. Either push a tag `tools-v<theme-tool version>` (for example `tools-v1.1.0`; the workflow refuses a tag that doesn't match), or run **Actions → Publish npm packages** by hand (tick *dry run* first to see what would go out, set *dist tag* to `next` for a pre-release).
+3. The workflow builds the tool, builds and checks every theme with it, then publishes each package with provenance. A version already on npm is skipped, so re-running is safe.
+
+It needs one repository secret, `NPM_TOKEN` (an npm automation token with publish rights on the `@team-spotube` scope). Theme releases keep using plain `v*` tags (`release.yml`).

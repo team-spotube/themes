@@ -7,6 +7,114 @@ const glow = (c = '{vars.led}', r = 8) => ({ color: c, offsetX: 0, offsetY: 0, b
 const label = { fontFamily: 'Silkscreen', fontSize: 11, letterSpacing: 0.6 };
 const flat = { shadows: [NONE], shadowElevation: 0, interactionOverlay: NONE, interactionRim: NONE, motion: { hoverScale: 1, pressedScale: 0.98 } };
 
+
+// The app's own components (mediaCard, players, lists, screens): same deck look as the controls above.
+const deck = { fontFamily: 'Silkscreen', letterSpacing: 0.6 };
+const lcdTitle = { ...deck, fontSize: 12, color: '{vars.lcdInk}', shadow: glow('{vars.ledGlow}', 6) };
+const appComponents = {
+  mediaCard: {
+    variants: {
+      root: {
+        base: { shape: 6 },
+        states: {
+          hovered: { highlightBackground: metal(false), borderColor: '{vars.edge}', innerGlowColor: '{vars.sheen}' },
+          focused: { highlightBackground: metal(false), borderColor: '{vars.ledOn}', borderWidth: 2 },
+          pressed: { highlightBackground: metal(true), innerGlowColor: NONE },
+          error: { background: solid(['alpha', '#ff5a4d', 0.18]) },
+        },
+      },
+      artwork: { base: { shape: 4 } },
+      info: { base: { titleStyle: { ...deck, fontSize: 11 }, subtitleStyle: { fontSize: 11 } } },
+    },
+  },
+  mediaListTile: {
+    base: { shape: 4, titleStyle: { ...deck, fontSize: 11 } },
+    states: {
+      hovered: { background: metal(false), borderColor: '{vars.edge}', borderWidth: 1 },
+      selected: { background: lcd, titleForeground: '{vars.ledOn}', borderColor: '{vars.ledOn}', borderWidth: 1 },
+      error: { borderColor: '#ff5a4d', borderWidth: 1 },
+    },
+  },
+  mediaArtwork: { base: { shape: 4, borderColor: '{vars.edge}', borderWidth: 1, background: lcd, placeholderTint: '{vars.ledOn}' } },
+  floatingPlayer: {
+    variants: {
+      root: { base: { background: lcd, shape: [10, 10, 0, 0], borderColor: '{vars.edge}', borderWidth: 1 } },
+      artwork: { base: { shape: 4, background: '{vars.lcdBot}', placeholderTint: '{vars.ledOn}' } },
+      info: { base: { titleStyle: lcdTitle, subtitleStyle: { ...deck, fontSize: 10, color: '{vars.ledOn}' } } },
+    },
+  },
+  largePlayer: {
+    variants: {
+      artwork: { base: { shape: 4 } },
+      info: { base: { titleStyle: { ...deck, fontSize: 13 }, artistStyle: { ...deck, fontSize: 10 } } },
+      transport: { base: { timeStyle: { ...deck, fontSize: 10 }, activeTint: '{vars.led}' } },
+    },
+  },
+  expandedPlayer: {
+    variants: {
+      root: { base: { headerStyle: { ...deck, fontSize: 12 } } },
+      artwork: { base: { shape: 6 } },
+      info: { base: { titleStyle: { ...deck, fontSize: 16 }, artistStyle: { ...deck, fontSize: 11 } } },
+      transport: { base: { timeStyle: { ...deck, fontSize: 11 }, activeTint: '{vars.led}' } },
+      lyrics: { base: { iconTint: '{vars.led}', titleStyle: { ...deck, fontSize: 12 } } },
+      optionTile: { base: { iconTint: '{vars.led}', labelStyle: { ...deck, fontSize: 12 } } },
+    },
+  },
+  playerQueue: {
+    variants: {
+      root: { base: { titleStyle: { ...deck, fontSize: 13 }, emptyStyle: { ...deck, fontSize: 11 } } },
+      row: {
+        base: { thumbShape: 3, handleTint: '{vars.led}', durationStyle: { ...deck, fontSize: 10 }, thumbIndexStyle: { ...deck, fontSize: 10 } },
+        states: { selected: { titleStyle: { color: '{vars.led}' }, thumbBackground: '{vars.lcdBot}' } },
+      },
+    },
+  },
+  trackList: {
+    variants: {
+      card: { base: { feedbackStyle: { ...deck, fontSize: 11 } } },
+      row: {
+        base: { artworkShape: 3, indexStyle: { ...deck, fontSize: 10 }, durationStyle: { ...deck, fontSize: 10 }, titleStyle: { fontWeight: 700 } },
+        states: {
+          selected: { background: lcd, selectedBackground: lcd, titleStyle: { color: '{vars.ledOn}' }, overlayIconTint: '{vars.ledOn}' },
+          error: { titleStyle: { color: '#ff5a4d' } },
+        },
+      },
+    },
+  },
+  trackOptions: { base: { labelStyle: { ...deck, fontSize: 12 }, headerTitleStyle: { ...deck, fontSize: 13 }, headerArtworkShape: 4 } },
+  collectionHeader: {
+    base: {
+      artworkShape: 6,
+      titleStyle: { ...deck, fontWeight: 700 },
+      compactTitleStyle: { ...deck, fontWeight: 700 },
+      collapsedTitleStyle: { ...deck, fontSize: 13 },
+      collapsedArtworkShape: 4,
+    },
+  },
+  featuredCarousel: { base: { cardShape: 6, buttonTint: '{vars.ledOn}', titleStyle: { ...deck, fontWeight: 700 }, subtitleStyle: { ...deck, fontSize: 11 } } },
+  emptyState: {
+    base: {
+      iconBoxShape: 6, iconBoxBackground: lcd, iconBoxBorderColor: '{vars.edge}', iconBoxBorderWidth: 1, iconTint: '{vars.ledOn}', titleStyle: { ...deck, fontSize: 13 },
+    },
+  },
+  errorDisplay: { base: { iconTint: '#ff5a4d', titleStyle: { ...deck, fontSize: 14 }, detailsHeaderStyle: { ...deck, fontSize: 11 } } },
+  loginRequired: { base: { badgeShape: 6, badgeBackground: '{vars.lcdTop}', iconTint: '{vars.ledOn}', titleStyle: { ...deck, fontSize: 14 } } },
+  section: { variants: { header: { base: { titleStyle: { ...deck, fontSize: 13 } } } } },
+  lyricsLine: {
+    variants: {
+      root: { states: { selected: { textStyle: { color: '{vars.led}', shadow: glow('{vars.ledGlow}', 8) } } } },
+      immersive: { states: { selected: { textStyle: { color: '{vars.ledOn}', shadow: glow('{vars.ledGlow}', 8) } } } },
+    },
+  },
+  connectBanner: {
+    variants: {
+      row: { base: { shape: 4, textStyle: { ...deck, fontSize: 11 }, chevronTint: '{vars.led}' } },
+      dot: { base: { color: '{vars.ledOn}', ringColor: '{vars.ledGlow}' } },
+    },
+  },
+  settingsRow: { variants: { root: { base: { titleStyle: { ...deck, fontSize: 12 } } } } },
+};
+
 export default defineTheme({
   name: 'Amp',
   author: 'Spotube Team',
@@ -50,6 +158,7 @@ export default defineTheme({
   },
   defaults: { shape: 6 },
   components: {
+    ...appComponents,
     button: {
       base: { background: metal(false), borderWidth: 1, borderColor: '{vars.edge}', innerGlowColor: '{vars.sheen}', bottomRimColor: '#00000040', ...flat, labelShadow: false, shape: 6, foreground: '{vars.ink}', textStyle: label },
       states: { pressed: { background: metal(true), innerGlowColor: NONE }, hovered: { innerGlowColor: '#ffffff' }, disabled: { foreground: '{vars.inkDim}' }, focused: { borderColor: '{vars.ledOn}' } },
@@ -135,6 +244,80 @@ export default defineTheme({
         itemTextStyle: { fontSize: 13 },
       },
       states: { hovered: { itemBackground: ['gradient', '{vars.ledGlow}', '{vars.ledGlow}'] }, focused: { itemBackground: ['gradient', '{vars.ledGlow}', '{vars.ledGlow}'] }, pressed: { itemBackground: ['gradient', '{vars.ledGlow}', '{vars.ledGlow}'] } },
+    },
+    // Millennium components the theme had left at the stock glossy look.
+    autocomplete: {
+      base: {
+        panelBackground: lcd, panelShape: 6, panelBorderColor: '{vars.edge}', panelBorderWidth: 1, panelGlowColor: NONE, panelBottomRimColor: null, panelShadowElevation: 20, panelShadowColor: '#000000a0',
+        dividerColor: '#1d3a28', dividerSecondaryColor: NONE, itemShape: 3, itemForeground: '{vars.lcdInk}', highlightedItemBackground: ['gradient', '{vars.ledGlow}', '{vars.ledGlow}'], highlightedItemForeground: '#ffffff',
+        itemBorderColor: NONE, itemBorderWidth: 0, itemInnerGlowColor: NONE, itemInteractionOverlay: NONE, itemShadowElevation: 0, itemHoverScale: 1, itemPressedScale: 1, itemTextStyle: { fontSize: 13 },
+      },
+      states: { hovered: { itemBackground: ['gradient', '{vars.ledGlow}', '{vars.ledGlow}'] }, pressed: { itemBackground: ['gradient', '{vars.ledGlow}', '{vars.ledGlow}'] } },
+    },
+    bottomSheet: {
+      base: {
+        background: metal(false), shape: [16, 16, 0, 0], borderColor: '{vars.edge}', borderWidth: 1, innerGlowColor: '{vars.sheen}', bottomRimColor: null, orbColor: null, overlayBrush: NONE,
+        shadowElevation: 24, shadowColor: '#000000a0', handleBrush: lcd, handleColor: '{vars.edge}', handleShape: 'pill',
+      },
+    },
+    modalBottomSheet: {
+      base: {
+        background: metal(false), shape: [16, 16, 0, 0], borderColor: '{vars.edge}', borderWidth: 1, innerGlowColor: '{vars.sheen}', bottomRimColor: null, orbColor: null, overlayBrush: NONE,
+        shadowElevation: 24, shadowColor: '#000000a0', handleBrush: lcd, handleColor: '{vars.edge}', handleShape: 'pill', scrimColor: '#000000a0',
+      },
+    },
+    drawer: {
+      base: {
+        background: metal(false), shape: 'rect', borderColor: '{vars.edge}', borderWidth: 1, innerGlowColor: '{vars.sheen}', bottomRimColor: null, orbColor: null, overlayBrush: NONE,
+        shadowElevation: 24, shadowColor: '#000000a0', scrimColor: '#000000a0',
+      },
+    },
+    tabGroup: {
+      base: {
+        listBackground: lcd, listBorderColor: '{vars.edge}', listBorderWidth: 1, listShape: 6, listInnerGlowColor: NONE, listBottomRimColor: '{vars.sheen}', listInsetShadeColor: '#000000', listShadowElevation: 0,
+        tabShape: 4, unselectedTabBackground: solid(NONE), unselectedTabForeground: '#7fa68b', selectedTabBackground: ['gradient', '{vars.ledGlow}', '{vars.ledGlow}'], selectedTabItemBackground: ['gradient', '{vars.ledGlow}', '{vars.ledGlow}'],
+        selectedTabForeground: '{vars.ledOn}', selectedTabBorderColor: '{vars.ledOn}', selectedTabBottomRimColor: null, selectedTabOrbColor: null, selectedTabOverlayBrush: NONE,
+        tabGlowColor: NONE, tabElevation: 0, tabHoverBackground: ['gradient', '#ffffff14', '#ffffff14'], tabPressedBackground: ['gradient', '#ffffff24', '#ffffff24'], tabHoverScale: 1, tabPressedScale: 1, tabTextStyle: label,
+      },
+    },
+    loading: {
+      base: {
+        color: '{vars.ledOn}', fillBrush: ['linear', 90, '{vars.led}', '{vars.ledOn}'], glossBrush: NONE, trackBackground: lcd, trackBorderColor: '{vars.edge}', trackBorderWidth: 1, trackBottomRimColor: null, trackGlowColor: NONE,
+        linearShape: 3, segmentShape: 2, segmentBackground: lcd, segmentBorderColor: '{vars.edge}', skeletonBackground: ['gradient', '#0d1c13', '#0d1c13'], skeletonShimmerColor: '{vars.ledGlow}',
+      },
+    },
+    avatar: {
+      base: {
+        background: metal(false), shape: 'pill', borderColor: '{vars.edge}', borderWidth: 1, innerGlowColor: '{vars.sheen}', bottomRimColor: null, shadowElevation: 0, shadowColor: NONE,
+        foreground: '{vars.ledOn}', initialsBackground: lcd, textStyle: { ...label, shadow: glow() }, interactionOverlay: NONE, imageOverlay: NONE,
+      },
+    },
+    radioGroup: {
+      base: {
+        indicatorSize: [18, 18], indicatorShape: 'pill', indicatorBackground: lcd, selectedIndicatorBackground: lcd, indicatorBorderColor: '{vars.edge}', indicatorBorderWidth: 1, indicatorBottomRimColor: null, indicatorElevation: 0,
+        indicatorGlowColor: NONE, indicatorShadows: [NONE], dotColor: '{vars.ledOn}', indicatorInteractionOverlay: NONE, indicatorInteractionRim: NONE, indicatorHoverScale: 1, indicatorPressedScale: 1,
+        labelColor: '{vars.ink}', selectedLabelColor: '{vars.ink}',
+      },
+      states: { selected: { indicatorBorderColor: '{vars.ledOn}', indicatorGlowColor: '{vars.ledGlow}' } },
+    },
+    triStateCheckbox: {
+      base: {
+        faceShape: 3, faceSize: [18, 18], faceBackground: lcd, faceBorderColor: '{vars.edge}', faceBorderWidth: 1,
+        selectedFaceBackground: lcd, selectedFaceBorderColor: '{vars.ledOn}', selectedFaceForeground: '{vars.ledOn}', indeterminateFaceBackground: lcd, dashBrush: solid('{vars.ledOn}'),
+        faceGlowColor: NONE, selectedFaceGlowColor: '{vars.ledGlow}', faceElevation: 0, faceBottomRimColor: null, faceInteractionOverlay: NONE, faceHoverScale: 1, facePressedScale: 1,
+      },
+    },
+    disclosure: {
+      base: {
+        background: solid(NONE), headerBackground: metal(false), contentBackground: lcd, shape: 6, borderColor: '{vars.edge}', borderWidth: 1, innerGlowColor: '{vars.sheen}', bottomRimColor: null, shadowElevation: 0, shadows: [NONE],
+        foreground: '{vars.ink}', chevronForeground: '{vars.ledOn}', titleStyle: label, contentStyle: { color: '{vars.lcdInk}' }, headerInteractionOverlay: NONE, headerInteractionRim: NONE, headerPressedScale: 1,
+      },
+    },
+    pullToRefresh: {
+      base: {
+        indicatorBackground: lcd, indicatorBorderColor: '{vars.edge}', indicatorBorderWidth: 1, indicatorBottomRimColor: null, indicatorInnerGlowColor: NONE, indicatorShape: 'pill', indicatorShadowElevation: 0,
+        indicatorProgressBackground: ['linear', 90, '{vars.led}', '{vars.ledOn}'], indicatorTrackBackground: solid('#000000'),
+      },
     },
     tooltip: { base: { background: lcd, foreground: '{vars.ledOn}', shape: 3, borderColor: '{vars.ledOn}', borderWidth: 1, shadowElevation: 0 } },
     segmentedButton: {

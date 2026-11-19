@@ -137,6 +137,55 @@ export default defineTheme({
       },
       states: { hovered: { itemBackground: solid('{vars.hi}'), itemIconTint: '#ffffff' }, focused: { itemBackground: solid('{vars.hi}'), itemIconTint: '#ffffff' }, pressed: { itemBackground: solid('{vars.hi}'), itemIconTint: '#ffffff' } },
     },
+    autocomplete: {
+      base: {
+        panelBackground: solid('{vars.face}'), panelShape: 'rect', panelBorderColor: '{vars.frame}', panelBorderWidth: 1, panelGlowColor: '{vars.lit}', panelBottomRimColor: '{vars.shade}', panelShadowElevation: 0, panelShadowColor: NONE,
+        itemBackground: solid(NONE), itemShape: 'rect', itemForeground: '{vars.ink}', highlightedItemBackground: solid('{vars.hi}'), highlightedItemForeground: '#ffffff', itemBorderColor: NONE, itemBorderWidth: 0,
+        itemInnerGlowColor: NONE, itemInteractionOverlay: NONE, itemShadowElevation: 0, itemHoverScale: 1, itemPressedScale: 1, dividerColor: '{vars.shade}', dividerSecondaryColor: '{vars.lit}',
+      },
+    },
+    bottomSheet: { base: { ...bevel('{vars.face}'), borderWidth: 2, shape: 'rect', shadowElevation: 0, orbColor: null, overlayBrush: NONE, handleColor: '{vars.shade}', handleShape: 'rect' } },
+    modalBottomSheet: { base: { ...bevel('{vars.face}'), borderWidth: 2, shape: 'rect', shadowElevation: 0, orbColor: null, overlayBrush: NONE, handleColor: '{vars.shade}', handleShape: 'rect', scrimColor: '#00000040' } },
+    drawer: { base: { ...bevel('{vars.face}'), borderWidth: 2, shape: 'rect', shadowElevation: 0, orbColor: null, overlayBrush: NONE, scrimColor: '#00000040' } },
+    tabGroup: {
+      base: {
+        listBackground: solid('{vars.faceDown}'), listBorderColor: '{vars.frame}', listBorderWidth: 1, listBottomRimColor: '{vars.lit}', listInnerGlowColor: NONE, listInsetShadeColor: NONE, listShadowElevation: 0, listShape: 'rect',
+        tabShape: 'rect', tabElevation: 0, tabGlowColor: NONE, tabHoverScale: 1, tabPressedScale: 1, tabHoverBackground: solid('{vars.face}'), tabPressedBackground: solid('{vars.faceDown}'),
+        unselectedTabBackground: solid(NONE), unselectedTabForeground: '{vars.ink}', selectedTabBackground: solid('{vars.face}'), selectedTabItemBackground: solid('{vars.face}'), selectedTabForeground: '{vars.ink}',
+        selectedTabBorderColor: '{vars.frame}', selectedTabBottomRimColor: '{vars.shade}', selectedTabOrbColor: null, selectedTabOverlayBrush: NONE, tabTextStyle: { fontWeight: 400 },
+      },
+    },
+    loading: {
+      base: {
+        color: '{vars.hi}', fillBrush: solid('{vars.hi}'), glossBrush: solid(NONE), trackBackground: solid('{vars.field}'), trackBorderColor: '{vars.frame}', trackBorderWidth: 1, trackBottomRimColor: '{vars.lit}', trackGlowColor: NONE,
+        bufferedBrush: solid('{vars.shade}'), linearShape: 'rect', segmentShape: 'rect', skeletonBackground: solid('{vars.faceDown}'), skeletonShimmerColor: '{vars.lit}',
+      },
+    },
+    avatar: { base: { shape: 'rect', background: solid('{vars.face}'), initialsBackground: solid('{vars.face}'), foreground: '{vars.ink}', borderColor: '{vars.frame}', borderWidth: 1, shadowElevation: 0, innerGlowColor: '{vars.lit}', bottomRimColor: '{vars.shade}', imageOverlay: solid(NONE), interactionOverlay: solid(NONE) } },
+    radioGroup: {
+      base: {
+        indicatorShape: 'pill', indicatorBackground: solid('{vars.field}'), selectedIndicatorBackground: solid('{vars.field}'), indicatorBorderColor: '{vars.frame}', indicatorBorderWidth: 1, indicatorGlowColor: NONE, indicatorBottomRimColor: '{vars.lit}',
+        indicatorElevation: 0, indicatorHoverScale: 1, indicatorPressedScale: 1, indicatorInteractionOverlay: solid(NONE), indicatorInteractionRim: solid(NONE), dotColor: '{vars.ink}', dotBrush: solid('{vars.ink}'), labelColor: '{vars.ink}', selectedLabelColor: '{vars.ink}',
+      },
+    },
+    triStateCheckbox: {
+      base: {
+        faceShape: 'rect', faceSize: [16, 16], faceBackground: solid('{vars.field}'), faceBorderColor: '{vars.frame}', faceBorderWidth: 1, selectedFaceBackground: solid('{vars.field}'), indeterminateFaceBackground: solid('{vars.field}'), selectedFaceBorderColor: '{vars.frame}',
+        selectedFaceForeground: '{vars.ink}', dashBrush: solid('{vars.ink}'), dashShape: 'rect', faceGlowColor: NONE, selectedFaceGlowColor: NONE, faceElevation: 0, faceBottomRimColor: '{vars.lit}', faceInteractionOverlay: solid(NONE), faceHoverScale: 1, facePressedScale: 1,
+      },
+    },
+    disclosure: {
+      base: {
+        ...bevel('{vars.face}'), shape: 'rect', shadowElevation: 0, shadows: [NONE], headerBackground: solid(NONE), headerInteractionOverlay: solid(NONE), headerInteractionRim: solid(NONE), headerPressedScale: 1,
+        chevronForeground: '{vars.ink}', foreground: '{vars.ink}', contentBackground: solid('{vars.field}'),
+      },
+    },
+    pullToRefresh: {
+      base: {
+        indicatorBackground: solid('{vars.face}'), indicatorBorderColor: '{vars.frame}', indicatorBorderWidth: 1, indicatorBottomRimColor: '{vars.shade}', indicatorInnerGlowColor: '{vars.lit}', indicatorShadowElevation: 0, indicatorShape: 'rect',
+        indicatorProgressBackground: solid('{vars.hi}'), indicatorTrackBackground: solid('{vars.field}'), indicatorEnterScale: 1, indicatorExitScale: 1,
+      },
+    },
     tooltip: { base: { background: solid('#ffffe1'), foreground: '#000000', shape: 'rect', borderColor: '#000000', borderWidth: 1, shadowElevation: 0 } },
     segmentedButton: {
       base: { ...bevel('{vars.face}'), ...flat, foreground: '{vars.ink}' },
@@ -179,6 +228,95 @@ export default defineTheme({
             selected: { background: solid('{vars.hi}'), foreground: '#ffffff', iconTint: '#ffffff', labelStyle: { fontWeight: 700 } },
           },
         },
+      },
+    },
+
+    // ---- the app's own components (theme format 1.3): bevelled grey panels, navy selection, square everything ----
+    mediaCard: {
+      variants: {
+        root: {
+          base: { shape: 'rect', background: solid('{vars.face}'), highlightBackground: null, borderColor: '{vars.frame}', borderWidth: 1, innerGlowColor: '{vars.lit}', shadowElevation: 0, scale: 1, transitionMillis: 0, scaleMillis: 0 },
+          states: {
+            focused: { borderColor: '{vars.ink}', borderWidth: 2 },
+            pressed: { background: solid('{vars.faceDown}'), innerGlowColor: NONE },
+            error: { background: solid(['alpha', '{vars.bad}', 0.25]) },
+          },
+        },
+        artwork: { base: { shape: 'rect' } },
+        info: { base: { padding: 8, spacing: 2, titleStyle: { fontWeight: 700 } } },
+      },
+    },
+    mediaListTile: {
+      base: { shape: 'rect', borderWidth: 0, borderColor: NONE },
+      states: { selected: { background: solid('{vars.hi}'), titleForeground: '#ffffff', subtitleStyle: { color: '#ffffffc0' } }, error: { titleForeground: '{vars.bad}' } },
+    },
+    mediaArtwork: { base: { shape: 'rect', background: solid('{vars.field}'), borderColor: '{vars.frame}', borderWidth: 1, placeholderTint: '{vars.inkOff}' } },
+    floatingPlayer: {
+      variants: {
+        root: { base: { background: solid('{vars.face}'), shape: 'rect', borderColor: '{vars.frame}', borderWidth: 1, shadowElevation: 0 } },
+        artwork: { base: { shape: 'rect', background: '{vars.field}', placeholderTint: '{vars.inkOff}' } },
+        info: { base: { titleStyle: { fontWeight: 700, color: '{vars.ink}' }, subtitleStyle: { color: '{vars.inkOff}' } } },
+      },
+    },
+    largePlayer: {
+      variants: {
+        root: { base: { tint: ['alpha', '{vars.face}', 0.96], blurRadius: 0 } },
+        artwork: { base: { shape: 'rect', background: '{vars.field}' } },
+        info: { base: { titleStyle: { fontWeight: 700 } } },
+        transport: { base: { activeTint: '{vars.hi}', inactiveTint: '{vars.inkOff}' } },
+      },
+    },
+    expandedPlayer: {
+      variants: {
+        root: { base: { headerStyle: { fontWeight: 700 } } },
+        artwork: { base: { shape: 'rect', background: '{vars.field}' } },
+        info: { base: { titleStyle: { fontWeight: 700 } } },
+        transport: { base: { activeTint: '{vars.hi}', inactiveTint: '{vars.inkOff}' } },
+        lyrics: { base: { shadowElevation: 0, titleStyle: { fontWeight: 700 }, iconTint: '{vars.ink}' } },
+        optionTile: { base: { iconTint: '{vars.ink}' } },
+      },
+    },
+    playerQueue: {
+      variants: {
+        root: { base: { titleStyle: { fontWeight: 700 } } },
+        row: {
+          base: { thumbShape: 'rect', thumbBackground: '{vars.field}', handleTint: '{vars.inkOff}' },
+          states: { selected: { titleStyle: { fontWeight: 700, color: '{vars.hi}' } } },
+        },
+      },
+    },
+    trackList: {
+      variants: {
+        card: { base: { errorColor: '{vars.bad}' } },
+        row: {
+          base: { artworkShape: 'rect' },
+          states: {
+            selected: {
+              titleStyle: { color: '#ffffff' }, artistStyle: { color: '#ffffffc0' }, artistSeparatorStyle: { color: '#ffffffc0' },
+              albumStyle: { color: '#ffffffc0' }, durationStyle: { color: '#ffffffc0' }, indexStyle: { color: '#ffffffc0' },
+            },
+            error: { titleStyle: { color: '{vars.bad}' } },
+          },
+        },
+      },
+    },
+    trackOptions: { base: { headerArtworkShape: 'rect', headerTitleStyle: { fontWeight: 700 } } },
+    collectionHeader: { base: { artworkShape: 'rect', titleStyle: { fontWeight: 700 }, compactTitleStyle: { fontWeight: 700 } } },
+    featuredCarousel: { base: { cardShape: 'rect', buttonBlur: 0, titleStyle: { fontWeight: 700 } } },
+    emptyState: { base: { iconBoxShape: 'rect', iconBoxBackground: solid('{vars.face}'), iconBoxBorderColor: '{vars.frame}', iconBoxBorderWidth: 1, iconTint: '{vars.ink}', titleStyle: { fontWeight: 700 } } },
+    errorDisplay: { base: { iconTint: '{vars.bad}', titleStyle: { fontWeight: 700 } } },
+    loginRequired: { base: { badgeShape: 'rect', badgeBackground: '{vars.hi}', iconTint: '#ffffff', titleStyle: { fontWeight: 700 } } },
+    section: { variants: { header: { base: { titleStyle: { fontWeight: 700 } } } } },
+    connectBanner: {
+      variants: {
+        row: { base: { background: '{vars.hi}', shape: 'rect', textStyle: { color: '#ffffff' }, chevronTint: '#ffffff' } },
+      },
+    },
+    settingsRow: { variants: { root: { base: { titleStyle: { fontWeight: 700 } } } } },
+    lyricsLine: {
+      variants: {
+        root: { states: { selected: { textStyle: { fontWeight: 700, color: '{vars.hi}' } } } },
+        immersive: { base: { shape: 'rect' } },
       },
     },
   },
