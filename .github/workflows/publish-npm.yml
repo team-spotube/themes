@@ -1,24 +1,23 @@
 name: Publish npm packages
 
-# Publishes @team-spotube/theme-tool and create-spotube-theme to npm.
-#   - push a tag like tools-v1.2.0 (it must match packages/theme-tool/package.json), or
-#   - run the workflow by hand (Actions -> Publish npm packages). Tick "dry run" to see what would be published.
-# A package whose version is already on npm is skipped, so re-running is safe. Needs the NPM_TOKEN repository secret
-# (an npm automation token with publish rights on the @team-spotube scope). Releases of the themes themselves use
-# plain v* tags and live in release.yml.
+# Publishes @team-spotube/theme-tool and create-spotube-theme to npm, at the version in each package.json.
+#   - runs on every push to main that touches a package (bump "version" in the package.json you want to release), or
+#   - by hand (Actions -> Publish npm packages); tick "dry run" to see what would be published.
+# No tags are involved: the version comes only from package.json. A package whose version is already on npm is
+# skipped, so pushes that don't bump a version publish nothing. Needs the NPM_TOKEN repository secret (an npm
+# automation token with publish rights on the @team-spotube scope). Theme releases live in release.yml.
 on:
   push:
-    tags: ['tools-v*']
+    branches: [main]
+    paths:
+      - 'packages/**'
+      - '.github/workflows/publish-npm.yml'
   workflow_dispatch:
     inputs:
       dry_run:
         description: Dry run (build and pack, publish nothing)
         type: boolean
         default: false
-      dist_tag:
-        description: npm dist-tag (latest, next, ...)
-        type: string
-        default: latest
 
 permissions:
   contents: read
@@ -33,7 +32,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DRY_RUN: ${{ github.event.inputs.dry_run == 'true' }}
-      DIST_TAG: ${{ github.event.inputs.dist_tag || 'latest' }}
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - uses: actions/checkout@v4
@@ -45,15 +43,6 @@ jobs:
           node-version: 22
           cache: pnpm
           registry-url: https://registry.npmjs.org
-
-      - name: The tag must match the tool's version
-        if: startsWith(github.ref, 'refs/tags/tools-v')
-        run: |
-          version=$(node -p "require('./packages/theme-tool/package.json').version")
-          if [[ "${GITHUB_REF_NAME}" != "tools-v$version" ]]; then
-            echo "::error::Tag ${GITHUB_REF_NAME} does not match @team-spotube/theme-tool version $version"
-            exit 1
-          fi
 
       - run: pnpm install --frozen-lockfile
 
@@ -81,7 +70,10 @@ jobs:
               echo "::notice::$name@$version is already on npm, skipping"
               continue
             fi
-            args=(--access public --no-git-checks --tag "$DIST_TAG")
+            # A pre-release version (1.2.0-beta.1) goes to the "next" dist-tag so it never becomes "latest".
+            tag=latest
+            [[ "$version" == *-* ]] && tag=next
+            args=(--access public --no-git-checks --tag "$tag")
             if [[ "$DRY_RUN" == "true" ]]; then
               (cd "$dir" && pnpm publish "${args[@]}" --dry-run)
             else

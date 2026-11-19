@@ -99,9 +99,8 @@ The repository, every theme definition and logo, and the tool are licensed under
 Open Sans and Caladea; MIT/ISC for most icon sets, CC BY 4.0 for Font Awesome); every theme's `LICENSE` includes the texts of what it ships.
 
 ## Publishing the tooling to npm
-`@team-spotube/theme-tool` and `create-spotube-theme` are published by `.github/workflows/publish-npm.yml`:
-1. Bump `version` in `packages/theme-tool/package.json` (and `packages/create-spotube-theme/package.json` if it changed), commit and push.
-2. Either push a tag `tools-v<theme-tool version>` (for example `tools-v1.1.0`; the workflow refuses a tag that doesn't match), or run **Actions → Publish npm packages** by hand (tick *dry run* first to see what would go out, set *dist tag* to `next` for a pre-release).
-3. The workflow builds the tool, builds and checks every theme with it, then publishes each package with provenance. A version already on npm is skipped, so re-running is safe.
+`@team-spotube/theme-tool` and `create-spotube-theme` are published by `.github/workflows/publish-npm.yml`, at the `version` in each package's `package.json`. No tags are involved.
+1. Bump `version` in `packages/theme-tool/package.json` (and/or `packages/create-spotube-theme/package.json`) and merge to `main`. The workflow runs on any push to `main` that touches `packages/`, or run it by hand under **Actions → Publish npm packages** (tick *dry run* to see what would go out).
+2. It builds the tool, builds and checks every theme with it, then publishes each package with provenance. A version that is already on npm is skipped, so a push that doesn't bump a version publishes nothing. A pre-release version (`1.2.0-beta.1`) goes to the `next` dist-tag.
 
 It needs one repository secret, `NPM_TOKEN` (an npm automation token with publish rights on the `@team-spotube` scope). Theme releases keep using plain `v*` tags (`release.yml`).
