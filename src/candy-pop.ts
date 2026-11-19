@@ -5,6 +5,101 @@ const ghost = solid(NONE);
 const candy = (hi: string, lo: string) => ['linear', 180, hi, lo];
 const bounce = { hoverScale: 1.04, pressedScale: 0.93 };
 
+
+// The app's own components (mediaCard, players, lists, screens): fat glossy candy, round corners, bouncy lift on hover.
+const iced = candy('{vars.cream}', '{vars.creamLo}');
+const cherry = candy('{vars.sweetHi}', '{vars.sweet}');
+const appComponents = {
+  mediaCard: {
+    variants: {
+      root: {
+        base: { shape: 24, scaleMillis: 160 },
+        states: {
+          hovered: { highlightBackground: iced, borderColor: '{vars.creamEdge}', borderWidth: 2, shadowElevation: 10, innerGlowColor: '#ffffffff', scale: 1.03 },
+          focused: { highlightBackground: iced, borderColor: '{vars.sweet}', borderWidth: 3, shadowElevation: 10, innerGlowColor: '#ffffffff' },
+          pressed: { highlightBackground: iced, borderColor: '{vars.creamEdge}', borderWidth: 2, shadowElevation: 2, scale: 0.94 },
+          error: { background: solid(['alpha', '#ff5a5f', 0.18]) },
+        },
+      },
+      artwork: { base: { shape: 18, actionSize: 38 } },
+      info: { base: { padding: [14, 12], titleStyle: { fontWeight: 700 } } },
+    },
+  },
+  mediaListTile: {
+    base: { shape: 22, titleStyle: { fontWeight: 700 } },
+    states: {
+      hovered: { background: iced, borderColor: '{vars.creamEdge}', borderWidth: 2 },
+      selected: { background: cherry, titleForeground: '{vars.onSweet}', borderColor: '{vars.sweetLo}', borderWidth: 2 },
+      error: { borderColor: '#ff5a5f', borderWidth: 2 },
+    },
+  },
+  mediaArtwork: { base: { shape: 18, borderColor: '{vars.creamEdge}', borderWidth: 2, background: iced, placeholderTint: '{vars.sweet}' } },
+  floatingPlayer: {
+    variants: {
+      root: { base: { background: iced, shape: 28, horizontalMargin: 14, borderColor: '{vars.creamEdge}', borderWidth: 2, shadowElevation: 12 } },
+      artwork: { base: { shape: 14, background: '{vars.wash}', placeholderTint: '{vars.sweet}' } },
+      info: { base: { titleStyle: { fontWeight: 700 } } },
+    },
+  },
+  largePlayer: {
+    variants: {
+      root: { base: { tint: ['alpha', '{vars.cream}', 0.7] } },
+      artwork: { base: { shape: 18 } },
+      info: { base: { titleStyle: { fontWeight: 700 } } },
+      transport: { base: { activeTint: '{vars.sweet}' } },
+    },
+  },
+  expandedPlayer: {
+    variants: {
+      artwork: { base: { shape: 32 } },
+      info: { base: { titleStyle: { fontWeight: 700 } } },
+      transport: { base: { activeTint: '{vars.sweet}' } },
+      lyrics: { base: { shadowElevation: 10, iconTint: '{vars.sweet}' } },
+      optionTile: { base: { iconTint: '{vars.sweet}', labelStyle: { fontWeight: 700 } } },
+    },
+  },
+  playerQueue: {
+    variants: {
+      root: { base: { titleStyle: { fontWeight: 700 } } },
+      row: {
+        base: { thumbShape: 12 },
+        states: { selected: { thumbBackground: '{vars.wash}', titleStyle: { color: '{vars.sweet}', fontWeight: 700 } } },
+      },
+    },
+  },
+  trackList: {
+    variants: {
+      row: {
+        base: { artworkShape: 12, titleStyle: { fontWeight: 700 } },
+        states: {
+          selected: { background: solid('{vars.wash}'), selectedBackground: solid('{vars.wash}'), overlayIconTint: '{vars.sweet}' },
+          error: { titleStyle: { color: '#ff5a5f' } },
+        },
+      },
+    },
+  },
+  trackOptions: { base: { labelStyle: { fontWeight: 700 }, headerArtworkShape: 14, headerTitleStyle: { fontWeight: 700 } } },
+  collectionHeader: { base: { artworkShape: 28, collapsedArtworkShape: 12, ownerPlaceholderBackground: '{vars.wash}', ownerPlaceholderTint: '{vars.sweet}', titleStyle: { fontWeight: 700 } } },
+  featuredCarousel: { base: { cardShape: 32, titleStyle: { fontWeight: 700 } } },
+  emptyState: { base: { iconBoxShape: 'pill', iconBoxBackground: iced, iconBoxBorderColor: '{vars.creamEdge}', iconBoxBorderWidth: 2, iconTint: '{vars.sweet}', titleStyle: { fontWeight: 700 } } },
+  errorDisplay: { base: { iconTint: '#ff5a5f', titleStyle: { fontWeight: 700 } } },
+  loginRequired: { base: { badgeShape: 'pill', badgeBackground: '{vars.wash}', iconTint: '{vars.sweet}', titleStyle: { fontWeight: 700 } } },
+  section: { variants: { header: { base: { titleStyle: { fontWeight: 700 } } } } },
+  lyricsLine: {
+    variants: {
+      root: { states: { selected: { textStyle: { fontWeight: 700, color: '{vars.sweet}' } } } },
+      immersive: { base: { shape: 20 }, states: { selected: { textStyle: { fontWeight: 700, color: '{vars.sweet}' } } } },
+    },
+  },
+  connectBanner: {
+    variants: {
+      row: { base: { shape: 'pill', background: '{vars.wash}', chevronTint: '{vars.sweet}', textStyle: { fontWeight: 700 } } },
+      dot: { base: { color: '{vars.sweet}', ringColor: '{vars.soft}' } },
+    },
+  },
+  settingsRow: { variants: { root: { base: { titleStyle: { fontWeight: 700 } } } } },
+};
+
 export default defineTheme({
   name: 'Candy Pop',
   author: 'Spotube Team',
@@ -44,6 +139,7 @@ export default defineTheme({
   },
   defaults: { shape: 20 },
   components: merge(flatComponents(), {
+    ...appComponents,
     button: {
       base: {
         background: candy('{vars.cream}', '{vars.creamLo}'), foreground: '{vars.ink}', borderWidth: 0, innerGlowColor: '#ffffffff', bottomRimColor: '{vars.creamEdge}', shape: 'pill', padding: [26, 13], motion: bounce,
@@ -105,6 +201,71 @@ export default defineTheme({
         itemForeground: '{vars.ink}', itemActiveBackground: candy('{vars.sweetHi}', '{vars.sweet}'), itemSelectedBackground: solid('{vars.wash}'), itemActiveForeground: '{vars.onSweet}', itemIconTint: '{vars.dim}', itemMutedForeground: '{vars.dim}', separatorBrush: '{vars.creamEdge}', itemHoverScale: 1.02,
       },
       states: { hovered: { itemBackground: candy('{vars.sweetHi}', '{vars.sweet}'), itemIconTint: '{vars.onSweet}' }, focused: { itemBackground: solid('{vars.wash}') }, pressed: { itemBackground: candy('{vars.sweet}', '{vars.sweetLo}') } },
+    },
+    // Millennium components the theme had left at the stock look.
+    autocomplete: {
+      base: {
+        panelBackground: iced, panelShape: 26, panelGlowColor: '#ffffffff', panelBottomRimColor: '{vars.creamEdge}', panelShadowElevation: 24, panelShadowColor: '#5a23472e', dividerColor: '{vars.creamEdge}',
+        itemShape: 'pill', itemForeground: '{vars.ink}', highlightedItemBackground: cherry, highlightedItemForeground: '{vars.onSweet}', itemHoverScale: 1.02, itemTextStyle: { fontWeight: 700 },
+      },
+      states: { hovered: { itemBackground: solid('{vars.wash}') }, pressed: { itemBackground: candy('{vars.sweet}', '{vars.sweetLo}'), itemForeground: '{vars.onSweet}' } },
+    },
+    bottomSheet: {
+      base: {
+        background: iced, shape: [32, 32, 0, 0], borderColor: '{vars.creamEdge}', borderWidth: 2, innerGlowColor: '#ffffffff', bottomRimColor: '{vars.creamEdge}', shadowElevation: 28, shadowColor: '#5a23472e',
+        handleBrush: solid('{vars.creamEdge}'), handleColor: '{vars.creamEdge}', handleShape: 'pill', handleSize: [44, 6],
+      },
+    },
+    modalBottomSheet: {
+      base: {
+        background: iced, shape: [32, 32, 0, 0], borderColor: '{vars.creamEdge}', borderWidth: 2, innerGlowColor: '#ffffffff', bottomRimColor: '{vars.creamEdge}', shadowElevation: 28, shadowColor: '#5a23472e',
+        handleBrush: solid('{vars.creamEdge}'), handleColor: '{vars.creamEdge}', handleShape: 'pill', handleSize: [44, 6], scrimColor: A('#5a234760', '#0f0820b0'),
+      },
+    },
+    drawer: {
+      base: {
+        background: iced, shape: [0, 32, 32, 0], borderColor: '{vars.creamEdge}', borderWidth: 2, innerGlowColor: '#ffffffff', bottomRimColor: '{vars.creamEdge}', shadowElevation: 28, shadowColor: '#5a23472e',
+        scrimColor: A('#5a234760', '#0f0820b0'),
+      },
+    },
+    tabGroup: {
+      base: {
+        listBackground: solid('{vars.wash}'), listShape: 'pill', listBorderWidth: 0, listInsetShadeColor: '#5a23470d', listBottomRimColor: null, listInnerGlowColor: NONE, listPadding: 5,
+        tabShape: 'pill', unselectedTabBackground: ghost, unselectedTabForeground: '{vars.dim}', selectedTabBackground: cherry, selectedTabItemBackground: cherry, selectedTabForeground: '{vars.onSweet}', selectedTabBorderColor: NONE,
+        selectedTabBottomRimColor: '{vars.sweetLo}', tabGlowColor: '#ffffffa0', tabHoverBackground: solid('{vars.wash}'), tabPressedBackground: solid('{vars.soft}'), tabHoverScale: 1.04, tabPressedScale: 0.94, tabTextStyle: { fontWeight: 700 },
+      },
+    },
+    loading: {
+      base: {
+        color: '{vars.sweet}', fillBrush: cherry, trackBackground: solid('{vars.creamEdge}'), trackBorderColor: NONE, trackBottomRimColor: null, trackGlowColor: NONE, linearShape: 'pill',
+        segmentShape: 'pill', segmentBackground: solid('{vars.creamEdge}'), ringBorderColor: '{vars.creamEdge}', skeletonBackground: solid('{vars.wash}'), skeletonShimmerColor: '#ffffff',
+      },
+    },
+    avatar: {
+      base: {
+        background: iced, shape: 'pill', borderColor: '{vars.creamEdge}', borderWidth: 2, innerGlowColor: '#ffffffff', bottomRimColor: '{vars.creamEdge}', shadowElevation: 6, shadowColor: '#5a234722',
+        foreground: '{vars.onSweet}', initialsBackground: cherry, textStyle: { fontWeight: 700 },
+      },
+    },
+    radioGroup: {
+      base: {
+        indicatorSize: [24, 24], indicatorShape: 'pill', indicatorBackground: iced, selectedIndicatorBackground: cherry, indicatorBorderColor: '{vars.creamEdge}', indicatorBorderWidth: 2, indicatorBottomRimColor: '{vars.creamEdge}',
+        indicatorGlowColor: '#ffffffff', dotColor: '{vars.onSweet}', indicatorHoverScale: 1.08, indicatorPressedScale: 0.9, labelStyle: { fontWeight: 700 },
+      },
+      states: { selected: { indicatorBorderColor: '{vars.sweetLo}', indicatorBottomRimColor: '{vars.sweetLo}' } },
+    },
+    triStateCheckbox: { base: { faceShape: 9, faceSize: [22, 22], faceBackground: iced, faceBorderColor: '{vars.creamEdge}', faceBorderWidth: 2, selectedFaceBackground: cherry, selectedFaceBorderColor: '{vars.sweetLo}', selectedFaceForeground: '{vars.onSweet}', indeterminateFaceBackground: cherry, dashBrush: solid('{vars.onSweet}') } },
+    disclosure: {
+      base: {
+        background: ghost, headerBackground: iced, contentBackground: ghost, shape: 24, borderWidth: 0, innerGlowColor: '#ffffffff', bottomRimColor: '{vars.creamEdge}', shadowElevation: 8, shadows: ['#5a234722'],
+        foreground: '{vars.ink}', chevronForeground: '{vars.sweet}', titleStyle: { fontWeight: 700 }, headerPressedScale: 0.97,
+      },
+    },
+    pullToRefresh: {
+      base: {
+        indicatorBackground: iced, indicatorBorderColor: '{vars.creamEdge}', indicatorBorderWidth: 2, indicatorShape: 'pill', indicatorInnerGlowColor: '#ffffffff', indicatorBottomRimColor: '{vars.creamEdge}',
+        indicatorShadowElevation: 10, indicatorShadowColor: '#5a23472e', indicatorProgressBackground: cherry, indicatorTrackBackground: solid('{vars.creamEdge}'),
+      },
     },
     tooltip: { base: { background: candy('{vars.sweetHi}', '{vars.sweet}'), foreground: '{vars.onSweet}', shape: 16 } },
     segmentedButton: {

@@ -1,8 +1,8 @@
 {
   "$schema": "https://docs.spotube.cc/schemas/theme/1.json",
-  "schema": "1.2.0",
+  "schema": "1.3.0",
   "id": "amp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Spotube Team",
   "repository": "https://github.com/team-spotube/themes",
   "bugs": "https://github.com/team-spotube/themes/issues",
@@ -199,6 +199,552 @@
     "shape": 6
   },
   "components": {
+    "mediaCard": {
+      "variants": {
+        "root": {
+          "base": {
+            "shape": 6
+          },
+          "states": {
+            "hovered": {
+              "highlightBackground": [
+                "linear",
+                180,
+                "{vars.metalTop}",
+                "{vars.metalBot}"
+              ],
+              "borderColor": "{vars.edge}",
+              "innerGlowColor": "{vars.sheen}"
+            },
+            "focused": {
+              "highlightBackground": [
+                "linear",
+                180,
+                "{vars.metalTop}",
+                "{vars.metalBot}"
+              ],
+              "borderColor": "{vars.ledOn}",
+              "borderWidth": 2
+            },
+            "pressed": {
+              "highlightBackground": [
+                "linear",
+                180,
+                "{vars.metalBot}",
+                "{vars.metalTop}"
+              ],
+              "innerGlowColor": "#00000000"
+            },
+            "error": {
+              "background": [
+                "gradient",
+                [
+                  "alpha",
+                  "#ff5a4d",
+                  0.18
+                ],
+                [
+                  "alpha",
+                  "#ff5a4d",
+                  0.18
+                ]
+              ]
+            }
+          }
+        },
+        "artwork": {
+          "base": {
+            "shape": 4
+          }
+        },
+        "info": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 11
+            },
+            "subtitleStyle": {
+              "fontSize": 11
+            }
+          }
+        }
+      }
+    },
+    "mediaListTile": {
+      "base": {
+        "shape": 4,
+        "titleStyle": {
+          "fontFamily": "Silkscreen",
+          "letterSpacing": 0.6,
+          "fontSize": 11
+        }
+      },
+      "states": {
+        "hovered": {
+          "background": [
+            "linear",
+            180,
+            "{vars.metalTop}",
+            "{vars.metalBot}"
+          ],
+          "borderColor": "{vars.edge}",
+          "borderWidth": 1
+        },
+        "selected": {
+          "background": [
+            "linear",
+            180,
+            "{vars.lcdTop}",
+            "{vars.lcdBot}"
+          ],
+          "titleForeground": "{vars.ledOn}",
+          "borderColor": "{vars.ledOn}",
+          "borderWidth": 1
+        },
+        "error": {
+          "borderColor": "#ff5a4d",
+          "borderWidth": 1
+        }
+      }
+    },
+    "mediaArtwork": {
+      "base": {
+        "shape": 4,
+        "borderColor": "{vars.edge}",
+        "borderWidth": 1,
+        "background": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "placeholderTint": "{vars.ledOn}"
+      }
+    },
+    "floatingPlayer": {
+      "variants": {
+        "root": {
+          "base": {
+            "background": [
+              "linear",
+              180,
+              "{vars.lcdTop}",
+              "{vars.lcdBot}"
+            ],
+            "shape": [
+              10,
+              10,
+              0,
+              0
+            ],
+            "borderColor": "{vars.edge}",
+            "borderWidth": 1
+          }
+        },
+        "artwork": {
+          "base": {
+            "shape": 4,
+            "background": "{vars.lcdBot}",
+            "placeholderTint": "{vars.ledOn}"
+          }
+        },
+        "info": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 12,
+              "color": "{vars.lcdInk}",
+              "shadow": {
+                "color": "{vars.ledGlow}",
+                "offsetX": 0,
+                "offsetY": 0,
+                "blurRadius": 6
+              }
+            },
+            "subtitleStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 10,
+              "color": "{vars.ledOn}"
+            }
+          }
+        }
+      }
+    },
+    "largePlayer": {
+      "variants": {
+        "artwork": {
+          "base": {
+            "shape": 4
+          }
+        },
+        "info": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 13
+            },
+            "artistStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 10
+            }
+          }
+        },
+        "transport": {
+          "base": {
+            "timeStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 10
+            },
+            "activeTint": "{vars.led}"
+          }
+        }
+      }
+    },
+    "expandedPlayer": {
+      "variants": {
+        "root": {
+          "base": {
+            "headerStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 12
+            }
+          }
+        },
+        "artwork": {
+          "base": {
+            "shape": 6
+          }
+        },
+        "info": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 16
+            },
+            "artistStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 11
+            }
+          }
+        },
+        "transport": {
+          "base": {
+            "timeStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 11
+            },
+            "activeTint": "{vars.led}"
+          }
+        },
+        "lyrics": {
+          "base": {
+            "iconTint": "{vars.led}",
+            "titleStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 12
+            }
+          }
+        },
+        "optionTile": {
+          "base": {
+            "iconTint": "{vars.led}",
+            "labelStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 12
+            }
+          }
+        }
+      }
+    },
+    "playerQueue": {
+      "variants": {
+        "root": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 13
+            },
+            "emptyStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 11
+            }
+          }
+        },
+        "row": {
+          "base": {
+            "thumbShape": 3,
+            "handleTint": "{vars.led}",
+            "durationStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 10
+            },
+            "thumbIndexStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 10
+            }
+          },
+          "states": {
+            "selected": {
+              "titleStyle": {
+                "color": "{vars.led}"
+              },
+              "thumbBackground": "{vars.lcdBot}"
+            }
+          }
+        }
+      }
+    },
+    "trackList": {
+      "variants": {
+        "card": {
+          "base": {
+            "feedbackStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 11
+            }
+          }
+        },
+        "row": {
+          "base": {
+            "artworkShape": 3,
+            "indexStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 10
+            },
+            "durationStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 10
+            },
+            "titleStyle": {
+              "fontWeight": 700
+            }
+          },
+          "states": {
+            "selected": {
+              "background": [
+                "linear",
+                180,
+                "{vars.lcdTop}",
+                "{vars.lcdBot}"
+              ],
+              "selectedBackground": [
+                "linear",
+                180,
+                "{vars.lcdTop}",
+                "{vars.lcdBot}"
+              ],
+              "titleStyle": {
+                "color": "{vars.ledOn}"
+              },
+              "overlayIconTint": "{vars.ledOn}"
+            },
+            "error": {
+              "titleStyle": {
+                "color": "#ff5a4d"
+              }
+            }
+          }
+        }
+      }
+    },
+    "trackOptions": {
+      "base": {
+        "labelStyle": {
+          "fontFamily": "Silkscreen",
+          "letterSpacing": 0.6,
+          "fontSize": 12
+        },
+        "headerTitleStyle": {
+          "fontFamily": "Silkscreen",
+          "letterSpacing": 0.6,
+          "fontSize": 13
+        },
+        "headerArtworkShape": 4
+      }
+    },
+    "collectionHeader": {
+      "base": {
+        "artworkShape": 6,
+        "titleStyle": {
+          "fontFamily": "Silkscreen",
+          "letterSpacing": 0.6,
+          "fontWeight": 700
+        },
+        "compactTitleStyle": {
+          "fontFamily": "Silkscreen",
+          "letterSpacing": 0.6,
+          "fontWeight": 700
+        },
+        "collapsedTitleStyle": {
+          "fontFamily": "Silkscreen",
+          "letterSpacing": 0.6,
+          "fontSize": 13
+        },
+        "collapsedArtworkShape": 4
+      }
+    },
+    "featuredCarousel": {
+      "base": {
+        "cardShape": 6,
+        "buttonTint": "{vars.ledOn}",
+        "titleStyle": {
+          "fontFamily": "Silkscreen",
+          "letterSpacing": 0.6,
+          "fontWeight": 700
+        },
+        "subtitleStyle": {
+          "fontFamily": "Silkscreen",
+          "letterSpacing": 0.6,
+          "fontSize": 11
+        }
+      }
+    },
+    "emptyState": {
+      "base": {
+        "iconBoxShape": 6,
+        "iconBoxBackground": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "iconBoxBorderColor": "{vars.edge}",
+        "iconBoxBorderWidth": 1,
+        "iconTint": "{vars.ledOn}",
+        "titleStyle": {
+          "fontFamily": "Silkscreen",
+          "letterSpacing": 0.6,
+          "fontSize": 13
+        }
+      }
+    },
+    "errorDisplay": {
+      "base": {
+        "iconTint": "#ff5a4d",
+        "titleStyle": {
+          "fontFamily": "Silkscreen",
+          "letterSpacing": 0.6,
+          "fontSize": 14
+        },
+        "detailsHeaderStyle": {
+          "fontFamily": "Silkscreen",
+          "letterSpacing": 0.6,
+          "fontSize": 11
+        }
+      }
+    },
+    "loginRequired": {
+      "base": {
+        "badgeShape": 6,
+        "badgeBackground": "{vars.lcdTop}",
+        "iconTint": "{vars.ledOn}",
+        "titleStyle": {
+          "fontFamily": "Silkscreen",
+          "letterSpacing": 0.6,
+          "fontSize": 14
+        }
+      }
+    },
+    "section": {
+      "variants": {
+        "header": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 13
+            }
+          }
+        }
+      }
+    },
+    "lyricsLine": {
+      "variants": {
+        "root": {
+          "states": {
+            "selected": {
+              "textStyle": {
+                "color": "{vars.led}",
+                "shadow": {
+                  "color": "{vars.ledGlow}",
+                  "offsetX": 0,
+                  "offsetY": 0,
+                  "blurRadius": 8
+                }
+              }
+            }
+          }
+        },
+        "immersive": {
+          "states": {
+            "selected": {
+              "textStyle": {
+                "color": "{vars.ledOn}",
+                "shadow": {
+                  "color": "{vars.ledGlow}",
+                  "offsetX": 0,
+                  "offsetY": 0,
+                  "blurRadius": 8
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "connectBanner": {
+      "variants": {
+        "row": {
+          "base": {
+            "shape": 4,
+            "textStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 11
+            },
+            "chevronTint": "{vars.led}"
+          }
+        },
+        "dot": {
+          "base": {
+            "color": "{vars.ledOn}",
+            "ringColor": "{vars.ledGlow}"
+          }
+        }
+      }
+    },
+    "settingsRow": {
+      "variants": {
+        "root": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "Silkscreen",
+              "letterSpacing": 0.6,
+              "fontSize": 12
+            }
+          }
+        }
+      }
+    },
     "button": {
       "base": {
         "background": [
@@ -818,6 +1364,431 @@
             "{vars.ledGlow}"
           ]
         }
+      }
+    },
+    "autocomplete": {
+      "base": {
+        "panelBackground": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "panelShape": 6,
+        "panelBorderColor": "{vars.edge}",
+        "panelBorderWidth": 1,
+        "panelGlowColor": "#00000000",
+        "panelBottomRimColor": null,
+        "panelShadowElevation": 20,
+        "panelShadowColor": "#000000a0",
+        "dividerColor": "#1d3a28",
+        "dividerSecondaryColor": "#00000000",
+        "itemShape": 3,
+        "itemForeground": "{vars.lcdInk}",
+        "highlightedItemBackground": [
+          "gradient",
+          "{vars.ledGlow}",
+          "{vars.ledGlow}"
+        ],
+        "highlightedItemForeground": "#ffffff",
+        "itemBorderColor": "#00000000",
+        "itemBorderWidth": 0,
+        "itemInnerGlowColor": "#00000000",
+        "itemInteractionOverlay": "#00000000",
+        "itemShadowElevation": 0,
+        "itemHoverScale": 1,
+        "itemPressedScale": 1,
+        "itemTextStyle": {
+          "fontSize": 13
+        }
+      },
+      "states": {
+        "hovered": {
+          "itemBackground": [
+            "gradient",
+            "{vars.ledGlow}",
+            "{vars.ledGlow}"
+          ]
+        },
+        "pressed": {
+          "itemBackground": [
+            "gradient",
+            "{vars.ledGlow}",
+            "{vars.ledGlow}"
+          ]
+        }
+      }
+    },
+    "bottomSheet": {
+      "base": {
+        "background": [
+          "linear",
+          180,
+          "{vars.metalTop}",
+          "{vars.metalBot}"
+        ],
+        "shape": [
+          16,
+          16,
+          0,
+          0
+        ],
+        "borderColor": "{vars.edge}",
+        "borderWidth": 1,
+        "innerGlowColor": "{vars.sheen}",
+        "bottomRimColor": null,
+        "orbColor": null,
+        "overlayBrush": "#00000000",
+        "shadowElevation": 24,
+        "shadowColor": "#000000a0",
+        "handleBrush": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "handleColor": "{vars.edge}",
+        "handleShape": "pill"
+      }
+    },
+    "modalBottomSheet": {
+      "base": {
+        "background": [
+          "linear",
+          180,
+          "{vars.metalTop}",
+          "{vars.metalBot}"
+        ],
+        "shape": [
+          16,
+          16,
+          0,
+          0
+        ],
+        "borderColor": "{vars.edge}",
+        "borderWidth": 1,
+        "innerGlowColor": "{vars.sheen}",
+        "bottomRimColor": null,
+        "orbColor": null,
+        "overlayBrush": "#00000000",
+        "shadowElevation": 24,
+        "shadowColor": "#000000a0",
+        "handleBrush": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "handleColor": "{vars.edge}",
+        "handleShape": "pill",
+        "scrimColor": "#000000a0"
+      }
+    },
+    "drawer": {
+      "base": {
+        "background": [
+          "linear",
+          180,
+          "{vars.metalTop}",
+          "{vars.metalBot}"
+        ],
+        "shape": "rect",
+        "borderColor": "{vars.edge}",
+        "borderWidth": 1,
+        "innerGlowColor": "{vars.sheen}",
+        "bottomRimColor": null,
+        "orbColor": null,
+        "overlayBrush": "#00000000",
+        "shadowElevation": 24,
+        "shadowColor": "#000000a0",
+        "scrimColor": "#000000a0"
+      }
+    },
+    "tabGroup": {
+      "base": {
+        "listBackground": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "listBorderColor": "{vars.edge}",
+        "listBorderWidth": 1,
+        "listShape": 6,
+        "listInnerGlowColor": "#00000000",
+        "listBottomRimColor": "{vars.sheen}",
+        "listInsetShadeColor": "#000000",
+        "listShadowElevation": 0,
+        "tabShape": 4,
+        "unselectedTabBackground": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "unselectedTabForeground": "#7fa68b",
+        "selectedTabBackground": [
+          "gradient",
+          "{vars.ledGlow}",
+          "{vars.ledGlow}"
+        ],
+        "selectedTabItemBackground": [
+          "gradient",
+          "{vars.ledGlow}",
+          "{vars.ledGlow}"
+        ],
+        "selectedTabForeground": "{vars.ledOn}",
+        "selectedTabBorderColor": "{vars.ledOn}",
+        "selectedTabBottomRimColor": null,
+        "selectedTabOrbColor": null,
+        "selectedTabOverlayBrush": "#00000000",
+        "tabGlowColor": "#00000000",
+        "tabElevation": 0,
+        "tabHoverBackground": [
+          "gradient",
+          "#ffffff14",
+          "#ffffff14"
+        ],
+        "tabPressedBackground": [
+          "gradient",
+          "#ffffff24",
+          "#ffffff24"
+        ],
+        "tabHoverScale": 1,
+        "tabPressedScale": 1,
+        "tabTextStyle": {
+          "fontFamily": "Silkscreen",
+          "fontSize": 11,
+          "letterSpacing": 0.6
+        }
+      }
+    },
+    "loading": {
+      "base": {
+        "color": "{vars.ledOn}",
+        "fillBrush": [
+          "linear",
+          90,
+          "{vars.led}",
+          "{vars.ledOn}"
+        ],
+        "glossBrush": "#00000000",
+        "trackBackground": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "trackBorderColor": "{vars.edge}",
+        "trackBorderWidth": 1,
+        "trackBottomRimColor": null,
+        "trackGlowColor": "#00000000",
+        "linearShape": 3,
+        "segmentShape": 2,
+        "segmentBackground": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "segmentBorderColor": "{vars.edge}",
+        "skeletonBackground": [
+          "gradient",
+          "#0d1c13",
+          "#0d1c13"
+        ],
+        "skeletonShimmerColor": "{vars.ledGlow}"
+      }
+    },
+    "avatar": {
+      "base": {
+        "background": [
+          "linear",
+          180,
+          "{vars.metalTop}",
+          "{vars.metalBot}"
+        ],
+        "shape": "pill",
+        "borderColor": "{vars.edge}",
+        "borderWidth": 1,
+        "innerGlowColor": "{vars.sheen}",
+        "bottomRimColor": null,
+        "shadowElevation": 0,
+        "shadowColor": "#00000000",
+        "foreground": "{vars.ledOn}",
+        "initialsBackground": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "textStyle": {
+          "fontFamily": "Silkscreen",
+          "fontSize": 11,
+          "letterSpacing": 0.6,
+          "shadow": {
+            "color": "{vars.led}",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blurRadius": 8
+          }
+        },
+        "interactionOverlay": "#00000000",
+        "imageOverlay": "#00000000"
+      }
+    },
+    "radioGroup": {
+      "base": {
+        "indicatorSize": [
+          18,
+          18
+        ],
+        "indicatorShape": "pill",
+        "indicatorBackground": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "selectedIndicatorBackground": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "indicatorBorderColor": "{vars.edge}",
+        "indicatorBorderWidth": 1,
+        "indicatorBottomRimColor": null,
+        "indicatorElevation": 0,
+        "indicatorGlowColor": "#00000000",
+        "indicatorShadows": [
+          "#00000000"
+        ],
+        "dotColor": "{vars.ledOn}",
+        "indicatorInteractionOverlay": "#00000000",
+        "indicatorInteractionRim": "#00000000",
+        "indicatorHoverScale": 1,
+        "indicatorPressedScale": 1,
+        "labelColor": "{vars.ink}",
+        "selectedLabelColor": "{vars.ink}"
+      },
+      "states": {
+        "selected": {
+          "indicatorBorderColor": "{vars.ledOn}",
+          "indicatorGlowColor": "{vars.ledGlow}"
+        }
+      }
+    },
+    "triStateCheckbox": {
+      "base": {
+        "faceShape": 3,
+        "faceSize": [
+          18,
+          18
+        ],
+        "faceBackground": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "faceBorderColor": "{vars.edge}",
+        "faceBorderWidth": 1,
+        "selectedFaceBackground": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "selectedFaceBorderColor": "{vars.ledOn}",
+        "selectedFaceForeground": "{vars.ledOn}",
+        "indeterminateFaceBackground": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "dashBrush": [
+          "gradient",
+          "{vars.ledOn}",
+          "{vars.ledOn}"
+        ],
+        "faceGlowColor": "#00000000",
+        "selectedFaceGlowColor": "{vars.ledGlow}",
+        "faceElevation": 0,
+        "faceBottomRimColor": null,
+        "faceInteractionOverlay": "#00000000",
+        "faceHoverScale": 1,
+        "facePressedScale": 1
+      }
+    },
+    "disclosure": {
+      "base": {
+        "background": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "headerBackground": [
+          "linear",
+          180,
+          "{vars.metalTop}",
+          "{vars.metalBot}"
+        ],
+        "contentBackground": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "shape": 6,
+        "borderColor": "{vars.edge}",
+        "borderWidth": 1,
+        "innerGlowColor": "{vars.sheen}",
+        "bottomRimColor": null,
+        "shadowElevation": 0,
+        "shadows": [
+          "#00000000"
+        ],
+        "foreground": "{vars.ink}",
+        "chevronForeground": "{vars.ledOn}",
+        "titleStyle": {
+          "fontFamily": "Silkscreen",
+          "fontSize": 11,
+          "letterSpacing": 0.6
+        },
+        "contentStyle": {
+          "color": "{vars.lcdInk}"
+        },
+        "headerInteractionOverlay": "#00000000",
+        "headerInteractionRim": "#00000000",
+        "headerPressedScale": 1
+      }
+    },
+    "pullToRefresh": {
+      "base": {
+        "indicatorBackground": [
+          "linear",
+          180,
+          "{vars.lcdTop}",
+          "{vars.lcdBot}"
+        ],
+        "indicatorBorderColor": "{vars.edge}",
+        "indicatorBorderWidth": 1,
+        "indicatorBottomRimColor": null,
+        "indicatorInnerGlowColor": "#00000000",
+        "indicatorShape": "pill",
+        "indicatorShadowElevation": 0,
+        "indicatorProgressBackground": [
+          "linear",
+          90,
+          "{vars.led}",
+          "{vars.ledOn}"
+        ],
+        "indicatorTrackBackground": [
+          "gradient",
+          "#000000",
+          "#000000"
+        ]
       }
     },
     "tooltip": {

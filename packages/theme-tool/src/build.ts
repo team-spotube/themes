@@ -6,7 +6,7 @@ import { createJiti } from 'jiti';
 import { ASSETS, moduleFile, moduleIds, readJson, schemaVersion, type Project } from './common.js';
 import { resolveFamily } from './fonts.js';
 import { renderPack } from './icons.js';
-import type { ThemeModule } from './lib.js';
+import { APP_COMPONENT_NAMES, type ThemeModule } from './lib.js';
 import { writeLogo } from './logo.js';
 
 /** The project's own version (package.json): themes without an explicit `version` share it, so one release tag matches every theme. */
@@ -22,6 +22,12 @@ function projectVersion(p: Project): string | undefined {
 const BASE_SCHEMA = '1.0.0';
 const ICON_IMAGES_SCHEMA = '1.1.0';
 const UPDATES_SCHEMA = '1.2.0';
+const APP_COMPONENTS_SCHEMA = '1.3.0';
+const newer = (a: string, b: string) => {
+  const [x, y] = [a, b].map((v) => v.split('.').map(Number));
+  for (let i = 0; i < 3; i++) if (x[i] !== y[i]) return x[i] > y[i] ? a : b;
+  return a;
+};
 
 export async function build(p: Project, only: string[] = []): Promise<string[]> {
   const ids = moduleIds(p).filter((id) => !only.length || only.includes(id));
@@ -96,6 +102,7 @@ export async function build(p: Project, only: string[] = []): Promise<string[]> 
       doc.updates = { github: github.replace(/\/$/, ''), asset: (updates === true ? undefined : updates.asset) ?? `${id}.zip` };
       schema = UPDATES_SCHEMA;
     }
+    if (Object.keys(doc.components ?? {}).some((c) => (APP_COMPONENT_NAMES as readonly string[]).includes(c))) schema = newer(schema, APP_COMPONENTS_SCHEMA);
     doc.schema = schema;
     if (!Object.keys(doc.assets?.fonts ?? {}).length && doc.assets) delete doc.assets.fonts;
     if (!readdirSync(join(folder, 'fonts')).length) rmSync(join(folder, 'fonts'), { recursive: true, force: true });

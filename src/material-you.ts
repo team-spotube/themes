@@ -1,10 +1,10 @@
-// You: tonal surfaces tinted by the accent, big pill buttons, stadium selection and generous rounding.
+// Material You: tonal surfaces tinted by the accent, big pill buttons, stadium selection and generous rounding.
 import { A, choice, defineTheme, flatComponents, merge, NONE, solid } from '@team-spotube/theme-tool';
 
 const tone = (map: Record<string, unknown>) => ['match', '{params.tone}', map];
 
 export default defineTheme({
-  name: 'You',
+  name: 'Material You',
   author: 'Spotube Team',
   license: 'AGPL-3.0-or-later',
   repository: 'https://github.com/team-spotube/themes',
@@ -33,6 +33,7 @@ export default defineTheme({
     state: { type: 'color', value: ['alpha', '{vars.onTonal}', 0.1] },
     r: { type: 'number', value: ['match', '{params.shape}', { round: 20, sharp: 6 }] },
     rCtl: { type: 'number', value: ['match', '{params.shape}', { round: 100, sharp: 6 }] },
+    rSm: { type: 'number', value: ['match', '{params.shape}', { round: 12, sharp: 4 }] },
   },
   tokens: {
     color: {
@@ -106,6 +107,55 @@ export default defineTheme({
       },
       states: { hovered: { itemBackground: solid('{vars.state}') }, focused: { itemBackground: solid('{vars.state}') }, pressed: { itemBackground: solid('{vars.tonal}') } },
     },
+    autocomplete: {
+      base: {
+        panelBackground: solid('{vars.panelHi}'), panelShape: 16, panelBorderWidth: 0, panelGlowColor: NONE, panelBottomRimColor: NONE, panelShadowElevation: 8, panelShadowColor: '#00000040',
+        itemBackground: solid(NONE), itemShape: 'pill', itemForeground: '{vars.ink}', highlightedItemBackground: solid('{vars.tonal}'), highlightedItemForeground: '{vars.onTonal}', itemMinimumHeight: 44,
+        itemInnerGlowColor: NONE, itemInteractionOverlay: solid(NONE), itemShadowElevation: 0, dividerColor: A('#cac4d0', '#49454f'), dividerSecondaryColor: NONE,
+      },
+    },
+    bottomSheet: { base: { background: solid('{vars.panelHi}'), shape: [28, 28, 0, 0], borderWidth: 0, innerGlowColor: NONE, bottomRimColor: NONE, orbColor: null, overlayBrush: NONE, shadowElevation: 1, handleColor: '{vars.outline}', handleShape: 'pill', foreground: '{vars.ink}' } },
+    modalBottomSheet: { base: { background: solid('{vars.panelHi}'), shape: [28, 28, 0, 0], borderWidth: 0, innerGlowColor: NONE, bottomRimColor: NONE, orbColor: null, overlayBrush: NONE, shadowElevation: 1, handleColor: '{vars.outline}', handleShape: 'pill', foreground: '{vars.ink}', scrimColor: '#00000066' } },
+    drawer: { base: { background: solid('{vars.panel}'), shape: [0, 16, 16, 0], borderWidth: 0, innerGlowColor: NONE, bottomRimColor: NONE, orbColor: null, overlayBrush: NONE, shadowElevation: 1, foreground: '{vars.ink}', scrimColor: '#00000066' } },
+    tabGroup: {
+      base: {
+        listBackground: solid(NONE), listBorderWidth: 0, listBottomRimColor: NONE, listInnerGlowColor: NONE, listInsetShadeColor: NONE, listShadowElevation: 0, listShape: 'pill', tabShape: 'pill', tabElevation: 0, tabGlowColor: NONE,
+        tabHoverBackground: solid('{vars.state}'), tabPressedBackground: solid('{vars.tonal}'), unselectedTabBackground: solid(NONE), unselectedTabForeground: '{vars.inkDim}', selectedTabBackground: solid('{vars.tonal}'), selectedTabItemBackground: solid('{vars.tonal}'),
+        selectedTabForeground: '{vars.onTonal}', selectedTabBorderColor: NONE, selectedTabBottomRimColor: NONE, selectedTabOrbColor: null, selectedTabOverlayBrush: NONE, tabBorderWidth: 0, tabHoverBorderWidth: 0,
+      },
+    },
+    loading: {
+      base: {
+        color: '{vars.key}', fillBrush: solid('{vars.key}'), glossBrush: solid(NONE), trackBackground: solid('{vars.tonal}'), trackBorderWidth: 0, trackBottomRimColor: NONE, trackGlowColor: NONE, bufferedBrush: solid('{vars.tonal}'),
+        linearHeight: 4, linearShape: 'pill', segmentShape: 'pill', skeletonBackground: solid('{vars.tonal}'), skeletonShimmerColor: '{vars.panelHi}',
+      },
+    },
+    avatar: { base: { shape: 'pill', background: solid('{vars.tonal}'), initialsBackground: solid('{vars.tonal}'), foreground: '{vars.onTonal}', borderWidth: 0, shadowElevation: 0, innerGlowColor: NONE, bottomRimColor: NONE, imageOverlay: solid(NONE), interactionOverlay: solid(NONE) } },
+    radioGroup: {
+      base: {
+        indicatorShape: 'pill', indicatorBackground: solid(NONE), selectedIndicatorBackground: solid(NONE), indicatorBorderColor: '{vars.outline}', indicatorBorderWidth: 2, indicatorGlowColor: NONE, indicatorBottomRimColor: NONE, indicatorElevation: 0,
+        indicatorInteractionOverlay: solid(NONE), indicatorInteractionRim: solid(NONE), dotColor: '{vars.key}', dotBrush: solid('{vars.key}'), labelColor: '{vars.ink}', selectedLabelColor: '{vars.ink}',
+      },
+      states: { selected: { indicatorBorderColor: '{vars.key}' } },
+    },
+    triStateCheckbox: {
+      base: {
+        faceShape: 4, faceSize: [20, 20], faceBackground: solid(NONE), faceBorderColor: '{vars.outline}', faceBorderWidth: 2, selectedFaceBackground: solid('{vars.key}'), indeterminateFaceBackground: solid('{vars.key}'), selectedFaceBorderColor: '{vars.key}',
+        selectedFaceForeground: '{vars.onKey}', dashBrush: solid('{vars.onKey}'), faceGlowColor: NONE, selectedFaceGlowColor: NONE, faceElevation: 0, faceBottomRimColor: NONE, faceInteractionOverlay: solid(NONE),
+      },
+    },
+    disclosure: {
+      base: {
+        background: solid('{vars.panel}'), shape: 20, borderWidth: 0, innerGlowColor: NONE, bottomRimColor: NONE, shadowElevation: 0, shadows: [NONE], headerBackground: solid(NONE), headerInteractionOverlay: solid(NONE), headerInteractionRim: solid(NONE),
+        chevronForeground: '{vars.inkDim}', foreground: '{vars.ink}', contentBackground: solid(NONE),
+      },
+    },
+    pullToRefresh: {
+      base: {
+        indicatorBackground: solid('{vars.panelHi}'), indicatorBorderWidth: 0, indicatorBottomRimColor: NONE, indicatorInnerGlowColor: NONE, indicatorShadowElevation: 4, indicatorShape: 'pill',
+        indicatorProgressBackground: solid('{vars.key}'), indicatorTrackBackground: solid('{vars.tonal}'),
+      },
+    },
     tooltip: { base: { background: solid(A('#322f35', '#e6e0e9')), foreground: A('#f5eff7', '#322f35'), shape: 8 } },
     segmentedButton: { base: { background: solid(NONE), foreground: '{vars.ink}', borderColor: '{vars.outline}', borderWidth: 1 }, states: { selected: { background: solid('{vars.tonal}'), foreground: '{vars.onTonal}' }, hovered: { background: solid('{vars.state}') } } },
     scrollbar: { base: { trackBackground: solid(NONE), thumbBackground: solid('{vars.outline}') } },
@@ -137,6 +187,104 @@ export default defineTheme({
             selected: { background: solid('{vars.tonal}'), foreground: '{vars.onTonal}', iconTint: '{vars.onTonal}', labelStyle: { fontSize: 14, fontWeight: 700 } },
           },
         },
+      },
+    },
+
+    // ---- the app's own components (theme format 1.3): tonal containers, state layers, stadium rows ----
+    mediaCard: {
+      variants: {
+        root: {
+          base: {
+            shape: '{vars.r}', background: solid('{vars.panel}'), highlightBackground: solid('{vars.state}'), borderColor: NONE, borderWidth: 0, innerGlowColor: NONE,
+            shadowElevation: 0, transitionMillis: 200, scaleMillis: 150,
+          },
+          states: {
+            hovered: { shadowElevation: 2 },
+            focused: { borderColor: '{vars.key}', borderWidth: 2 },
+            pressed: { scale: 0.98 },
+            error: { background: solid(['alpha', '{tokens.color.danger}', 0.16]) },
+          },
+        },
+        artwork: { base: { shape: '{vars.r}' } },
+        info: { base: { padding: [16, 12], spacing: 2, titleStyle: { fontWeight: 500 } } },
+      },
+    },
+    mediaListTile: {
+      base: { shape: '{vars.rCtl}', borderWidth: 0, borderColor: NONE },
+      states: {
+        hovered: { background: solid('{vars.state}') },
+        selected: { background: solid('{vars.tonal}'), titleForeground: '{vars.onTonal}', subtitleStyle: { color: '{vars.onTonal}' } },
+        error: { titleForeground: '{tokens.color.danger}' },
+      },
+    },
+    mediaArtwork: { base: { shape: '{vars.rSm}', background: solid('{vars.panelHi}'), borderColor: NONE, borderWidth: 0 } },
+    floatingPlayer: {
+      variants: {
+        root: {
+          base: {
+            background: solid('{vars.panelHi}'), shape: ['match', '{params.shape}', { round: [28, 28, 0, 0], sharp: [6, 6, 0, 0] }], borderColor: NONE, borderWidth: 0, progressHeight: 3,
+          },
+        },
+        artwork: { base: { shape: '{vars.rSm}', background: '{vars.tonal}', placeholderTint: '{vars.onTonal}' } },
+        info: { base: { titleStyle: { fontWeight: 500 } } },
+      },
+    },
+    largePlayer: {
+      variants: {
+        root: { base: { tint: ['alpha', '{vars.panel}', 0.86], blurRadius: 24 } },
+        artwork: { base: { shape: '{vars.rSm}', background: '{vars.tonal}' } },
+        info: { base: { titleStyle: { fontWeight: 500 } } },
+        transport: { base: { activeTint: '{vars.key}' } },
+      },
+    },
+    expandedPlayer: {
+      variants: {
+        root: { base: { headerStyle: { fontWeight: 500 } } },
+        artwork: { base: { shape: '{vars.r}', background: '{vars.tonal}' } },
+        info: { base: { titleStyle: { fontWeight: 500 } } },
+        transport: { base: { activeTint: '{vars.key}' } },
+        lyrics: { base: { shadowElevation: 0, titleStyle: { fontWeight: 500 }, iconTint: '{vars.inkDim}' } },
+        optionTile: { base: { iconTint: '{vars.inkDim}', labelStyle: { fontWeight: 500 } } },
+      },
+    },
+    playerQueue: {
+      variants: {
+        root: { base: { titleStyle: { fontWeight: 500 } } },
+        row: {
+          base: { thumbShape: '{vars.rSm}', thumbBackground: '{vars.panelHi}', handleTint: '{vars.outline}' },
+          states: { selected: { titleStyle: { fontWeight: 700, color: '{vars.key}' } } },
+        },
+      },
+    },
+    trackList: {
+      variants: {
+        card: { base: { errorColor: '{tokens.color.danger}' } },
+        row: {
+          base: { artworkShape: '{vars.rSm}' },
+          states: {
+            selected: { titleStyle: { color: '{vars.onTonal}' }, artistStyle: { color: '{vars.onTonal}' }, albumStyle: { color: '{vars.onTonal}' }, durationStyle: { color: '{vars.onTonal}' } },
+            error: { titleStyle: { color: '{tokens.color.danger}' } },
+          },
+        },
+      },
+    },
+    trackOptions: { base: { headerArtworkShape: '{vars.rSm}', headerTitleStyle: { fontWeight: 500 } } },
+    collectionHeader: { base: { artworkShape: '{vars.r}', titleStyle: { fontWeight: 500 }, compactTitleStyle: { fontWeight: 500 } } },
+    featuredCarousel: { base: { cardShape: ['match', '{params.shape}', { round: 28, sharp: 6 }], titleStyle: { fontWeight: 500 } } },
+    emptyState: { base: { iconBoxShape: 'pill', iconBoxBackground: solid('{vars.tonal}'), iconBoxBorderWidth: 0, iconBoxBorderColor: NONE, iconTint: '{vars.onTonal}', titleStyle: { fontWeight: 500 } } },
+    errorDisplay: { base: { iconTint: '{tokens.color.danger}', titleStyle: { fontWeight: 500 } } },
+    loginRequired: { base: { badgeShape: 'pill', badgeBackground: '{vars.tonal}', iconTint: '{vars.onTonal}', titleStyle: { fontWeight: 500 } } },
+    section: { variants: { header: { base: { titleStyle: { fontWeight: 500 } } } } },
+    connectBanner: {
+      variants: {
+        row: { base: { background: '{vars.tonal}', shape: 'pill', textStyle: { color: '{vars.onTonal}' }, chevronTint: '{vars.onTonal}' } },
+      },
+    },
+    settingsRow: { variants: { root: { base: { titleStyle: { fontWeight: 500 } } } } },
+    lyricsLine: {
+      variants: {
+        root: { states: { selected: { textStyle: { fontWeight: 700, color: '{vars.key}' } } } },
+        immersive: { base: { shape: '{vars.rSm}' } },
       },
     },
   }),

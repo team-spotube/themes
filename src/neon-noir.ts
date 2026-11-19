@@ -5,6 +5,138 @@ const tube = (c = '{vars.neon}', r = 10) => ({ color: c, offsetX: 0, offsetY: 0,
 const sheet = (a: string, b: string) => ['linear', 160, a, b];
 const ghost = solid(NONE);
 
+
+// The app's own components (cards, players, lists, screens): neon tubes around outlines, Audiowide headings.
+const neonTitle = (extra = {}) => ({ fontFamily: 'Audiowide', shadow: tube('{vars.halo}', 8), ...extra });
+// Millennium components the stock look would otherwise leave glossy.
+const gaps = {
+  autocomplete: {
+    base: {
+      panelBackground: sheet('{vars.pane}', '{vars.pane2}'), panelShape: 18, panelBorderColor: '{vars.neon}', panelBorderWidth: 1, panelShadowElevation: 24, panelShadowColor: '{vars.haloSoft}', panelBottomRimColor: null,
+      itemShape: 12, itemForeground: '{vars.ink}', highlightedItemBackground: solid('{vars.wash}'), highlightedItemForeground: '{vars.neon}', dividerColor: '{vars.line}', itemInteractionOverlay: ghost,
+    },
+    states: { hovered: { itemBackground: solid('{vars.wash}') }, pressed: { itemBackground: solid('{vars.wash}') } },
+  },
+  bottomSheet: { base: { background: sheet('{vars.pane}', '{vars.pane2}'), shape: [24, 24, 0, 0], borderColor: '{vars.neon}', borderWidth: 1, shadowElevation: 24, shadowColor: '{vars.halo}', foreground: '{vars.ink}', handleColor: '{vars.line}', handleShape: 'pill', bottomRimColor: null, orbColor: null } },
+  modalBottomSheet: { base: { background: sheet('{vars.pane}', '{vars.pane2}'), shape: [24, 24, 0, 0], borderColor: '{vars.neon}', borderWidth: 1, shadowElevation: 24, shadowColor: '{vars.halo}', foreground: '{vars.ink}', handleColor: '{vars.line}', handleShape: 'pill', scrimColor: A('#2a124570', '#05020ac0'), bottomRimColor: null, orbColor: null } },
+  drawer: { base: { background: sheet('{vars.pane}', '{vars.pane2}'), shape: [0, 24, 24, 0], borderColor: '{vars.neon}', borderWidth: 1, shadowElevation: 24, shadowColor: '{vars.halo}', foreground: '{vars.ink}', scrimColor: A('#2a124570', '#05020ac0'), bottomRimColor: null, orbColor: null } },
+  tabGroup: {
+    base: {
+      listBackground: solid('{vars.pane2}'), listBorderColor: '{vars.line}', listBorderWidth: 1, listShape: 'pill', listBottomRimColor: null, tabShape: 'pill', tabTextStyle: { fontWeight: 700 }, unselectedTabForeground: '{vars.dim}',
+      selectedTabBackground: ['linear', 135, '{vars.neonHi}', '{vars.neonLo}'], selectedTabForeground: '#ffffff', selectedTabBorderColor: '{vars.neon}', selectedTabBottomRimColor: null, selectedTabOrbColor: null, tabHoverBackground: solid('{vars.wash}'), tabGlowColor: '{vars.haloSoft}',
+    },
+  },
+  loading: {
+    base: {
+      color: '{vars.neon}', highlightColor: '{vars.neonHi}', fillBrush: ['linear', 90, '{vars.neonLo}', '{vars.neon}', '{vars.neonHi}'], trackBackground: solid('{vars.pane2}'), trackBorderColor: '{vars.line}', trackBorderWidth: 1,
+      linearShape: 'pill', linearHeight: 8, trackBottomRimColor: null, skeletonBackground: solid('{vars.wash}'), skeletonShimmerColor: ['alpha', '{vars.neon}', 0.25],
+    },
+  },
+  avatar: { base: { shape: 'pill', background: solid('{vars.pane2}'), foreground: '{vars.ink}', borderColor: '{vars.neon}', borderWidth: 1.5, shadowElevation: 0, bottomRimColor: null, initialsBackground: ['linear', 135, '{vars.neonHi}', '{vars.neonLo}'] } },
+  radioGroup: {
+    base: { indicatorBackground: ghost, indicatorBorderColor: '{vars.line}', indicatorBorderWidth: 1.5, indicatorShape: 'pill', indicatorBottomRimColor: null, indicatorInteractionOverlay: ghost, selectedIndicatorBackground: ghost, dotBrush: ['linear', 135, '{vars.neonHi}', '{vars.neonLo}'] },
+    states: { selected: { indicatorBorderColor: '{vars.neon}', indicatorGlowColor: '{vars.halo}' } },
+  },
+  triStateCheckbox: {
+    base: { faceShape: 6, faceSize: [20, 20], faceBackground: ghost, faceBorderColor: '{vars.line}', faceBorderWidth: 1.5, selectedFaceBackground: ['linear', 135, '{vars.neonHi}', '{vars.neonLo}'], indeterminateFaceBackground: ['linear', 135, '{vars.neonHi}', '{vars.neonLo}'], selectedFaceBorderColor: '{vars.neon}', selectedFaceForeground: '#ffffff', selectedFaceGlowColor: '{vars.halo}' },
+  },
+  disclosure: {
+    base: { background: ghost, borderColor: '{vars.line}', borderWidth: 1, shape: 14, foreground: '{vars.ink}', chevronForeground: '{vars.neon}', headerBackground: ghost, bottomRimColor: null, titleStyle: { fontWeight: 700 } },
+    states: { hovered: { headerBackground: solid('{vars.wash}') } },
+  },
+  pullToRefresh: { base: { indicatorBackground: sheet('{vars.pane}', '{vars.pane2}'), indicatorBorderColor: '{vars.neon}', indicatorBorderWidth: 1, indicatorShape: 'pill', indicatorShadowElevation: 12, indicatorShadowColor: '{vars.halo}', indicatorBottomRimColor: null, indicatorProgressBackground: ['linear', 90, '{vars.neonLo}', '{vars.neon}'], indicatorTrackBackground: solid('{vars.pane2}') } },
+};
+const appComponents = {
+  mediaCard: {
+    variants: {
+      root: {
+        base: { shape: 14, background: solid('{vars.pane}'), borderColor: '{vars.line}', borderWidth: 1, shadowElevation: 0, innerGlowColor: NONE },
+        states: {
+          hovered: { highlightBackground: ['linear', 160, '{vars.wash}', NONE], borderColor: '{vars.neon}', innerGlowColor: '{vars.haloSoft}' },
+          focused: { highlightBackground: ['linear', 160, '{vars.wash}', NONE], borderColor: '{vars.twin}', borderWidth: 2, innerGlowColor: '{vars.twinHalo}' },
+          pressed: { highlightBackground: ['linear', 160, '{vars.wash}', NONE], borderColor: '{vars.neon}', innerGlowColor: '{vars.halo}', scale: 0.97 },
+          error: { background: solid(['alpha', '{tokens.color.danger}', 0.14]), borderColor: '{tokens.color.danger}' },
+        },
+      },
+      artwork: { base: { shape: 10 } },
+      info: { base: { titleStyle: { fontWeight: 700, letterSpacing: 0.3 } } },
+    },
+  },
+  mediaListTile: {
+    base: { shape: 12, borderColor: NONE, borderWidth: 1 },
+    states: {
+      selected: { background: ['linear', 90, '{vars.wash}', NONE], borderColor: '{vars.neon}', titleForeground: '{vars.neon}' },
+      error: { borderColor: '{tokens.color.danger}' },
+    },
+  },
+  mediaArtwork: { base: { shape: 10, borderColor: '{vars.line}', background: solid('{vars.pane2}'), placeholderTint: '{vars.neon}' } },
+  floatingPlayer: {
+    variants: {
+      root: { base: { background: ['linear', 180, '{vars.pane}', '{vars.pane2}'], shape: 16, horizontalMargin: 14, borderColor: '{vars.neon}', borderWidth: 1 } },
+      artwork: { base: { shape: 8, background: '{vars.wash}', placeholderTint: '{vars.neon}' } },
+      info: { base: { titleStyle: { fontWeight: 700, shadow: tube('{vars.halo}', 6) } } },
+    },
+  },
+  largePlayer: {
+    variants: {
+      root: { base: { tint: ['alpha', '{vars.deep}', 0.72] } },
+      artwork: { base: { shape: 14 } },
+      info: { base: { titleStyle: neonTitle({ fontSize: 15 }) } },
+      transport: { base: { activeTint: '{vars.neon}' } },
+    },
+  },
+  expandedPlayer: {
+    variants: {
+      root: { base: { headerStyle: { fontFamily: 'Audiowide' } } },
+      artwork: { base: { shape: 22 } },
+      info: { base: { titleStyle: neonTitle() } },
+      transport: { base: { activeTint: '{vars.neon}' } },
+      lyrics: { base: { titleStyle: { fontFamily: 'Audiowide' }, iconTint: '{vars.neon}', shadowElevation: 0 } },
+      optionTile: { base: { iconTint: '{vars.neon}' } },
+    },
+  },
+  playerQueue: {
+    variants: {
+      root: { base: { titleStyle: { fontFamily: 'Audiowide' } } },
+      row: {
+        base: { thumbShape: 8, handleTint: '{vars.dim}', thumbBackground: '{vars.pane2}' },
+        states: { selected: { titleStyle: { fontWeight: 700, color: '{vars.neon}', shadow: tube('{vars.halo}', 8) } } },
+      },
+    },
+  },
+  trackList: {
+    variants: {
+      row: {
+        base: { selectedBackground: ['linear', 90, '{vars.wash}', NONE], artworkShape: 8 },
+        states: {
+          selected: { titleStyle: { fontWeight: 700, color: '{vars.neon}', shadow: tube('{vars.halo}', 8) }, indexStyle: { color: '{vars.neon}' } },
+          error: { titleStyle: { color: '{tokens.color.danger}' } },
+        },
+      },
+    },
+  },
+  trackOptions: { base: { headerArtworkShape: 10, headerTitleStyle: { fontFamily: 'Audiowide' } } },
+  collectionHeader: { base: { artworkShape: 22, titleStyle: neonTitle(), compactTitleStyle: neonTitle(), collapsedTitleStyle: { fontFamily: 'Audiowide' }, collapsedArtworkShape: 8 } },
+  featuredCarousel: { base: { cardShape: 22, scrimColor: ['alpha', '{vars.deep}', 0.85], buttonTint: '{vars.neon}', titleStyle: neonTitle() } },
+  emptyState: { base: { iconBoxShape: 14, iconBoxBackground: solid('{vars.wash}'), iconBoxBorderColor: '{vars.neon}', iconTint: '{vars.neon}', titleStyle: { fontFamily: 'Audiowide' } } },
+  errorDisplay: { base: { iconTint: '{tokens.color.danger}', titleStyle: { fontFamily: 'Audiowide' } } },
+  loginRequired: { base: { badgeShape: 'pill', badgeBackground: '{vars.wash}', iconTint: '{vars.neon}', titleStyle: { fontFamily: 'Audiowide' } } },
+  section: { variants: { header: { base: { titleStyle: neonTitle() } } } },
+  connectBanner: {
+    variants: {
+      row: { base: { background: '{vars.wash}', shape: 'pill', chevronTint: '{vars.neon}' } },
+      dot: { base: { color: '{vars.neon}', ringColor: '{vars.halo}' } },
+    },
+  },
+  settingsRow: { variants: { root: { base: { titleStyle: { fontWeight: 700 } } } } },
+  lyricsLine: {
+    variants: {
+      root: { states: { selected: { textStyle: { color: '{vars.neon}', fontWeight: 700, shadow: tube('{vars.halo}', 10) } } } },
+      immersive: { states: { selected: { textStyle: { color: '{vars.neon}', shadow: tube('{vars.halo}', 10) } } } },
+    },
+  },
+};
+
 export default defineTheme({
   name: 'Neon Noir',
   author: 'Spotube Team',
@@ -55,7 +187,7 @@ export default defineTheme({
     },
   },
   defaults: { shape: 14 },
-  components: merge(flatComponents(), {
+  components: merge(merge(merge(flatComponents(), {
     button: {
       base: { background: ghost, foreground: '{vars.ink}', borderWidth: 1.5, borderColor: '{vars.line}', shape: 'pill', padding: [22, 11], textStyle: { fontWeight: 700, letterSpacing: 0.6 }, motion: { hoverScale: 1.03, pressedScale: 0.96 } },
       states: { hovered: { borderColor: '{vars.neon}', shadows: ['{vars.haloSoft}'], shadowElevation: 12 }, pressed: { background: solid('{vars.wash}') }, disabled: { alpha: 0.4 } },
@@ -156,5 +288,5 @@ export default defineTheme({
         },
       },
     },
-  }),
+  }), appComponents), gaps),
 });

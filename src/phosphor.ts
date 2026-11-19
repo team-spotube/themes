@@ -5,6 +5,133 @@ const inv = (extra = {}) => ({ background: solid('{vars.ink}'), foreground: '{va
 const glow = { color: '{vars.glow}', offsetX: 0, offsetY: 0, blurRadius: 7 };
 const outline = { background: solid(NONE), foreground: '{vars.ink}', borderColor: '{vars.ink}', borderWidth: 1, shape: 'rect' };
 
+
+// The app's own components: one-pixel outlines, no corners, inverse video for hover and selection, glowing text.
+const cell = { fontSize: 17 };
+const hot = { color: '{vars.bg}' };
+// Millennium components the stock look would otherwise leave glossy.
+const gaps = {
+  autocomplete: {
+    base: {
+      panelBackground: solid('{vars.bg}'), panelShape: 'rect', panelBorderColor: '{vars.ink}', panelBorderWidth: 1, panelShadowElevation: 0, panelGlowColor: NONE, panelBottomRimColor: null, itemShape: 'rect', itemForeground: '{vars.ink}',
+      highlightedItemBackground: solid('{vars.ink}'), highlightedItemForeground: '{vars.bg}', dividerColor: '{vars.dim}', itemInteractionOverlay: solid(NONE), itemHoverScale: 1, itemPressedScale: 1, openAnimationMillis: 0, closeAnimationMillis: 0,
+    },
+    states: { hovered: { itemBackground: solid('{vars.ink}') }, pressed: { itemBackground: solid('{vars.ink}') } },
+  },
+  bottomSheet: { base: { background: solid('{vars.bg}'), shape: 'rect', borderColor: '{vars.ink}', borderWidth: 2, shadowElevation: 0, foreground: '{vars.ink}', handleColor: '{vars.ink}', handleShape: 'rect', innerGlowColor: NONE, bottomRimColor: null, orbColor: null } },
+  modalBottomSheet: { base: { background: solid('{vars.bg}'), shape: 'rect', borderColor: '{vars.ink}', borderWidth: 2, shadowElevation: 0, foreground: '{vars.ink}', handleColor: '{vars.ink}', handleShape: 'rect', scrimColor: A('#00000066', '#000000c0'), innerGlowColor: NONE, bottomRimColor: null, orbColor: null } },
+  drawer: { base: { background: solid('{vars.bg}'), shape: 'rect', borderColor: '{vars.ink}', borderWidth: 2, shadowElevation: 0, foreground: '{vars.ink}', scrimColor: A('#00000066', '#000000c0'), innerGlowColor: NONE, bottomRimColor: null, orbColor: null } },
+  tabGroup: {
+    base: {
+      listBackground: solid(NONE), listBorderColor: '{vars.ink}', listBorderWidth: 1, listShape: 'rect', listBottomRimColor: null, listInnerGlowColor: NONE, listShadowElevation: 0, tabShape: 'rect', unselectedTabForeground: '{vars.ink}',
+      selectedTabBackground: solid('{vars.ink}'), selectedTabForeground: '{vars.bg}', selectedTabBorderColor: '{vars.ink}', selectedTabBottomRimColor: null, selectedTabOrbColor: null, tabHoverBackground: solid('{vars.faint}'), tabElevation: 0, tabHoverScale: 1, tabPressedScale: 1,
+    },
+  },
+  loading: {
+    base: {
+      color: '{vars.ink}', fillBrush: solid('{vars.ink}'), trackBackground: solid(NONE), trackBorderColor: '{vars.ink}', trackBorderWidth: 1, linearShape: 'rect', linearHeight: 14, trackBottomRimColor: null, trackGlowColor: NONE,
+      segmentBackground: solid('{vars.ink}'), segmentShape: 'rect', skeletonBackground: solid('{vars.faint}'), skeletonShimmerColor: '{vars.ink}',
+    },
+  },
+  avatar: { base: { shape: 'rect', background: solid(NONE), foreground: '{vars.ink}', borderColor: '{vars.ink}', borderWidth: 1, shadowElevation: 0, innerGlowColor: NONE, bottomRimColor: null, initialsBackground: solid('{vars.ink}'), textStyle: { color: '{vars.bg}' } } },
+  radioGroup: {
+    base: { indicatorBackground: solid(NONE), indicatorBorderColor: '{vars.ink}', indicatorBorderWidth: 1, indicatorShape: 'rect', indicatorBottomRimColor: null, indicatorInteractionOverlay: solid(NONE), indicatorHoverScale: 1, indicatorPressedScale: 1, selectedIndicatorBackground: solid(NONE), dotBrush: solid('{vars.ink}'), dotShape: 'rect' },
+  },
+  triStateCheckbox: {
+    base: { faceShape: 'rect', faceSize: [16, 16], faceBackground: solid(NONE), faceBorderColor: '{vars.ink}', faceBorderWidth: 1, selectedFaceBackground: solid('{vars.ink}'), indeterminateFaceBackground: solid('{vars.ink}'), selectedFaceBorderColor: '{vars.ink}', selectedFaceForeground: '{vars.bg}', dashBrush: solid('{vars.bg}'), dashShape: 'rect' },
+  },
+  disclosure: {
+    base: { background: solid(NONE), borderColor: '{vars.ink}', borderWidth: 1, shape: 'rect', foreground: '{vars.ink}', chevronForeground: '{vars.ink}', headerBackground: solid(NONE), innerGlowColor: NONE, bottomRimColor: null, headerPressedScale: 1 },
+    states: { hovered: { headerBackground: solid('{vars.faint}') } },
+  },
+  pullToRefresh: { base: { indicatorBackground: solid('{vars.bg}'), indicatorBorderColor: '{vars.ink}', indicatorBorderWidth: 1, indicatorShape: 'rect', indicatorShadowElevation: 0, indicatorInnerGlowColor: NONE, indicatorBottomRimColor: null, indicatorProgressBackground: solid('{vars.ink}'), indicatorTrackBackground: solid('{vars.faint}') } },
+};
+const appComponents = {
+  mediaCard: {
+    variants: {
+      root: {
+        base: { shape: 'rect', background: solid(NONE), borderColor: '{vars.ink}', borderWidth: 1, shadowElevation: 0, innerGlowColor: NONE, transitionMillis: 0, scaleMillis: 0 },
+        states: {
+          hovered: { highlightBackground: solid('{vars.faint}') },
+          focused: { highlightBackground: solid('{vars.faint}'), borderWidth: 2 },
+          pressed: { highlightBackground: solid('{vars.dim}'), scale: 1 },
+          error: { borderColor: '{tokens.color.danger}' },
+        },
+      },
+      artwork: { base: { shape: 'rect' } },
+      info: { base: { titleStyle: { shadow: glow }, subtitleStyle: {} } },
+    },
+  },
+  mediaListTile: {
+    base: { shape: 'rect', borderColor: NONE, borderWidth: 1, titleStyle: { shadow: glow } },
+    states: {
+      selected: { background: solid('{vars.ink}'), titleForeground: '{vars.bg}', borderColor: '{vars.ink}' },
+      error: { borderColor: '{tokens.color.danger}' },
+    },
+  },
+  mediaArtwork: { base: { shape: 'rect', borderColor: '{vars.ink}', borderWidth: 1, background: solid(NONE), placeholderTint: '{vars.ink}' } },
+  floatingPlayer: {
+    variants: {
+      root: { base: { background: solid('{vars.bg}'), shape: 'rect', borderColor: '{vars.ink}', borderWidth: 1 } },
+      artwork: { base: { shape: 'rect', background: '{vars.faint}', placeholderTint: '{vars.ink}' } },
+      info: { base: { titleStyle: { shadow: glow }, subtitleStyle: {} } },
+    },
+  },
+  largePlayer: {
+    variants: {
+      root: { base: { tint: ['alpha', '{vars.bg}', 0.9], blurRadius: 0 } },
+      artwork: { base: { shape: 'rect' } },
+      info: { base: { titleStyle: { shadow: glow } } },
+      transport: { base: { activeTint: '{vars.ink}' } },
+    },
+  },
+  expandedPlayer: {
+    variants: {
+      root: { base: { headerStyle: { shadow: glow } } },
+      artwork: { base: { shape: 'rect' } },
+      info: { base: { titleStyle: { shadow: glow } } },
+      transport: { base: { activeTint: '{vars.ink}' } },
+      lyrics: { base: { titleStyle: { shadow: glow }, shadowElevation: 0 } },
+      optionTile: { base: { iconTint: '{vars.ink}' } },
+    },
+  },
+  playerQueue: {
+    variants: {
+      root: { base: { titleStyle: { shadow: glow } } },
+      row: {
+        base: { thumbShape: 'rect', thumbBackground: '{vars.faint}', handleTint: '{vars.dim}' },
+        states: { selected: { titleStyle: { shadow: glow, fontWeight: 700 } } },
+      },
+    },
+  },
+  trackList: {
+    variants: {
+      row: {
+        base: { selectedBackground: solid('{vars.ink}'), artworkShape: 'rect' },
+        states: {
+          selected: { titleStyle: { ...hot }, indexStyle: { ...hot }, artistStyle: { ...hot }, albumStyle: { ...hot }, durationStyle: { ...hot }, artistSeparatorStyle: { ...hot } },
+          error: { titleStyle: { color: '{tokens.color.danger}' } },
+        },
+      },
+    },
+  },
+  trackOptions: { base: { headerArtworkShape: 'rect', headerTitleStyle: { shadow: glow } } },
+  collectionHeader: { base: { artworkShape: 'rect', collapsedArtworkShape: 'rect', titleStyle: { shadow: glow }, compactTitleStyle: { shadow: glow } } },
+  featuredCarousel: { base: { cardShape: 'rect', titleStyle: { shadow: glow }, scrimColor: ['alpha', '{vars.bg}', 0.85], buttonTint: '{vars.ink}', buttonBlur: 0 } },
+  emptyState: { base: { iconBoxShape: 'rect', iconBoxBackground: solid(NONE), iconBoxBorderColor: '{vars.ink}', iconBoxBorderWidth: 1, titleStyle: { shadow: glow, ...cell } } },
+  errorDisplay: { base: { iconTint: '{tokens.color.danger}', titleStyle: { shadow: glow } } },
+  loginRequired: { base: { badgeShape: 'rect', badgeBackground: NONE, titleStyle: { shadow: glow } } },
+  section: { variants: { header: { base: { titleStyle: { shadow: glow } } } } },
+  connectBanner: { variants: { row: { base: { background: '{vars.faint}', shape: 'rect' } }, dot: { base: { color: '{vars.ink}', ringColor: '{vars.glow}' } } } },
+  settingsRow: { variants: { root: { base: { titleStyle: { shadow: glow } } } } },
+  lyricsLine: {
+    variants: {
+      root: { states: { selected: { textStyle: { color: '{vars.ink}', shadow: glow, fontWeight: 700 } } } },
+      immersive: { base: { shape: 'rect' }, states: { selected: { textStyle: { color: '{vars.ink}', shadow: glow } } } },
+    },
+  },
+};
+
 export default defineTheme({
   name: 'Phosphor',
   author: 'Spotube Team',
@@ -39,7 +166,7 @@ export default defineTheme({
     app: { background: ['radial', 0.5, 0.45, 1.05, A('#f7f4e6', '#0a140c'), A('#e7e3cf', '#000000')] },
   },
   defaults: { shape: 'rect' },
-  components: merge(flatComponents(), {
+  components: merge(merge(merge(flatComponents(), {
     button: {
       base: { ...outline, textStyle: { fontSize: 17, shadow: glow }, padding: [14, 5] },
       states: { hovered: inv(), pressed: inv({ background: solid('{vars.dim}') }), focused: { borderWidth: 2 }, disabled: { foreground: '{vars.dim}', borderColor: '{vars.dim}' } },
@@ -129,5 +256,5 @@ export default defineTheme({
         },
       },
     },
-  }),
+  }), appComponents), gaps),
 });

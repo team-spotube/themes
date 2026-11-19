@@ -5,6 +5,134 @@ const key = (top: string, bot: string) => ['linear', 180, top, bot];
 const lcd = solid('{vars.lcd}');
 const mono = { fontFamily: 'Space Mono' };
 
+
+// The app's own components: cards are keycaps sitting on the panel, players and selected rows are the pale LCD.
+const cap = key('{vars.capTop}', '{vars.capBot}');
+const lcdText = { color: '{vars.lcdInk}', fontFamily: 'Space Mono' };
+const lcdDim = { color: ['alpha', '{vars.lcdInk}', 0.65], fontFamily: 'Space Mono' };
+// Millennium components the stock look would otherwise leave glossy.
+const gaps = {
+  autocomplete: {
+    base: {
+      panelBackground: solid('{vars.panel}'), panelShape: 8, panelBorderColor: '{vars.capEdge}', panelBorderWidth: 1, panelBottomRimColor: '{vars.seat}', panelShadowElevation: 14, panelShadowColor: '#00000060', itemShape: 4, itemForeground: '{vars.ink}',
+      highlightedItemBackground: solid('{vars.key}'), highlightedItemForeground: '#ffffff', dividerColor: '{vars.capEdge}', itemTextStyle: { fontSize: 13 }, itemInteractionOverlay: solid(NONE),
+    },
+    states: { hovered: { itemBackground: solid('{vars.key}') }, pressed: { itemBackground: solid('{vars.keyDown}') } },
+  },
+  bottomSheet: { base: { background: solid('{vars.panel}'), shape: [10, 10, 0, 0], borderColor: '{vars.capEdge}', borderWidth: 1, innerGlowColor: '#ffffff60', bottomRimColor: '{vars.seat}', shadowElevation: 14, shadowColor: '#00000060', foreground: '{vars.ink}', handleColor: '{vars.capEdge}', handleShape: 'pill', orbColor: null } },
+  modalBottomSheet: { base: { background: solid('{vars.panel}'), shape: [10, 10, 0, 0], borderColor: '{vars.capEdge}', borderWidth: 1, innerGlowColor: '#ffffff60', bottomRimColor: '{vars.seat}', shadowElevation: 14, shadowColor: '#00000060', foreground: '{vars.ink}', handleColor: '{vars.capEdge}', handleShape: 'pill', scrimColor: '#00000070', orbColor: null } },
+  drawer: { base: { background: solid('{vars.panel}'), shape: [0, 10, 10, 0], borderColor: '{vars.capEdge}', borderWidth: 1, innerGlowColor: '#ffffff60', bottomRimColor: '{vars.seat}', shadowElevation: 18, shadowColor: '#00000070', foreground: '{vars.ink}', scrimColor: '#00000070', orbColor: null } },
+  tabGroup: {
+    base: {
+      listBackground: solid('{vars.seat}'), listBorderColor: '{vars.capEdge}', listBorderWidth: 1, listShape: 6, listBottomRimColor: null, listInnerGlowColor: NONE, tabShape: 4, tabTextStyle: { ...mono, fontWeight: 700 }, unselectedTabForeground: '{vars.ink}',
+      unselectedTabBackground: key('{vars.capTop}', '{vars.capBot}'), selectedTabBackground: lcd, selectedTabForeground: '{vars.lcdInk}', selectedTabBorderColor: '{vars.capEdge}', selectedTabBottomRimColor: null, selectedTabOrbColor: null, tabHoverBackground: key('{vars.capTop}', '{vars.capTop}'),
+    },
+  },
+  loading: {
+    base: {
+      color: '{vars.key}', fillBrush: solid('{vars.key}'), trackBackground: solid('{vars.seat}'), trackBorderColor: NONE, linearShape: 3, linearHeight: 10, trackBottomRimColor: null,
+      skeletonBackground: solid('{vars.panelLo}'), skeletonShimmerColor: '#ffffff60',
+    },
+  },
+  avatar: { base: { shape: 4, background: lcd, foreground: '{vars.lcdInk}', borderColor: '{vars.capEdge}', borderWidth: 1, shadowElevation: 0, innerGlowColor: '#ffffff60', bottomRimColor: '{vars.seat}', initialsBackground: lcd, textStyle: { ...mono, fontWeight: 700 } } },
+  radioGroup: {
+    base: { indicatorBackground: lcd, indicatorBorderColor: '{vars.capEdge}', indicatorBorderWidth: 1, indicatorShape: 'pill', indicatorBottomRimColor: null, selectedIndicatorBackground: lcd, dotBrush: solid('{vars.lcdInk}') },
+  },
+  triStateCheckbox: {
+    base: { faceShape: 3, faceSize: [18, 18], faceBackground: lcd, faceBorderColor: '{vars.capEdge}', faceBorderWidth: 1, selectedFaceBackground: lcd, indeterminateFaceBackground: lcd, selectedFaceBorderColor: '{vars.capEdge}', selectedFaceForeground: '{vars.lcdInk}', dashBrush: solid('{vars.lcdInk}') },
+  },
+  disclosure: {
+    base: { background: solid('{vars.panelLo}'), borderColor: '{vars.capEdge}', borderWidth: 1, shape: 8, foreground: '{vars.ink}', chevronForeground: '{vars.dim}', headerBackground: key('{vars.capTop}', '{vars.capBot}'), innerGlowColor: '#ffffff60', bottomRimColor: '{vars.seat}', titleStyle: { ...mono, fontWeight: 700 } },
+    states: { hovered: { headerBackground: key('{vars.capTop}', '{vars.capTop}') } },
+  },
+  pullToRefresh: { base: { indicatorBackground: lcd, indicatorBorderColor: '{vars.capEdge}', indicatorBorderWidth: 1, indicatorShape: 6, indicatorShadowElevation: 8, indicatorShadowColor: '#00000060', indicatorInnerGlowColor: '#ffffff60', indicatorBottomRimColor: '{vars.seat}', indicatorProgressBackground: solid('{vars.key}'), indicatorTrackBackground: solid('{vars.seat}') } },
+};
+const appComponents = {
+  mediaCard: {
+    variants: {
+      root: {
+        base: { shape: 6, background: cap, borderColor: '{vars.capEdge}', borderWidth: 1, innerGlowColor: '#ffffffa0', shadowElevation: 0, scaleMillis: 60, transitionMillis: 80 },
+        states: {
+          hovered: { highlightBackground: solid('{vars.wash}') },
+          focused: { highlightBackground: solid('{vars.wash}'), borderColor: '{vars.key}', borderWidth: 2 },
+          pressed: { background: key('{vars.capBot}', '{vars.capTop}'), highlightBackground: solid('{vars.wash}'), innerGlowColor: NONE, scale: 0.985 },
+          error: { background: solid(['alpha', '{tokens.color.danger}', 0.18]), borderColor: '{tokens.color.danger}' },
+        },
+      },
+      artwork: { base: { shape: 4 } },
+      info: { base: { titleStyle: { ...mono, fontWeight: 700, fontSize: 13 }, subtitleStyle: { ...mono, fontSize: 11 } } },
+    },
+  },
+  mediaListTile: {
+    base: { shape: 6, borderColor: NONE, borderWidth: 1, titleStyle: { ...mono, fontWeight: 700 }, subtitleStyle: { ...mono } },
+    states: {
+      selected: { background: lcd, borderColor: '{vars.seat}', titleForeground: '{vars.lcdInk}' },
+      error: { borderColor: '{tokens.color.danger}' },
+    },
+  },
+  mediaArtwork: { base: { shape: 4, borderColor: '{vars.seat}', background: lcd, placeholderTint: '{vars.lcdInk}' } },
+  floatingPlayer: {
+    variants: {
+      root: { base: { background: lcd, shape: [10, 10, 0, 0], borderColor: '{vars.seat}', borderWidth: 2, progressHeight: 4 } },
+      artwork: { base: { shape: 4, background: ['alpha', '{vars.lcdInk}', 0.14], placeholderTint: '{vars.lcdInk}' } },
+      info: { base: { titleStyle: { ...lcdText, fontWeight: 700 }, subtitleStyle: { ...lcdDim } } },
+    },
+  },
+  largePlayer: {
+    variants: {
+      root: { base: { tint: ['alpha', '{vars.panel}', 0.92], blurRadius: 0 } },
+      artwork: { base: { shape: 6 } },
+      info: { base: { titleStyle: { ...mono, fontWeight: 700 } } },
+      transport: { base: { activeTint: '{vars.key}', timeStyle: { ...mono } } },
+    },
+  },
+  expandedPlayer: {
+    variants: {
+      root: { base: { headerStyle: { ...mono, fontWeight: 700 } } },
+      artwork: { base: { shape: 8 } },
+      info: { base: { titleStyle: { ...mono, fontWeight: 700 } } },
+      transport: { base: { activeTint: '{vars.key}', timeStyle: { ...mono } } },
+      lyrics: { base: { shadowElevation: 0, titleStyle: { ...mono, fontWeight: 700 }, iconTint: '{vars.key}' } },
+      optionTile: { base: { iconTint: '{vars.key}', labelStyle: { ...mono } } },
+    },
+  },
+  playerQueue: {
+    variants: {
+      root: { base: { titleStyle: { ...mono, fontWeight: 700 } } },
+      row: {
+        base: { thumbShape: 4, thumbBackground: '{vars.lcd}', handleTint: '{vars.dim}', thumbIndexStyle: { ...lcdText } },
+        states: { selected: { titleStyle: { color: '{vars.key}', fontWeight: 700 } } },
+      },
+    },
+  },
+  trackList: {
+    variants: {
+      row: {
+        base: { selectedBackground: lcd, artworkShape: 4 },
+        states: {
+          selected: { titleStyle: { ...lcdText, fontWeight: 700 }, indexStyle: { ...lcdText }, artistStyle: { ...lcdDim }, albumStyle: { ...lcdDim }, durationStyle: { ...lcdDim }, artistSeparatorStyle: { ...lcdDim } },
+          error: { titleStyle: { color: '{tokens.color.danger}' } },
+        },
+      },
+    },
+  },
+  trackOptions: { base: { headerArtworkShape: 4, headerTitleStyle: { ...mono, fontWeight: 700 } } },
+  collectionHeader: { base: { artworkShape: 8, collapsedArtworkShape: 4, titleStyle: { ...mono, fontWeight: 700 }, compactTitleStyle: { ...mono, fontWeight: 700 }, collapsedTitleStyle: { ...mono, fontWeight: 700 } } },
+  featuredCarousel: { base: { cardShape: 10, titleStyle: { ...mono, fontWeight: 700 }, buttonTint: '{vars.key}' } },
+  emptyState: { base: { iconBoxShape: 6, iconBoxBackground: lcd, iconBoxBorderColor: '{vars.seat}', iconBoxBorderWidth: 2, iconTint: '{vars.lcdInk}', titleStyle: { ...mono, fontWeight: 700 } } },
+  errorDisplay: { base: { iconTint: '{tokens.color.danger}', titleStyle: { ...mono, fontWeight: 700 } } },
+  loginRequired: { base: { badgeShape: 6, badgeBackground: '{vars.lcd}', iconTint: '{vars.lcdInk}', titleStyle: { ...mono, fontWeight: 700 } } },
+  section: { variants: { header: { base: { titleStyle: { ...mono, fontWeight: 700 } } } } },
+  connectBanner: { variants: { row: { base: { background: '{vars.lcd}', shape: 6, textStyle: { ...lcdText } , chevronTint: '{vars.lcdInk}' } }, dot: { base: { color: '{vars.key}' } } } },
+  settingsRow: { variants: { root: { base: { titleStyle: { ...mono, fontWeight: 700 } } } } },
+  lyricsLine: {
+    variants: {
+      root: { states: { selected: { textStyle: { color: '{vars.key}', fontWeight: 700 } } } },
+      immersive: { states: { selected: { textStyle: { color: '{vars.key}', fontWeight: 700 } } } },
+    },
+  },
+};
+
 export default defineTheme({
   name: 'Pocket Synth',
   author: 'Spotube Team',
@@ -48,7 +176,7 @@ export default defineTheme({
     app: { background: ['linear', 180, A('#e3dfd0', '#323236'), A('#cfcab8', '#242427')] },
   },
   defaults: { shape: 6 },
-  components: merge(flatComponents(), {
+  components: merge(merge(merge(flatComponents(), {
     button: {
       base: {
         background: key('{vars.capTop}', '{vars.capBot}'), foreground: '{vars.ink}', borderWidth: 1, borderColor: '{vars.capEdge}', innerGlowColor: '#ffffffa0', bottomRimColor: '{vars.seat}',
@@ -160,5 +288,5 @@ export default defineTheme({
         },
       },
     },
-  }),
+  }), appComponents), gaps),
 });

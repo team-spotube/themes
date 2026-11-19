@@ -17,7 +17,15 @@ export interface ComponentTheme {
 export type ComponentName =
   | 'autocomplete' | 'avatar' | 'bottomNavigationBar' | 'bottomSheet' | 'button' | 'card' | 'checkbox' | 'dialog' | 'disclosure' | 'drawer' | 'dropdownMenu'
   | 'icon' | 'iconButton' | 'listTile' | 'loading' | 'modalBottomSheet' | 'progress' | 'pullToRefresh' | 'radioGroup' | 'scaffold' | 'scrollbar' | 'segmentedButton'
-  | 'separator' | 'sidebar' | 'slider' | 'snackbar' | 'tabGroup' | 'text' | 'textField' | 'toggleSwitch' | 'tooltip' | 'topAppBar' | 'triStateCheckbox';
+  | 'separator' | 'sidebar' | 'slider' | 'snackbar' | 'tabGroup' | 'text' | 'textField' | 'toggleSwitch' | 'tooltip' | 'topAppBar' | 'triStateCheckbox'
+  | AppComponentName;
+
+/** The app's own components (theme format 1.3): styled through `variants.<slot>`, see docs/themes/theme-format. */
+export const APP_COMPONENT_NAMES = [
+  'appShell', 'collectionHeader', 'connectBanner', 'emptyState', 'errorDisplay', 'expandedPlayer', 'featuredCarousel', 'floatingPlayer', 'largePlayer', 'loginRequired',
+  'lyricsLine', 'mediaArtwork', 'mediaCard', 'mediaListTile', 'playerQueue', 'screen', 'section', 'settingsRow', 'trackList', 'trackOptions',
+] as const;
+export type AppComponentName = (typeof APP_COMPONENT_NAMES)[number];
 
 export interface VarDecl { type: 'color' | 'number' | 'bool' | 'string' | 'enum'; default?: Value; value?: Value; min?: number; max?: number; options?: Value[] }
 /** A setting offered to users under *Customize*; referenced as `{params.name}`. */

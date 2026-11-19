@@ -1,8 +1,8 @@
 {
   "$schema": "https://docs.spotube.cc/schemas/theme/1.json",
-  "schema": "1.2.0",
+  "schema": "1.3.0",
   "id": "newsprint",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Spotube Team",
   "repository": "https://github.com/team-spotube/themes",
   "bugs": "https://github.com/team-spotube/themes/issues",
@@ -1090,6 +1090,740 @@
           "{vars.paper}"
         ],
         "separatorColor": "{vars.ink}"
+      }
+    },
+    "mediaCard": {
+      "variants": {
+        "root": {
+          "base": {
+            "shape": "rect",
+            "background": [
+              "gradient",
+              "{vars.paper}",
+              "{vars.paper}"
+            ],
+            "borderColor": "{vars.ink}",
+            "borderWidth": 1,
+            "shadowElevation": 0,
+            "innerGlowColor": "#00000000"
+          },
+          "states": {
+            "hovered": {
+              "highlightBackground": [
+                "gradient",
+                "{vars.tint}",
+                "{vars.tint}"
+              ],
+              "borderWidth": 1
+            },
+            "focused": {
+              "highlightBackground": [
+                "gradient",
+                "{vars.tint}",
+                "{vars.tint}"
+              ],
+              "borderColor": "{vars.spot}",
+              "borderWidth": 2
+            },
+            "pressed": {
+              "highlightBackground": [
+                "gradient",
+                "{vars.paper3}",
+                "{vars.paper3}"
+              ],
+              "scale": 1
+            },
+            "error": {
+              "background": [
+                "gradient",
+                [
+                  "alpha",
+                  "{tokens.color.danger}",
+                  0.1
+                ],
+                [
+                  "alpha",
+                  "{tokens.color.danger}",
+                  0.1
+                ]
+              ],
+              "borderColor": "{tokens.color.danger}"
+            }
+          }
+        },
+        "artwork": {
+          "base": {
+            "shape": "rect"
+          }
+        },
+        "info": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "DM Serif Display",
+              "fontSize": 15
+            },
+            "subtitleStyle": {
+              "fontStyle": "italic"
+            }
+          }
+        }
+      }
+    },
+    "mediaListTile": {
+      "base": {
+        "shape": "rect",
+        "borderColor": "#00000000",
+        "borderWidth": 1,
+        "titleStyle": {
+          "fontWeight": 700
+        },
+        "subtitleStyle": {
+          "fontStyle": "italic"
+        }
+      },
+      "states": {
+        "selected": {
+          "background": [
+            "gradient",
+            "{vars.tint}",
+            "{vars.tint}"
+          ],
+          "borderColor": "{vars.ink}",
+          "titleForeground": "{vars.spot}"
+        },
+        "error": {
+          "borderColor": "{tokens.color.danger}"
+        }
+      }
+    },
+    "mediaArtwork": {
+      "base": {
+        "shape": "rect",
+        "borderColor": "{vars.ink}",
+        "borderWidth": 1,
+        "background": [
+          "gradient",
+          "{vars.paper3}",
+          "{vars.paper3}"
+        ]
+      }
+    },
+    "floatingPlayer": {
+      "variants": {
+        "root": {
+          "base": {
+            "background": [
+              "gradient",
+              "{vars.paper2}",
+              "{vars.paper2}"
+            ],
+            "shape": "rect",
+            "borderColor": "{vars.ink}",
+            "borderWidth": 1,
+            "progressHeight": 3
+          }
+        },
+        "artwork": {
+          "base": {
+            "shape": "rect",
+            "background": "{vars.paper3}"
+          }
+        },
+        "info": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "DM Serif Display"
+            },
+            "subtitleStyle": {
+              "fontStyle": "italic"
+            }
+          }
+        }
+      }
+    },
+    "largePlayer": {
+      "variants": {
+        "root": {
+          "base": {
+            "tint": [
+              "alpha",
+              "{vars.paper}",
+              0.92
+            ],
+            "blurRadius": 0
+          }
+        },
+        "artwork": {
+          "base": {
+            "shape": "rect"
+          }
+        },
+        "info": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "DM Serif Display",
+              "fontSize": 16
+            },
+            "artistStyle": {
+              "fontStyle": "italic"
+            }
+          }
+        },
+        "transport": {
+          "base": {
+            "activeTint": "{vars.spot}"
+          }
+        }
+      }
+    },
+    "expandedPlayer": {
+      "variants": {
+        "root": {
+          "base": {
+            "headerStyle": {
+              "fontFamily": "DM Serif Display"
+            }
+          }
+        },
+        "artwork": {
+          "base": {
+            "shape": "rect"
+          }
+        },
+        "info": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "DM Serif Display"
+            },
+            "artistStyle": {
+              "fontStyle": "italic"
+            }
+          }
+        },
+        "transport": {
+          "base": {
+            "activeTint": "{vars.spot}"
+          }
+        },
+        "lyrics": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "DM Serif Display"
+            },
+            "shadowElevation": 0
+          }
+        },
+        "optionTile": {
+          "base": {
+            "iconTint": "{vars.ink}"
+          }
+        }
+      }
+    },
+    "playerQueue": {
+      "variants": {
+        "root": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "DM Serif Display"
+            }
+          }
+        },
+        "row": {
+          "base": {
+            "thumbShape": "rect",
+            "thumbBackground": "{vars.paper3}",
+            "subtitleStyle": {
+              "fontStyle": "italic"
+            }
+          },
+          "states": {
+            "selected": {
+              "titleStyle": {
+                "color": "{vars.spot}",
+                "fontWeight": 700
+              }
+            }
+          }
+        }
+      }
+    },
+    "trackList": {
+      "variants": {
+        "row": {
+          "base": {
+            "selectedBackground": [
+              "gradient",
+              "{vars.tint}",
+              "{vars.tint}"
+            ],
+            "artworkShape": "rect",
+            "artistStyle": {
+              "fontStyle": "italic"
+            }
+          },
+          "states": {
+            "selected": {
+              "titleStyle": {
+                "color": "{vars.spot}",
+                "fontWeight": 700
+              }
+            },
+            "error": {
+              "titleStyle": {
+                "color": "{tokens.color.danger}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "trackOptions": {
+      "base": {
+        "headerArtworkShape": "rect",
+        "headerTitleStyle": {
+          "fontFamily": "DM Serif Display"
+        },
+        "headerArtistStyle": {
+          "fontStyle": "italic"
+        }
+      }
+    },
+    "collectionHeader": {
+      "base": {
+        "artworkShape": "rect",
+        "titleStyle": {
+          "fontFamily": "DM Serif Display"
+        },
+        "compactTitleStyle": {
+          "fontFamily": "DM Serif Display"
+        },
+        "collapsedTitleStyle": {
+          "fontFamily": "DM Serif Display"
+        },
+        "collapsedArtworkShape": "rect",
+        "descriptionStyle": {
+          "fontStyle": "italic"
+        }
+      }
+    },
+    "featuredCarousel": {
+      "base": {
+        "cardShape": "rect",
+        "titleStyle": {
+          "fontFamily": "DM Serif Display"
+        },
+        "subtitleStyle": {
+          "fontStyle": "italic"
+        }
+      }
+    },
+    "emptyState": {
+      "base": {
+        "iconBoxShape": "rect",
+        "iconBoxBackground": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "iconBoxBorderColor": "{vars.ink}",
+        "titleStyle": {
+          "fontFamily": "DM Serif Display"
+        }
+      }
+    },
+    "errorDisplay": {
+      "base": {
+        "iconTint": "{tokens.color.danger}",
+        "titleStyle": {
+          "fontFamily": "DM Serif Display"
+        }
+      }
+    },
+    "loginRequired": {
+      "base": {
+        "badgeShape": "rect",
+        "badgeBackground": "{vars.paper3}",
+        "titleStyle": {
+          "fontFamily": "DM Serif Display"
+        }
+      }
+    },
+    "section": {
+      "variants": {
+        "header": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "DM Serif Display"
+            },
+            "subtitleStyle": {
+              "fontStyle": "italic"
+            }
+          }
+        }
+      }
+    },
+    "connectBanner": {
+      "variants": {
+        "row": {
+          "base": {
+            "background": "{vars.paper3}",
+            "shape": "rect"
+          }
+        },
+        "dot": {
+          "base": {
+            "color": "{vars.spot}"
+          }
+        }
+      }
+    },
+    "settingsRow": {
+      "variants": {
+        "root": {
+          "base": {
+            "titleStyle": {
+              "fontWeight": 700
+            },
+            "subtitleStyle": {
+              "fontStyle": "italic"
+            }
+          }
+        }
+      }
+    },
+    "lyricsLine": {
+      "variants": {
+        "root": {
+          "states": {
+            "selected": {
+              "textStyle": {
+                "fontFamily": "DM Serif Display",
+                "color": "{vars.spot}"
+              }
+            }
+          }
+        },
+        "immersive": {
+          "base": {
+            "shape": "rect"
+          },
+          "states": {
+            "selected": {
+              "textStyle": {
+                "fontFamily": "DM Serif Display",
+                "color": "{vars.spot}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "autocomplete": {
+      "base": {
+        "panelBackground": [
+          "gradient",
+          "{vars.paper}",
+          "{vars.paper}"
+        ],
+        "panelShape": "rect",
+        "panelBorderColor": "{vars.ink}",
+        "panelBorderWidth": 1,
+        "panelShadowElevation": 0,
+        "panelBottomRimColor": null,
+        "itemShape": "rect",
+        "itemForeground": "{vars.ink}",
+        "highlightedItemBackground": [
+          "gradient",
+          "{vars.ink}",
+          "{vars.ink}"
+        ],
+        "highlightedItemForeground": "{vars.paper}",
+        "dividerColor": "{vars.ink}",
+        "itemInteractionOverlay": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "itemTextStyle": {
+          "fontSize": 15
+        }
+      },
+      "states": {
+        "hovered": {
+          "itemBackground": [
+            "gradient",
+            "{vars.ink}",
+            "{vars.ink}"
+          ]
+        },
+        "pressed": {
+          "itemBackground": [
+            "gradient",
+            "{vars.spot}",
+            "{vars.spot}"
+          ]
+        }
+      }
+    },
+    "bottomSheet": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.paper}",
+          "{vars.paper}"
+        ],
+        "shape": "rect",
+        "borderColor": "{vars.ink}",
+        "borderWidth": 2,
+        "shadowElevation": 0,
+        "foreground": "{vars.ink}",
+        "handleColor": "{vars.ink}",
+        "handleShape": "rect",
+        "bottomRimColor": null,
+        "orbColor": null
+      }
+    },
+    "modalBottomSheet": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.paper}",
+          "{vars.paper}"
+        ],
+        "shape": "rect",
+        "borderColor": "{vars.ink}",
+        "borderWidth": 2,
+        "shadowElevation": 0,
+        "foreground": "{vars.ink}",
+        "handleColor": "{vars.ink}",
+        "handleShape": "rect",
+        "scrimColor": {
+          "light": "#1b1a1780",
+          "dark": "#000000b0"
+        },
+        "bottomRimColor": null,
+        "orbColor": null
+      }
+    },
+    "drawer": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.paper}",
+          "{vars.paper}"
+        ],
+        "shape": "rect",
+        "borderColor": "{vars.ink}",
+        "borderWidth": 2,
+        "shadowElevation": 0,
+        "foreground": "{vars.ink}",
+        "scrimColor": {
+          "light": "#1b1a1780",
+          "dark": "#000000b0"
+        },
+        "bottomRimColor": null,
+        "orbColor": null
+      }
+    },
+    "tabGroup": {
+      "base": {
+        "listBackground": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "listBorderColor": "{vars.ink}",
+        "listBorderWidth": 1,
+        "listShape": "rect",
+        "listBottomRimColor": null,
+        "tabShape": "rect",
+        "tabTextStyle": {
+          "fontWeight": 700
+        },
+        "unselectedTabForeground": "{vars.dim}",
+        "selectedTabBackground": [
+          "gradient",
+          "{vars.ink}",
+          "{vars.ink}"
+        ],
+        "selectedTabForeground": "{vars.paper}",
+        "selectedTabBorderColor": "{vars.ink}",
+        "selectedTabBottomRimColor": null,
+        "selectedTabOrbColor": null,
+        "tabHoverBackground": [
+          "gradient",
+          "{vars.paper2}",
+          "{vars.paper2}"
+        ],
+        "tabElevation": 0
+      }
+    },
+    "loading": {
+      "base": {
+        "color": "{vars.ink}",
+        "fillBrush": [
+          "gradient",
+          "{vars.ink}",
+          "{vars.ink}"
+        ],
+        "trackBackground": [
+          "gradient",
+          "{vars.paper3}",
+          "{vars.paper3}"
+        ],
+        "trackBorderColor": "#00000000",
+        "linearShape": "rect",
+        "linearHeight": 6,
+        "trackBottomRimColor": null,
+        "skeletonBackground": [
+          "gradient",
+          "{vars.paper3}",
+          "{vars.paper3}"
+        ],
+        "skeletonShimmerColor": "{vars.paper2}"
+      }
+    },
+    "avatar": {
+      "base": {
+        "shape": "rect",
+        "background": [
+          "gradient",
+          "{vars.paper3}",
+          "{vars.paper3}"
+        ],
+        "foreground": "{vars.ink}",
+        "borderColor": "{vars.ink}",
+        "borderWidth": 1,
+        "shadowElevation": 0,
+        "bottomRimColor": null,
+        "initialsBackground": [
+          "gradient",
+          "{vars.ink}",
+          "{vars.ink}"
+        ],
+        "textStyle": {
+          "fontFamily": "DM Serif Display"
+        }
+      }
+    },
+    "radioGroup": {
+      "base": {
+        "indicatorBackground": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "indicatorBorderColor": "{vars.ink}",
+        "indicatorBorderWidth": 1,
+        "indicatorShape": "rect",
+        "indicatorBottomRimColor": null,
+        "indicatorInteractionOverlay": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "selectedIndicatorBackground": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "dotBrush": [
+          "gradient",
+          "{vars.spot}",
+          "{vars.spot}"
+        ],
+        "dotShape": "rect"
+      }
+    },
+    "triStateCheckbox": {
+      "base": {
+        "faceShape": "rect",
+        "faceSize": [
+          18,
+          18
+        ],
+        "faceBackground": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "faceBorderColor": "{vars.ink}",
+        "faceBorderWidth": 1,
+        "selectedFaceBackground": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "indeterminateFaceBackground": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "selectedFaceBorderColor": "{vars.ink}",
+        "selectedFaceForeground": "{vars.spot}",
+        "dashBrush": [
+          "gradient",
+          "{vars.spot}",
+          "{vars.spot}"
+        ],
+        "dashShape": "rect"
+      }
+    },
+    "disclosure": {
+      "base": {
+        "background": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "borderColor": "{vars.ink}",
+        "borderWidth": 1,
+        "shape": "rect",
+        "foreground": "{vars.ink}",
+        "chevronForeground": "{vars.ink}",
+        "headerBackground": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ],
+        "bottomRimColor": null,
+        "titleStyle": {
+          "fontFamily": "DM Serif Display"
+        }
+      },
+      "states": {
+        "hovered": {
+          "headerBackground": [
+            "gradient",
+            "{vars.paper2}",
+            "{vars.paper2}"
+          ]
+        }
+      }
+    },
+    "pullToRefresh": {
+      "base": {
+        "indicatorBackground": [
+          "gradient",
+          "{vars.paper}",
+          "{vars.paper}"
+        ],
+        "indicatorBorderColor": "{vars.ink}",
+        "indicatorBorderWidth": 1,
+        "indicatorShape": "rect",
+        "indicatorShadowElevation": 0,
+        "indicatorBottomRimColor": null,
+        "indicatorProgressBackground": [
+          "gradient",
+          "{vars.ink}",
+          "{vars.ink}"
+        ],
+        "indicatorTrackBackground": [
+          "gradient",
+          "{vars.paper3}",
+          "{vars.paper3}"
+        ]
       }
     }
   },

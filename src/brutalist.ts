@@ -3,6 +3,103 @@ import { A, choice, defineTheme, flatComponents, merge, NONE, solid } from '@tea
 
 const f = (c: string) => solid(c);
 
+
+// The app's own components (mediaCard, players, lists, screens): outlined, flat, hover floods with the paint.
+const head = { fontFamily: 'Archivo Black' };
+const appComponents = {
+  mediaCard: {
+    variants: {
+      root: {
+        base: { shape: 'rect', borderColor: '{vars.line}', borderWidth: '{vars.w}', shadowElevation: 0, innerGlowColor: NONE, scale: 1 },
+        states: {
+          hovered: { highlightBackground: f('{vars.paint}') },
+          focused: { highlightBackground: f('{vars.paint}'), borderWidth: 5 },
+          pressed: { highlightBackground: f('{vars.paint}'), scale: 0.97 },
+          error: { background: ['alpha', '#ff3b30', 0.25] },
+        },
+      },
+      artwork: { base: { shape: 'rect' } },
+      info: { base: { titleStyle: { ...head, fontSize: 13 } } },
+    },
+  },
+  mediaListTile: {
+    base: { shape: 'rect', titleStyle: { ...head, fontSize: 13 } },
+    states: {
+      hovered: { background: f('{vars.paint}'), titleForeground: '{vars.onPaint}', borderColor: '{vars.line}', borderWidth: '{vars.w}' },
+      selected: { background: f('{vars.paint}'), titleForeground: '{vars.onPaint}', borderColor: '{vars.line}', borderWidth: '{vars.w}' },
+      error: { borderColor: '#ff3b30', borderWidth: '{vars.w}' },
+    },
+  },
+  mediaArtwork: { base: { shape: 'rect', borderColor: '{vars.line}', borderWidth: '{vars.w}', background: f('{vars.paper2}'), placeholderTint: '{vars.ink}' } },
+  floatingPlayer: {
+    variants: {
+      root: { base: { background: f('{vars.paper}'), shape: 'rect', borderColor: '{vars.line}', borderWidth: '{vars.w}', shadowElevation: 0 } },
+      artwork: { base: { shape: 'rect', background: '{vars.paper2}', placeholderTint: '{vars.ink}' } },
+      info: { base: { titleStyle: { ...head, fontSize: 13 } } },
+    },
+  },
+  largePlayer: {
+    variants: {
+      root: { base: { tint: ['alpha', '{vars.paper}', 0.94], blurRadius: 0 } },
+      artwork: { base: { shape: 'rect' } },
+      info: { base: { titleStyle: { ...head, fontSize: 14 } } },
+      transport: { base: { activeTint: '{vars.ink}' } },
+    },
+  },
+  expandedPlayer: {
+    variants: {
+      root: { base: { headerStyle: { ...head, fontSize: 13 } } },
+      artwork: { base: { shape: 'rect' } },
+      info: { base: { titleStyle: { ...head, fontSize: 20 } } },
+      transport: { base: { activeTint: '{vars.ink}' } },
+      lyrics: { base: { shadowElevation: 0, iconTint: '{vars.ink}', titleStyle: { ...head, fontSize: 13 } } },
+      optionTile: { base: { iconTint: '{vars.ink}', labelStyle: { ...head, fontSize: 13 } } },
+    },
+  },
+  playerQueue: {
+    variants: {
+      root: { base: { titleStyle: { ...head, fontSize: 14 } } },
+      row: {
+        base: { thumbShape: 'rect', handleTint: '{vars.ink}' },
+        states: { selected: { thumbBackground: '{vars.paint}', titleStyle: { fontWeight: 700 } } },
+      },
+    },
+  },
+  trackList: {
+    variants: {
+      row: {
+        base: { artworkShape: 'rect', titleStyle: { fontWeight: 700 } },
+        states: {
+          selected: { background: f('{vars.paint}'), selectedBackground: f('{vars.paint}'), titleStyle: { color: '{vars.onPaint}' } },
+          error: { titleStyle: { color: '#ff3b30' } },
+        },
+      },
+    },
+  },
+  trackOptions: { base: { labelStyle: { ...head, fontSize: 13 }, headerArtworkShape: 'rect', headerTitleStyle: { ...head, fontSize: 14 } } },
+  collectionHeader: { base: { artworkShape: 'rect', collapsedArtworkShape: 'rect', ownerPlaceholderBackground: '{vars.paint}', ownerPlaceholderTint: '{vars.onPaint}' } },
+  featuredCarousel: { base: { cardShape: 'rect', titleStyle: head } },
+  emptyState: {
+    base: { iconBoxShape: 'rect', iconBoxBackground: f('{vars.paint}'), iconBoxBorderColor: '{vars.line}', iconBoxBorderWidth: '{vars.w}', iconTint: '{vars.onPaint}', titleStyle: { ...head, fontSize: 16 } },
+  },
+  errorDisplay: { base: { iconTint: '#ff3b30', titleStyle: { ...head, fontSize: 16 } } },
+  loginRequired: { base: { badgeShape: 'rect', badgeBackground: '{vars.paint}', iconTint: '{vars.onPaint}', titleStyle: { ...head, fontSize: 16 } } },
+  section: { variants: { header: { base: { titleStyle: head } } } },
+  lyricsLine: {
+    variants: {
+      root: { states: { selected: { textStyle: { ...head } } } },
+      immersive: { base: { shape: 'rect' }, states: { selected: { textStyle: { ...head } } } },
+    },
+  },
+  connectBanner: {
+    variants: {
+      row: { base: { shape: 'rect', background: '{vars.paint}', textStyle: { ...head, fontSize: 12, color: '{vars.onPaint}' }, chevronTint: '{vars.onPaint}' } },
+      dot: { base: { color: '{vars.ink}', ringColor: '{vars.paint}' } },
+    },
+  },
+  settingsRow: { variants: { root: { base: { titleStyle: { ...head, fontSize: 13 } } } } },
+};
+
 export default defineTheme({
   name: 'Brutal',
   author: 'Spotube Team',
@@ -51,6 +148,7 @@ export default defineTheme({
   },
   defaults: { shape: 'rect' },
   components: merge(flatComponents(), {
+    ...appComponents,
     button: {
       base: { background: f('{vars.paper}'), foreground: '{vars.ink}', borderWidth: '{vars.w}', borderColor: '{vars.line}', shape: 'rect', padding: [18, 10], textStyle: { fontFamily: 'Archivo Black', fontSize: 14 } },
       states: { hovered: { background: f('{vars.paint}'), foreground: '{vars.onPaint}' }, pressed: { background: f('{vars.ink}'), foreground: '{vars.paper}' }, focused: { borderWidth: 5 }, disabled: { alpha: 0.4 } },
@@ -104,6 +202,74 @@ export default defineTheme({
         itemActiveForeground: '{vars.onPaint}', itemIconTint: '{vars.ink}', itemMutedForeground: A('#4a4a42', '#b5b5aa'), separatorBrush: '{vars.line}', separatorThickness: 2, itemTextStyle: { fontWeight: 700 }, enterScale: 1,
       },
       states: { hovered: { itemBackground: f('{vars.paint}'), itemIconTint: '{vars.onPaint}' }, focused: { itemBackground: f('{vars.paint}') }, pressed: { itemBackground: f('{vars.ink}'), itemIconTint: '{vars.paper}' } },
+    },
+    // Millennium components the theme had left at the stock glossy look.
+    autocomplete: {
+      base: {
+        panelBackground: f('{vars.paper}'), panelShape: 'rect', panelBorderColor: '{vars.line}', panelBorderWidth: 4, panelShadowElevation: 0, panelGlowColor: NONE, panelBottomRimColor: null, panelShadowColor: NONE,
+        dividerColor: '{vars.line}', dividerSecondaryColor: NONE, itemShape: 'rect', itemForeground: '{vars.ink}', highlightedItemBackground: f('{vars.paint}'), highlightedItemForeground: '{vars.onPaint}',
+        itemBorderColor: NONE, itemBorderWidth: 0, itemInnerGlowColor: NONE, itemInteractionOverlay: NONE, itemShadowElevation: 0, itemHoverScale: 1, itemPressedScale: 1, itemTextStyle: { fontWeight: 700 },
+      },
+      states: { hovered: { itemBackground: f('{vars.paint}'), itemForeground: '{vars.onPaint}' }, pressed: { itemBackground: f('{vars.ink}'), itemForeground: '{vars.paper}' } },
+    },
+    bottomSheet: {
+      base: {
+        background: f('{vars.paper}'), shape: 'rect', borderColor: '{vars.line}', borderWidth: 5, innerGlowColor: NONE, bottomRimColor: null, orbColor: null, overlayBrush: NONE, shadowElevation: 0, shadowColor: NONE,
+        handleBrush: f('{vars.ink}'), handleColor: '{vars.ink}', handleShape: 'rect', handleSize: [48, 8],
+      },
+    },
+    modalBottomSheet: {
+      base: {
+        background: f('{vars.paper}'), shape: 'rect', borderColor: '{vars.line}', borderWidth: 5, innerGlowColor: NONE, bottomRimColor: null, orbColor: null, overlayBrush: NONE, shadowElevation: 0, shadowColor: NONE,
+        handleBrush: f('{vars.ink}'), handleColor: '{vars.ink}', handleShape: 'rect', handleSize: [48, 8], scrimColor: A('#11111180', '#000000b0'),
+      },
+    },
+    drawer: {
+      base: {
+        background: f('{vars.paper}'), shape: 'rect', borderColor: '{vars.line}', borderWidth: 5, innerGlowColor: NONE, bottomRimColor: null, orbColor: null, overlayBrush: NONE, shadowElevation: 0, shadowColor: NONE,
+        scrimColor: A('#11111180', '#000000b0'),
+      },
+    },
+    tabGroup: {
+      base: {
+        listBackground: f('{vars.paper}'), listBorderColor: '{vars.line}', listBorderWidth: '{vars.w}', listShape: 'rect', listInnerGlowColor: NONE, listBottomRimColor: NONE, listInsetShadeColor: NONE, listShadowElevation: 0, listPadding: 0, listInnerSpacing: 0,
+        tabShape: 'rect', unselectedTabBackground: f(NONE), unselectedTabForeground: '{vars.ink}', selectedTabBackground: f('{vars.paint}'), selectedTabItemBackground: f('{vars.paint}'), selectedTabForeground: '{vars.onPaint}',
+        selectedTabBorderColor: '{vars.line}', selectedTabBottomRimColor: NONE, selectedTabOrbColor: null, selectedTabOverlayBrush: NONE, tabGlowColor: NONE, tabElevation: 0,
+        tabHoverBackground: f('{vars.paper2}'), tabPressedBackground: f('{vars.ink}'), tabHoverScale: 1, tabPressedScale: 1, tabTextStyle: { fontFamily: 'Archivo Black', fontSize: 13 },
+      },
+    },
+    loading: {
+      base: {
+        color: '{vars.ink}', fillBrush: f('{vars.paint}'), glossBrush: NONE, trackBackground: f('{vars.paper}'), trackBorderColor: '{vars.line}', trackBorderWidth: '{vars.w}', trackBottomRimColor: NONE, trackGlowColor: NONE,
+        linearShape: 'rect', segmentShape: 'rect', segmentBackground: f('{vars.paper2}'), segmentBorderColor: '{vars.line}', skeletonBackground: f('{vars.paper2}'), skeletonShimmerColor: '{vars.paint}',
+      },
+    },
+    avatar: {
+      base: {
+        background: f('{vars.paper2}'), shape: 'rect', borderColor: '{vars.line}', borderWidth: '{vars.w}', innerGlowColor: NONE, bottomRimColor: NONE, shadowElevation: 0, shadowColor: NONE,
+        foreground: '{vars.onPaint}', initialsBackground: f('{vars.paint}'), textStyle: head, interactionOverlay: NONE, imageOverlay: NONE,
+      },
+    },
+    radioGroup: {
+      base: {
+        indicatorSize: [22, 22], indicatorShape: 'rect', indicatorBackground: f('{vars.paper}'), selectedIndicatorBackground: f('{vars.paint}'), indicatorBorderColor: '{vars.line}', indicatorBorderWidth: '{vars.w}', indicatorBottomRimColor: NONE,
+        indicatorElevation: 0, indicatorGlowColor: NONE, indicatorShadows: [NONE], dotColor: '{vars.ink}', dotShape: 'rect', indicatorInteractionOverlay: NONE, indicatorInteractionRim: NONE, indicatorHoverScale: 1, indicatorPressedScale: 1,
+        labelColor: '{vars.ink}', selectedLabelColor: '{vars.ink}',
+      },
+    },
+    triStateCheckbox: { base: { faceShape: 'rect', faceSize: [22, 22], faceBackground: f('{vars.paper}'), faceBorderColor: '{vars.line}', faceBorderWidth: '{vars.w}', selectedFaceBackground: f('{vars.paint}'), selectedFaceBorderColor: '{vars.line}', selectedFaceForeground: '{vars.onPaint}', indeterminateFaceBackground: f('{vars.paint}'), dashBrush: f('{vars.onPaint}') } },
+    disclosure: {
+      base: {
+        background: f(NONE), headerBackground: f('{vars.paper}'), contentBackground: f('{vars.paper2}'), shape: 'rect', borderColor: '{vars.line}', borderWidth: '{vars.w}', innerGlowColor: NONE, bottomRimColor: NONE, shadowElevation: 0, shadows: [NONE],
+        foreground: '{vars.ink}', chevronForeground: '{vars.ink}', titleStyle: head, headerInteractionOverlay: NONE, headerInteractionRim: NONE, headerPressedScale: 1,
+      },
+      states: { hovered: { headerBackground: f('{vars.paint}'), foreground: '{vars.onPaint}', chevronForeground: '{vars.onPaint}' } },
+    },
+    pullToRefresh: {
+      base: {
+        indicatorBackground: f('{vars.paper}'), indicatorBorderColor: '{vars.line}', indicatorBorderWidth: '{vars.w}', indicatorBottomRimColor: NONE, indicatorInnerGlowColor: NONE, indicatorShape: 'rect', indicatorShadowElevation: 0,
+        indicatorProgressBackground: f('{vars.paint}'), indicatorTrackBackground: f('{vars.paper2}'),
+      },
     },
     tooltip: { base: { background: f('{vars.ink}'), foreground: '{vars.paper}', shape: 'rect' } },
     segmentedButton: { base: { background: f('{vars.paper}'), foreground: '{vars.ink}', borderWidth: '{vars.w}', borderColor: '{vars.line}' }, states: { selected: { background: f('{vars.paint}'), foreground: '{vars.onPaint}' }, hovered: { background: f('{vars.paper2}') } } },

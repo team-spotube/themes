@@ -1,8 +1,8 @@
 {
   "$schema": "https://docs.spotube.cc/schemas/theme/1.json",
-  "schema": "1.2.0",
+  "schema": "1.3.0",
   "id": "pocket-synth",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Spotube Team",
   "repository": "https://github.com/team-spotube/themes",
   "bugs": "https://github.com/team-spotube/themes/issues",
@@ -1131,6 +1131,839 @@
           "{vars.panel}"
         ],
         "separatorColor": "{vars.capEdge}"
+      }
+    },
+    "mediaCard": {
+      "variants": {
+        "root": {
+          "base": {
+            "shape": 6,
+            "background": [
+              "linear",
+              180,
+              "{vars.capTop}",
+              "{vars.capBot}"
+            ],
+            "borderColor": "{vars.capEdge}",
+            "borderWidth": 1,
+            "innerGlowColor": "#ffffffa0",
+            "shadowElevation": 0,
+            "scaleMillis": 60,
+            "transitionMillis": 80
+          },
+          "states": {
+            "hovered": {
+              "highlightBackground": [
+                "gradient",
+                "{vars.wash}",
+                "{vars.wash}"
+              ]
+            },
+            "focused": {
+              "highlightBackground": [
+                "gradient",
+                "{vars.wash}",
+                "{vars.wash}"
+              ],
+              "borderColor": "{vars.key}",
+              "borderWidth": 2
+            },
+            "pressed": {
+              "background": [
+                "linear",
+                180,
+                "{vars.capBot}",
+                "{vars.capTop}"
+              ],
+              "highlightBackground": [
+                "gradient",
+                "{vars.wash}",
+                "{vars.wash}"
+              ],
+              "innerGlowColor": "#00000000",
+              "scale": 0.985
+            },
+            "error": {
+              "background": [
+                "gradient",
+                [
+                  "alpha",
+                  "{tokens.color.danger}",
+                  0.18
+                ],
+                [
+                  "alpha",
+                  "{tokens.color.danger}",
+                  0.18
+                ]
+              ],
+              "borderColor": "{tokens.color.danger}"
+            }
+          }
+        },
+        "artwork": {
+          "base": {
+            "shape": 4
+          }
+        },
+        "info": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "Space Mono",
+              "fontWeight": 700,
+              "fontSize": 13
+            },
+            "subtitleStyle": {
+              "fontFamily": "Space Mono",
+              "fontSize": 11
+            }
+          }
+        }
+      }
+    },
+    "mediaListTile": {
+      "base": {
+        "shape": 6,
+        "borderColor": "#00000000",
+        "borderWidth": 1,
+        "titleStyle": {
+          "fontFamily": "Space Mono",
+          "fontWeight": 700
+        },
+        "subtitleStyle": {
+          "fontFamily": "Space Mono"
+        }
+      },
+      "states": {
+        "selected": {
+          "background": [
+            "gradient",
+            "{vars.lcd}",
+            "{vars.lcd}"
+          ],
+          "borderColor": "{vars.seat}",
+          "titleForeground": "{vars.lcdInk}"
+        },
+        "error": {
+          "borderColor": "{tokens.color.danger}"
+        }
+      }
+    },
+    "mediaArtwork": {
+      "base": {
+        "shape": 4,
+        "borderColor": "{vars.seat}",
+        "background": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "placeholderTint": "{vars.lcdInk}"
+      }
+    },
+    "floatingPlayer": {
+      "variants": {
+        "root": {
+          "base": {
+            "background": [
+              "gradient",
+              "{vars.lcd}",
+              "{vars.lcd}"
+            ],
+            "shape": [
+              10,
+              10,
+              0,
+              0
+            ],
+            "borderColor": "{vars.seat}",
+            "borderWidth": 2,
+            "progressHeight": 4
+          }
+        },
+        "artwork": {
+          "base": {
+            "shape": 4,
+            "background": [
+              "alpha",
+              "{vars.lcdInk}",
+              0.14
+            ],
+            "placeholderTint": "{vars.lcdInk}"
+          }
+        },
+        "info": {
+          "base": {
+            "titleStyle": {
+              "color": "{vars.lcdInk}",
+              "fontFamily": "Space Mono",
+              "fontWeight": 700
+            },
+            "subtitleStyle": {
+              "color": [
+                "alpha",
+                "{vars.lcdInk}",
+                0.65
+              ],
+              "fontFamily": "Space Mono"
+            }
+          }
+        }
+      }
+    },
+    "largePlayer": {
+      "variants": {
+        "root": {
+          "base": {
+            "tint": [
+              "alpha",
+              "{vars.panel}",
+              0.92
+            ],
+            "blurRadius": 0
+          }
+        },
+        "artwork": {
+          "base": {
+            "shape": 6
+          }
+        },
+        "info": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "Space Mono",
+              "fontWeight": 700
+            }
+          }
+        },
+        "transport": {
+          "base": {
+            "activeTint": "{vars.key}",
+            "timeStyle": {
+              "fontFamily": "Space Mono"
+            }
+          }
+        }
+      }
+    },
+    "expandedPlayer": {
+      "variants": {
+        "root": {
+          "base": {
+            "headerStyle": {
+              "fontFamily": "Space Mono",
+              "fontWeight": 700
+            }
+          }
+        },
+        "artwork": {
+          "base": {
+            "shape": 8
+          }
+        },
+        "info": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "Space Mono",
+              "fontWeight": 700
+            }
+          }
+        },
+        "transport": {
+          "base": {
+            "activeTint": "{vars.key}",
+            "timeStyle": {
+              "fontFamily": "Space Mono"
+            }
+          }
+        },
+        "lyrics": {
+          "base": {
+            "shadowElevation": 0,
+            "titleStyle": {
+              "fontFamily": "Space Mono",
+              "fontWeight": 700
+            },
+            "iconTint": "{vars.key}"
+          }
+        },
+        "optionTile": {
+          "base": {
+            "iconTint": "{vars.key}",
+            "labelStyle": {
+              "fontFamily": "Space Mono"
+            }
+          }
+        }
+      }
+    },
+    "playerQueue": {
+      "variants": {
+        "root": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "Space Mono",
+              "fontWeight": 700
+            }
+          }
+        },
+        "row": {
+          "base": {
+            "thumbShape": 4,
+            "thumbBackground": "{vars.lcd}",
+            "handleTint": "{vars.dim}",
+            "thumbIndexStyle": {
+              "color": "{vars.lcdInk}",
+              "fontFamily": "Space Mono"
+            }
+          },
+          "states": {
+            "selected": {
+              "titleStyle": {
+                "color": "{vars.key}",
+                "fontWeight": 700
+              }
+            }
+          }
+        }
+      }
+    },
+    "trackList": {
+      "variants": {
+        "row": {
+          "base": {
+            "selectedBackground": [
+              "gradient",
+              "{vars.lcd}",
+              "{vars.lcd}"
+            ],
+            "artworkShape": 4
+          },
+          "states": {
+            "selected": {
+              "titleStyle": {
+                "color": "{vars.lcdInk}",
+                "fontFamily": "Space Mono",
+                "fontWeight": 700
+              },
+              "indexStyle": {
+                "color": "{vars.lcdInk}",
+                "fontFamily": "Space Mono"
+              },
+              "artistStyle": {
+                "color": [
+                  "alpha",
+                  "{vars.lcdInk}",
+                  0.65
+                ],
+                "fontFamily": "Space Mono"
+              },
+              "albumStyle": {
+                "color": [
+                  "alpha",
+                  "{vars.lcdInk}",
+                  0.65
+                ],
+                "fontFamily": "Space Mono"
+              },
+              "durationStyle": {
+                "color": [
+                  "alpha",
+                  "{vars.lcdInk}",
+                  0.65
+                ],
+                "fontFamily": "Space Mono"
+              },
+              "artistSeparatorStyle": {
+                "color": [
+                  "alpha",
+                  "{vars.lcdInk}",
+                  0.65
+                ],
+                "fontFamily": "Space Mono"
+              }
+            },
+            "error": {
+              "titleStyle": {
+                "color": "{tokens.color.danger}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "trackOptions": {
+      "base": {
+        "headerArtworkShape": 4,
+        "headerTitleStyle": {
+          "fontFamily": "Space Mono",
+          "fontWeight": 700
+        }
+      }
+    },
+    "collectionHeader": {
+      "base": {
+        "artworkShape": 8,
+        "collapsedArtworkShape": 4,
+        "titleStyle": {
+          "fontFamily": "Space Mono",
+          "fontWeight": 700
+        },
+        "compactTitleStyle": {
+          "fontFamily": "Space Mono",
+          "fontWeight": 700
+        },
+        "collapsedTitleStyle": {
+          "fontFamily": "Space Mono",
+          "fontWeight": 700
+        }
+      }
+    },
+    "featuredCarousel": {
+      "base": {
+        "cardShape": 10,
+        "titleStyle": {
+          "fontFamily": "Space Mono",
+          "fontWeight": 700
+        },
+        "buttonTint": "{vars.key}"
+      }
+    },
+    "emptyState": {
+      "base": {
+        "iconBoxShape": 6,
+        "iconBoxBackground": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "iconBoxBorderColor": "{vars.seat}",
+        "iconBoxBorderWidth": 2,
+        "iconTint": "{vars.lcdInk}",
+        "titleStyle": {
+          "fontFamily": "Space Mono",
+          "fontWeight": 700
+        }
+      }
+    },
+    "errorDisplay": {
+      "base": {
+        "iconTint": "{tokens.color.danger}",
+        "titleStyle": {
+          "fontFamily": "Space Mono",
+          "fontWeight": 700
+        }
+      }
+    },
+    "loginRequired": {
+      "base": {
+        "badgeShape": 6,
+        "badgeBackground": "{vars.lcd}",
+        "iconTint": "{vars.lcdInk}",
+        "titleStyle": {
+          "fontFamily": "Space Mono",
+          "fontWeight": 700
+        }
+      }
+    },
+    "section": {
+      "variants": {
+        "header": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "Space Mono",
+              "fontWeight": 700
+            }
+          }
+        }
+      }
+    },
+    "connectBanner": {
+      "variants": {
+        "row": {
+          "base": {
+            "background": "{vars.lcd}",
+            "shape": 6,
+            "textStyle": {
+              "color": "{vars.lcdInk}",
+              "fontFamily": "Space Mono"
+            },
+            "chevronTint": "{vars.lcdInk}"
+          }
+        },
+        "dot": {
+          "base": {
+            "color": "{vars.key}"
+          }
+        }
+      }
+    },
+    "settingsRow": {
+      "variants": {
+        "root": {
+          "base": {
+            "titleStyle": {
+              "fontFamily": "Space Mono",
+              "fontWeight": 700
+            }
+          }
+        }
+      }
+    },
+    "lyricsLine": {
+      "variants": {
+        "root": {
+          "states": {
+            "selected": {
+              "textStyle": {
+                "color": "{vars.key}",
+                "fontWeight": 700
+              }
+            }
+          }
+        },
+        "immersive": {
+          "states": {
+            "selected": {
+              "textStyle": {
+                "color": "{vars.key}",
+                "fontWeight": 700
+              }
+            }
+          }
+        }
+      }
+    },
+    "autocomplete": {
+      "base": {
+        "panelBackground": [
+          "gradient",
+          "{vars.panel}",
+          "{vars.panel}"
+        ],
+        "panelShape": 8,
+        "panelBorderColor": "{vars.capEdge}",
+        "panelBorderWidth": 1,
+        "panelBottomRimColor": "{vars.seat}",
+        "panelShadowElevation": 14,
+        "panelShadowColor": "#00000060",
+        "itemShape": 4,
+        "itemForeground": "{vars.ink}",
+        "highlightedItemBackground": [
+          "gradient",
+          "{vars.key}",
+          "{vars.key}"
+        ],
+        "highlightedItemForeground": "#ffffff",
+        "dividerColor": "{vars.capEdge}",
+        "itemTextStyle": {
+          "fontSize": 13
+        },
+        "itemInteractionOverlay": [
+          "gradient",
+          "#00000000",
+          "#00000000"
+        ]
+      },
+      "states": {
+        "hovered": {
+          "itemBackground": [
+            "gradient",
+            "{vars.key}",
+            "{vars.key}"
+          ]
+        },
+        "pressed": {
+          "itemBackground": [
+            "gradient",
+            "{vars.keyDown}",
+            "{vars.keyDown}"
+          ]
+        }
+      }
+    },
+    "bottomSheet": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.panel}",
+          "{vars.panel}"
+        ],
+        "shape": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "borderColor": "{vars.capEdge}",
+        "borderWidth": 1,
+        "innerGlowColor": "#ffffff60",
+        "bottomRimColor": "{vars.seat}",
+        "shadowElevation": 14,
+        "shadowColor": "#00000060",
+        "foreground": "{vars.ink}",
+        "handleColor": "{vars.capEdge}",
+        "handleShape": "pill",
+        "orbColor": null
+      }
+    },
+    "modalBottomSheet": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.panel}",
+          "{vars.panel}"
+        ],
+        "shape": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "borderColor": "{vars.capEdge}",
+        "borderWidth": 1,
+        "innerGlowColor": "#ffffff60",
+        "bottomRimColor": "{vars.seat}",
+        "shadowElevation": 14,
+        "shadowColor": "#00000060",
+        "foreground": "{vars.ink}",
+        "handleColor": "{vars.capEdge}",
+        "handleShape": "pill",
+        "scrimColor": "#00000070",
+        "orbColor": null
+      }
+    },
+    "drawer": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.panel}",
+          "{vars.panel}"
+        ],
+        "shape": [
+          0,
+          10,
+          10,
+          0
+        ],
+        "borderColor": "{vars.capEdge}",
+        "borderWidth": 1,
+        "innerGlowColor": "#ffffff60",
+        "bottomRimColor": "{vars.seat}",
+        "shadowElevation": 18,
+        "shadowColor": "#00000070",
+        "foreground": "{vars.ink}",
+        "scrimColor": "#00000070",
+        "orbColor": null
+      }
+    },
+    "tabGroup": {
+      "base": {
+        "listBackground": [
+          "gradient",
+          "{vars.seat}",
+          "{vars.seat}"
+        ],
+        "listBorderColor": "{vars.capEdge}",
+        "listBorderWidth": 1,
+        "listShape": 6,
+        "listBottomRimColor": null,
+        "listInnerGlowColor": "#00000000",
+        "tabShape": 4,
+        "tabTextStyle": {
+          "fontFamily": "Space Mono",
+          "fontWeight": 700
+        },
+        "unselectedTabForeground": "{vars.ink}",
+        "unselectedTabBackground": [
+          "linear",
+          180,
+          "{vars.capTop}",
+          "{vars.capBot}"
+        ],
+        "selectedTabBackground": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "selectedTabForeground": "{vars.lcdInk}",
+        "selectedTabBorderColor": "{vars.capEdge}",
+        "selectedTabBottomRimColor": null,
+        "selectedTabOrbColor": null,
+        "tabHoverBackground": [
+          "linear",
+          180,
+          "{vars.capTop}",
+          "{vars.capTop}"
+        ]
+      }
+    },
+    "loading": {
+      "base": {
+        "color": "{vars.key}",
+        "fillBrush": [
+          "gradient",
+          "{vars.key}",
+          "{vars.key}"
+        ],
+        "trackBackground": [
+          "gradient",
+          "{vars.seat}",
+          "{vars.seat}"
+        ],
+        "trackBorderColor": "#00000000",
+        "linearShape": 3,
+        "linearHeight": 10,
+        "trackBottomRimColor": null,
+        "skeletonBackground": [
+          "gradient",
+          "{vars.panelLo}",
+          "{vars.panelLo}"
+        ],
+        "skeletonShimmerColor": "#ffffff60"
+      }
+    },
+    "avatar": {
+      "base": {
+        "shape": 4,
+        "background": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "foreground": "{vars.lcdInk}",
+        "borderColor": "{vars.capEdge}",
+        "borderWidth": 1,
+        "shadowElevation": 0,
+        "innerGlowColor": "#ffffff60",
+        "bottomRimColor": "{vars.seat}",
+        "initialsBackground": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "textStyle": {
+          "fontFamily": "Space Mono",
+          "fontWeight": 700
+        }
+      }
+    },
+    "radioGroup": {
+      "base": {
+        "indicatorBackground": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "indicatorBorderColor": "{vars.capEdge}",
+        "indicatorBorderWidth": 1,
+        "indicatorShape": "pill",
+        "indicatorBottomRimColor": null,
+        "selectedIndicatorBackground": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "dotBrush": [
+          "gradient",
+          "{vars.lcdInk}",
+          "{vars.lcdInk}"
+        ]
+      }
+    },
+    "triStateCheckbox": {
+      "base": {
+        "faceShape": 3,
+        "faceSize": [
+          18,
+          18
+        ],
+        "faceBackground": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "faceBorderColor": "{vars.capEdge}",
+        "faceBorderWidth": 1,
+        "selectedFaceBackground": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "indeterminateFaceBackground": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "selectedFaceBorderColor": "{vars.capEdge}",
+        "selectedFaceForeground": "{vars.lcdInk}",
+        "dashBrush": [
+          "gradient",
+          "{vars.lcdInk}",
+          "{vars.lcdInk}"
+        ]
+      }
+    },
+    "disclosure": {
+      "base": {
+        "background": [
+          "gradient",
+          "{vars.panelLo}",
+          "{vars.panelLo}"
+        ],
+        "borderColor": "{vars.capEdge}",
+        "borderWidth": 1,
+        "shape": 8,
+        "foreground": "{vars.ink}",
+        "chevronForeground": "{vars.dim}",
+        "headerBackground": [
+          "linear",
+          180,
+          "{vars.capTop}",
+          "{vars.capBot}"
+        ],
+        "innerGlowColor": "#ffffff60",
+        "bottomRimColor": "{vars.seat}",
+        "titleStyle": {
+          "fontFamily": "Space Mono",
+          "fontWeight": 700
+        }
+      },
+      "states": {
+        "hovered": {
+          "headerBackground": [
+            "linear",
+            180,
+            "{vars.capTop}",
+            "{vars.capTop}"
+          ]
+        }
+      }
+    },
+    "pullToRefresh": {
+      "base": {
+        "indicatorBackground": [
+          "gradient",
+          "{vars.lcd}",
+          "{vars.lcd}"
+        ],
+        "indicatorBorderColor": "{vars.capEdge}",
+        "indicatorBorderWidth": 1,
+        "indicatorShape": 6,
+        "indicatorShadowElevation": 8,
+        "indicatorShadowColor": "#00000060",
+        "indicatorInnerGlowColor": "#ffffff60",
+        "indicatorBottomRimColor": "{vars.seat}",
+        "indicatorProgressBackground": [
+          "gradient",
+          "{vars.key}",
+          "{vars.key}"
+        ],
+        "indicatorTrackBackground": [
+          "gradient",
+          "{vars.seat}",
+          "{vars.seat}"
+        ]
       }
     }
   },
