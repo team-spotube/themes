@@ -23,6 +23,7 @@ const BASE_SCHEMA = '1.0.0';
 const ICON_IMAGES_SCHEMA = '1.1.0';
 const UPDATES_SCHEMA = '1.2.0';
 const APP_COMPONENTS_SCHEMA = '1.3.0';
+const APP_FILLS_SCHEMA = '1.4.0';
 const newer = (a: string, b: string) => {
   const [x, y] = [a, b].map((v) => v.split('.').map(Number));
   for (let i = 0; i < 3; i++) if (x[i] !== y[i]) return x[i] > y[i] ? a : b;
@@ -103,6 +104,8 @@ export async function build(p: Project, only: string[] = []): Promise<string[]> 
       schema = UPDATES_SCHEMA;
     }
     if (Object.keys(doc.components ?? {}).some((c) => (APP_COMPONENT_NAMES as readonly string[]).includes(c))) schema = newer(schema, APP_COMPONENTS_SCHEMA);
+    const app = doc.tokens?.app ?? {};
+    if ('panel' in app || 'bevel' in app) schema = newer(schema, APP_FILLS_SCHEMA);
     doc.schema = schema;
     if (!Object.keys(doc.assets?.fonts ?? {}).length && doc.assets) delete doc.assets.fonts;
     if (!readdirSync(join(folder, 'fonts')).length) rmSync(join(folder, 'fonts'), { recursive: true, force: true });

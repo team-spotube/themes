@@ -1,6 +1,6 @@
 {
   "name": "@team-spotube/theme-tool",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Build, validate and package Spotube themes: typed helpers, a CLI, bundled fonts and icon packs, and the theme JSON Schema.",
   "license": "AGPL-3.0-or-later",
   "keywords": [

@@ -98,3 +98,5 @@ pnpm --filter @team-spotube/theme-tool templates  # copy the official themes (..
 
 ## App components (theme format 1.3)
 Besides Millennium's components, a theme can style the app's own: `mediaCard`, `mediaListTile`, `floatingPlayer`, `largePlayer`, `expandedPlayer`, `playerQueue`, `trackList`, `collectionHeader`, `featuredCarousel`, `screen`, `section`, `settingsRow`, `lyricsLine` and more (`APP_COMPONENT_NAMES`). They use the same `base` / `states` / `variants` / `rules`; each styled part is a variant (`mediaCard.variants.root.states.hovered`). A theme that uses one is stamped `"schema": "1.3.0"` by the tool. See https://docs.spotube.cc/themes/theme-format.
+
+`tokens.app.panel` and `tokens.app.bevel` set the fill of the app's own panels/rows and of chips/icon boxes. Left out, they are Millennium's glossy gradients, or flat `surface`/`raised` when `tokens.surface.glow` is `false`. A theme that sets either is stamped `"schema": "1.4.0"`.

@@ -46,7 +46,7 @@ export default defineTheme({
     shape: { small: 0, medium: 0, large: 0 },
     type: { family: 'Liberation Sans' },
     interaction: { lighting: false },
-    app: { background: solid('{vars.face}') },
+    app: { background: solid('{vars.face}'), panel: solid('{vars.face}'), bevel: solid('{vars.face}') },
   },
   defaults: { shape: 'rect' },
   components: {
